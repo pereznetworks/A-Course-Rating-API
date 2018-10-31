@@ -5,7 +5,6 @@
 var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
-
 /*
   User
     _id (ObjectId, auto-generated)
@@ -15,9 +14,9 @@ var Schema = mongoose.Schema;
 */
 
 var UserSchema = new Schema({
-    fullName: String,
-    emailAddress: String,
-    password: String
+    fullName: {type: String, required: true}
+    emailAddress: {type: String, required: true}
+    password: {type: String, required: true}
 });
 
 /*
@@ -33,12 +32,18 @@ var UserSchema = new Schema({
 */
 
 var CourseSchema = new Schema({
-  user: [UserSchema.id],
-  title: String,
-  description: String,
+  user: UserSchema.id,
+  title: {type: String, required: true}
+  description: {type: String, required: true}
   estimatedTime: String,
   materialsNeeded: String,
-  steps: [{stepNumber: Number, title: String, description: String}],
+  steps: [
+            {
+              stepNumber: Number,
+              title: {type: String, required: true},
+              description: {type: String, required: true}
+            }
+          ],
   reviews: [ReviewSchema]
 });
 
@@ -53,7 +58,7 @@ var CourseSchema = new Schema({
 */
 
 var Review = new Schema({
-  user: [UserSchema.id],
+  user: UserSchema.id,
   postedOn: {type: Date, default: Date.now},
-  rating: {type: Number, //range : 1 - 5 }
+  rating: {type: Number, required: true, min: [1, 'A min of 1 is required.'], max: [5, 'The highest rating possible is 5.'] }
 });

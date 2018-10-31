@@ -72,6 +72,8 @@ Step 4:
 
 Steps 5 and 6:
 
+  Setup Postman 
+
     After installing (Postman)[https://www.getpostman.com/.]
 
       then ran it ..import CourseAPI.postman_collection.jso

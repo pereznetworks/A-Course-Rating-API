@@ -72,7 +72,7 @@ Step 4:
 
 Steps 5 and 6:
 
-  Setup Postman 
+  Setup Postman
 
     After installing (Postman)[https://www.getpostman.com/.]
 
@@ -93,6 +93,8 @@ Steps 5 and 6:
   NPM package.json changes:
 
       aded prestart, and downMongod script cmds to npm package.json
+
+      so mongod process starts as part of npm start 
 
 
   Added { useNewUrlParser: true } to mongoose.connection

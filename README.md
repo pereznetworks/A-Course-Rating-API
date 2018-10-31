@@ -88,7 +88,7 @@ Steps 5 and 6:
 
       ./startMongo.js methods, startdb(), onErr(), onceConnected()
 
-  NPM package.jsomn changes:
+  NPM package.json changes:
 
       aded prestart, and downMongod script cmds to npm package.json
 

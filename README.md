@@ -88,3 +88,8 @@ Steps 5 and 6:
       ./startMongo.js methods, startdb(), onErr(), onceConnected()
 
     aded prestart, and downMongod script cmds to npm package.json
+
+
+    had to add { useNewUrlParser: true } to mongoose.connection
+
+      (node:93931) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.

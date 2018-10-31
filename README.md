@@ -94,8 +94,7 @@ Steps 5 and 6:
 
       aded prestart, and downMongod script cmds to npm package.json
 
-      so mongod process starts as part of npm start 
-
+      so mongod process starts as part of npm start
 
   Added { useNewUrlParser: true } to mongoose.connection
 

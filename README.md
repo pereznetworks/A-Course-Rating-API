@@ -84,14 +84,16 @@ Steps 5 and 6:
 
 # Setting Up Database Connection:
 
-  Made mongoose.connection() and onErr and onceConnected modular
-    ./startMongo.js methods, startdb(), onErr(), onceConnected()
+  Modular Mongoose db connection method:
 
-  aded prestart, and downMongod script cmds to npm package.json
+      ./startMongo.js methods, startdb(), onErr(), onceConnected()
+
+  NPM package.jsomn changes:
+
+      aded prestart, and downMongod script cmds to npm package.json
 
 
-  had to add { useNewUrlParser: true } to mongoose.connection
-
+  Added { useNewUrlParser: true } to mongoose.connection
 
       (node:93931) DeprecationWarning:
 

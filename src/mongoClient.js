@@ -50,13 +50,13 @@ const connect = function(port, dbName){
 //place with in callfuncton, db.on('error',function(err){ startMongo.onErr(err)} )
 var onErr = function(err){
   // may change how error are logged
-	console.error("connection error:", err);
+	console.error(`**Mongod status**\nconnection error:`, err);
 };
 
 // place within callback function db.once('open', function(){ startMongo.onceConnected()} )
 var onceConnected = function(){
   // may change how message are logged
-	console.log("db connection successful");
+	console.log("**Mongod status**\ndb connection successful");
 };
 
 

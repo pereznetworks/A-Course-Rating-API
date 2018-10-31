@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "mongod --fork --logpath ./mongod.log",
     "start": "nodemon --inspect ./src/index.js localhost 5000",
-    "downMongod": "start mongo admin --eval \"db('admin').shutdownServer()\""
+    "downMongod": "mongo admin --eval 'db.shutdownServer()'"
   },
   "author": "",
   "license": "ISC",

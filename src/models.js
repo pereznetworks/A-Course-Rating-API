@@ -1,10 +1,9 @@
-/* Schema */
+/* define schemas and data models */
 
 'use strict';
-
 var mongoose = require("mongoose");
-
 var Schema = mongoose.Schema;
+
 /*
   User
     _id (ObjectId, auto-generated)
@@ -57,8 +56,17 @@ var CourseSchema = new Schema({
 
 */
 
-var Review = new Schema({
+var ReviewSchema = new Schema({
   user: UserSchema.id,
   postedOn: {type: Date, default: Date.now},
   rating: {type: Number, required: true, min: [1, 'A min of 1 is required.'], max: [5, 'The highest rating possible is 5.'] }
 });
+
+
+var User = mongoose.model("User", UserSchema);
+var Course = mongoose.model("Course", CourseSchema);
+var Review = mongoose.model("Review", ReviewSchema);
+
+module.exports.User = User;
+module.exports.Course = Course;
+module.exports.Review = Review;

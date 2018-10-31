@@ -1,0 +1,22 @@
+{
+  "name": "techdegree-fullstackjs-course-review-rest-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "mongod --fork --logpath ./mongod.log",
+    "start": "nodemon --inspect ./src/index.js localhost 5000",
+    "downMongod": "start mongo admin --eval \"db('admin').shutdownServer()\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.3.8",
+    "morgan": "^1.9.0"
+  }
+}

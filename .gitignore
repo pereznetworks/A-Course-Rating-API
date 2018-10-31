@@ -62,3 +62,6 @@ typings/
 
 # ignore node_modules
 node_modules
+
+# ignore mongod logfiles
+mongod.log*

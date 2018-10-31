@@ -19,11 +19,12 @@
           var myMongooseConnectionName = startdb(27017, 'myDatabaseName');
     */
 
-const startdb = function(port, dbName){
+const connect = function(port, dbName){
 
-var mongoose = require("mongoose");
+    // importing mongoose
+    var mongoose = require("mongoose");
 
-// adding some configurability options
+    // adding some configurability options
     if (!port ){
       let port = 27017;
     }
@@ -59,6 +60,6 @@ var onceConnected = function(){
 };
 
 
-module.exports.startdb = startdb;
+module.exports.connect = connect;
 module.exports.onErr = onErr;
 module.exports.onceConnected = onceConnected;

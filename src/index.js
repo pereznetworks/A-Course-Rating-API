@@ -9,19 +9,19 @@ const app = express();
 app.set('port', process.env.PORT || 5000);
 
 // my own modular mongoose connection method and callbacks
-const startMongo = require('./startMongo.js')
+const mongoClient = require('./mongoClient.js')
 
-// starting and connecting to mongodb...
-const db = startMongo.startdb();
+// connecting to mongodb...
+const db = mongoClient.connect();
 
 // if error in connection...
 db.on("error", function(err){
-	startMongo.onErr(err);
+	mongoClient.onErr(err);
 });
 
 // if connected and all is good...
 db.once("open", function(){
-	startMongo.onceConnected();
+	mongoClient.onceConnected();
 });
 
 // morgan gives us http request logging

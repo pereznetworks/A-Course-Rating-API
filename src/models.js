@@ -1,11 +1,18 @@
-/* define schemas and data models */
+/* define schemas and declare models */
 
 'use strict';
+// importing mongoose.Schema
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
+// using Validator.js to validate email address
+// may use for others as well
+var isEmail = require('validator').isEmail;
+
+/* SCHEMAS */
+
 /*
-  User
+  User schema requirements
     _id (ObjectId, auto-generated)
     fullName (String, required)
     emailAddress (String, required, must be unique and in correct format)
@@ -13,13 +20,17 @@ var Schema = mongoose.Schema;
 */
 
 var UserSchema = new Schema({
-    fullName: {type: String, required: true}
-    emailAddress: {type: String, required: true}
+    fullName: {type: String, required: [true, `Please type user's full name.`]},
+    emailAddress: {
+                    type: String,
+                    required: [true, `Please type user's email address.`],
+                    validate: { validator: isEmail , message: 'Invalid email.' }
+                  },
     password: {type: String, required: true}
 });
 
 /*
-  Course
+  Course schema requirements
     _id (ObjectId, auto-generated)
     user (_id from the users collection)
     title (String, required)
@@ -31,23 +42,23 @@ var UserSchema = new Schema({
 */
 
 var CourseSchema = new Schema({
-  user: UserSchema.id,
-  title: {type: String, required: true}
-  description: {type: String, required: true}
+  user: {type: [Schema.Types.ObjectId], required: [true, `This value should come from User._id`]},
+  title: {type: String, required: [true, `Please type a title for the course.`]},
+  description: {type: String, required: [true, `Please type a description for the course.`]},
   estimatedTime: String,
   materialsNeeded: String,
   steps: [
             {
               stepNumber: Number,
-              title: {type: String, required: true},
-              description: {type: String, required: true}
+              title: {type: String, required: [true, `Please type a title for this step of the course.`]},
+              description: {type: String, required: [true, `Please type a description for this step of the course.`]}
             }
           ],
-  reviews: [ReviewSchema]
+  reviews: [{type: [Schema.Types.ObjectId]}]
 });
 
 /*
-  Review
+  Review schema requirements
     _id (ObjectId, auto-generated)
     user (_id from the users collection)
     postedOn (Date, defaults to “now”)
@@ -57,11 +68,12 @@ var CourseSchema = new Schema({
 */
 
 var ReviewSchema = new Schema({
-  user: UserSchema.id,
+  user: {type: [Schema.Types.ObjectId], required: [true, `This value should come from User._id`]},
   postedOn: {type: Date, default: Date.now},
   rating: {type: Number, required: true, min: [1, 'A min of 1 is required.'], max: [5, 'The highest rating possible is 5.'] }
 });
 
+/* Models */
 
 var User = mongoose.model("User", UserSchema);
 var Course = mongoose.model("Course", CourseSchema);

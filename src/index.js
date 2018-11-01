@@ -1,9 +1,14 @@
 'use strict';
 
-// load modules
+// load npm modules
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
+
+// bringing in mongod data models
+const User = require('./models.js').User;
+const Course = require('./models.js').Course;
+const Review = require('./models.js').Review;
 
 // set our port
 app.set('port', process.env.PORT || 5000);

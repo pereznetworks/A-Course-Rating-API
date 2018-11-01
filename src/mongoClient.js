@@ -1,4 +1,6 @@
-/* startMongo, a simple custom Mongoose connection manager */
+/* mongoClient.js,
+   a simple custom Mongoose connection manager
+   I started writing with this project  */
 
 /* usage:
 

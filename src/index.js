@@ -10,7 +10,7 @@ const User = require('./models.js').User;
 const Course = require('./models.js').Course;
 const Review = require('./models.js').Review;
 
-// set our port
+// set the port
 app.set('port', process.env.PORT || 5000);
 
 // my own modular mongoose connection method and callbacks

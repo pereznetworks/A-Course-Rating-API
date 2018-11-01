@@ -5,6 +5,9 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
+//using bcrypt to to encrypt the passwords
+var bcrypt = require('bcrypt');
+
 // using Validator.js to validate email address
 // may use for others as well
 var isEmail = require('validator').isEmail;
@@ -20,11 +23,13 @@ var isEmail = require('validator').isEmail;
 */
 
 var UserSchema = new Schema({
-    fullName: {type: String, required: [true, `Please type user's full name.`]},
+    fullName: {type: String, required: [true, `Please type user's full name.`], trim: true},
     emailAddress: {
                     type: String,
                     required: [true, `Please type user's email address.`],
-                    validate: { validator: isEmail , message: 'Invalid email.' }
+                    unique: true,
+                    trim: true,
+                    validate: { validator: isEmail , message: 'Please type a valid email address.' }
                   },
     password: {type: String, required: true}
 });
@@ -70,7 +75,9 @@ var CourseSchema = new Schema({
 var ReviewSchema = new Schema({
   user: {type: [Schema.Types.ObjectId], required: [true, `This value should come from User._id`]},
   postedOn: {type: Date, default: Date.now},
-  rating: {type: Number, required: true, min: [1, 'A min of 1 is required.'], max: [5, 'The highest rating possible is 5.'] }
+  rating: {type: Number, required: true, min: [1, 'A minimum rating of 1 is required.'], max: [5, 'The highest rating possible is 5.'] },
+  review: {type: String},
+
 });
 
 /* Models */

@@ -104,7 +104,7 @@ Steps 5 and 6:
 
       To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
 
-# Setup Schemas:
+# Setup Schemas and compiled Models:
 
   Setup schema for Users, Courses and Reviews
 
@@ -112,6 +112,6 @@ Steps 5 and 6:
 
   Associated User.id in Courses and Reviews is set when adding data to model
 
-     mongod does throws 'invalid path' when trying to set this at schema level
+     mongod does throw an 'invalid path' when trying to set this at schema level
 
-     mongoose docs, in schema define section, do not actually show an example of how to do this 
+     mongoose docs, in schema define sections, do not actually show an example of how to do this

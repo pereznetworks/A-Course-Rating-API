@@ -103,3 +103,15 @@ Steps 5 and 6:
       current URL string parser is deprecated, and will be removed in a future version.
 
       To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+
+# Setup Schemas:
+
+  Setup schema for Users, Courses and Reviews
+
+  Will try to add as much validation to schema layer as possible
+
+  Associated User.id in Courses and Reviews is set when adding data to model
+
+     mongod does throws 'invalid path' when trying to set this at schema level
+
+     mongoose docs, in schema define section, do not actually show an example of how to do this 

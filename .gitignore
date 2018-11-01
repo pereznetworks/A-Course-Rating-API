@@ -64,4 +64,5 @@ typings/
 node_modules
 
 # ignore mongod logfiles
+logs
 mongod.log*

@@ -114,4 +114,4 @@ Steps 5 and 6:
 
      mongod does throw an 'invalid path' when trying to set this at schema level
 
-     mongoose docs, in schema define sections, do not actually show an example of how to do this
+     mongoose docs, under [Schemas](https://mongoosejs.com/docs/guide.html), do not actually show an example of how to do this

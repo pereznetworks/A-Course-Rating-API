@@ -28,7 +28,7 @@ Verified that I had the latest [MongoDB installed.](http://treehouse.github.io/i
 
 With mongod running, seeded my MongoDB database with data.
 
-see [Mongod Getting Start Note](#mongodb-getting-started-note:) below
+see [Mongod Getting Start Note](#mongodb-getting-started-note) below
 ```
 terminal$ mongoimport --db course-api --collection courses --type=json --jsonArray --file courses.json
 

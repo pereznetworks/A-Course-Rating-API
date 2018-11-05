@@ -136,66 +136,66 @@ Populate User.id and Reviews is set when adding data to model
 
 # Mongo db *getting started note:*
 
-  although the steps in the project requirement indicate to...
+although the steps in the project requirement indicate to:
 
-    1: import seed data using - mydbname
+  1: import seed data using - mydbname
 
-    2: create a mongo connection using - mydbname
+  2: create a mongo connection using - mydbname
 
-    3: create models from schema and and doc/collection to match
+  3: create models from schema and and doc/collection to match
 
-    4: then work on routes,
-        that will run queries on these and return json data
+  4: then work on routes,
+      that will run queries on these and return json data
 
-    I ended up having to start over
+  I ended up having to start over
 
-      I used the basic Mongo shell cmds
+    I used the basic Mongo shell cmds
 
-      mongo
-        show dbs
-        use mydbname
-        db.dropDatabase()
+    mongo
+      show dbs
+      use mydbname
+      db.dropDatabase()
 
-    process as documented on https://mongoosejs.com/docs/models.html
+process as documented on https://mongoosejs.com/docs/models.html :
 
-    *this second set of steps...
+  *this second set of steps...
 
-    was the only I could get data into the document/collections
+  was the only I could get data into the document/collections
 
-     I created from the models I declared in my code*
+   I created from the models I declared in my code*
 
-    1: create a mongo connection using - mydbname
-    2: create schema and declare models
-    3: create documents from the models
+  1: create a mongo connection using - mydbname
+  2: create schema and declare models
+  3: create documents from the models
 
-    4: seed data using ....
+  4: seed data using ....
 
-        the insertMany method on the document/collection
+      the insertMany method on the document/collection
 
-        I wrote a module for this in seed-data/insertData.js
+      I wrote a module for this in seed-data/insertData.js
 
-        which exports initUsers, initCourses, initReviews methods
+      which exports initUsers, initCourses, initReviews methods
 
-        these are run by index.js when the express server starts
+      these are run by index.js when the express server starts
 
-        one each of the user, course, review documents/collections
+      one each of the user, course, review documents/collections
 
-          if no results returned from a find({})
+        if no results returned from a find({})
 
-             then an insertMany is run
+           then an insertMany is run
 
-    5: then with routes set
+  5: then with routes set
 
-        can run queries on these documents/collections
+      can run queries on these documents/collections
 
-        which Returns json data as expected
+      which Returns json data as expected
 
-    *it seems that even though, per the project instructions...
+  *it seems that even though, per the project instructions...
 
-      I run the mongo-import cmds,
+    I run the mongo-import cmds,
 
-      and am connecting to the course-api db,
+    and am connecting to the course-api db,
 
-      I am actually not able to access that data,
+    I am actually not able to access that data,
 
-      other than through mongo shell directly*
+    other than through mongo shell directly*

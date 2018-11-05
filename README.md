@@ -217,3 +217,7 @@ process as documented on https://mongoosejs.com/docs/models.html :
   *and syntax to get this working from mongoimport*
 
   *but for now, I am using pure mongoose.js*
+
+# Lots more to do :
+
+  ... 

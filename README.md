@@ -134,7 +134,7 @@ Populate User.id and Reviews is set when adding data to model
 
       mongoose.set('useCreateIndex', true)
 
-# Mongo db *getting started note:*:
+# Mongo db *getting started note:*
 
   although the steps in the project requirement indicate to...
 

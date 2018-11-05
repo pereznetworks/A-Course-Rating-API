@@ -1,6 +1,6 @@
-# TD-Project11: Build a Course Rating API With Express
+## TD-Project11: Build a Course Rating API With Express
 
-# Before Starting to code:
+## Before Starting to code:
 
 Step 1:
 
@@ -26,8 +26,9 @@ Steps 2 and 3:
 
 Verified that I had the latest [MongoDB installed.](http://treehouse.github.io/installation-guides/)
 
-With mondod running, seeded my MongoDB database with data.
+With mongod running, seeded my MongoDB database with data.
 
+see [Mongod Getting Start note below](#Mongo-db-getting-started-note:)
 ```
 terminal$ mongoimport --db course-api --collection courses --type=json --jsonArray --file courses.json
 
@@ -84,7 +85,7 @@ at the beginning could only test the / *(root)* url req,
 
 but it worked... so I was good to go..].
 
-# Setting Up Database Connection:
+## Setting Up Database Connection:
 
 Modular Mongoose db connection method:
 
@@ -104,7 +105,7 @@ current URL string parser is deprecated, and will be removed in a future version
 
 To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
 
-# Setup Schemas and compiled Models:
+## Setup Schemas and compiled Models:
 
 Setup schema for Users, Courses and Reviews
 
@@ -121,7 +122,7 @@ Populate User.id and Reviews is set when adding data to model
 
  then need to use populate(fieldname).exec(function()) to fill in the values
 
-# Setup and test routes
+## Setup and test routes
 
   when a route actually tried to access a mongoose db :
 
@@ -134,7 +135,7 @@ Populate User.id and Reviews is set when adding data to model
 
       mongoose.set('useCreateIndex', true)
 
-# Mongo db *getting started note:*
+## Mongo db *getting started note:*
 
 although the steps in the project requirement indicate to:
 
@@ -218,6 +219,6 @@ process as documented on https://mongoosejs.com/docs/models.html :
 
   *but for now, I am using pure mongoose.js*
 
-# Lots more to do :
+## Lots more to do :
 
-  ... 
+  ...

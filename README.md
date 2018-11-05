@@ -138,57 +138,71 @@ Populate User.id and Reviews is set when adding data to model
 
 although the steps in the project requirement indicate to:
 
-  1: import seed data using - mydbname
+  1: running mongod in 1 term (project root dir)
 
-  2: create a mongo connection using - mydbname
+     and in 2nd term (same project root dir)
 
-  3: create models from schema and and doc/collection to match
+     mongoimport seed data using - mydbname
+
+  2: then, create a mongo connection using - mydbname
+
+  3: and, create models from schema and and doc/collection to match
 
   4: then work on routes,
-      that will run queries on these and return json data
+
+     that will run queries on these and return json data
+
+That did nt work for me:
 
   I ended up having to start over
 
-    I used the basic Mongo shell cmds
+  I used these basic Mongo shell cmds
 
-    mongo
+    mongod in 1 term
+    mongo shell in 2nd term
       show dbs
       use mydbname
       db.dropDatabase()
+
+  then I followed steps below...
 
 process as documented on https://mongoosejs.com/docs/models.html :
 
   *this second set of steps...
 
-  was the only I could get data into the document/collections
+   was the only I could get data into the document/collections
 
-   I created from the models I declared in my code*
+   I created from the models I declared
+
+   and then return data using routes I setup*
 
   1: create a mongo connection using - mydbname
+
   2: create schema and declare models
+
   3: create documents from the models
 
   4: seed data using ....
 
-      the insertMany method on the document/collection
+  the insertMany method on the document/collection
 
-      I wrote a module for this in seed-data/insertData.js
+  I wrote a module for this in seed-data/insertData.js
 
-      which exports initUsers, initCourses, initReviews methods
+  which exports initUsers, initCourses, initReviews methods
 
-      these are run by index.js when the express server starts
+  these are run by index.js when the express server starts
 
-      one each of the user, course, review documents/collections
+  one each of the user, course, review documents/collections
 
-        if no results returned from a find({})
+  if no results returned from a find({})
 
-           then an insertMany is run
+  then an insertMany is performed
 
   5: then with routes set
 
-      can run queries on these documents/collections
+  can run queries on these documents/collections
 
-      which Returns json data as expected
+  which Returns json data as expected
 
   *it seems that even though, per the project instructions...
 
@@ -198,4 +212,12 @@ process as documented on https://mongoosejs.com/docs/models.html :
 
     I am actually not able to access that data,
 
-    other than through mongo shell directly*
+    other than through mongo shell directly
+
+    maybe it's necessary to break from mongoose.js
+
+    and use some mongod methods
+
+    and syntax to get this working from mongoimport
+
+    but for now, I am using pure mongoose.js*

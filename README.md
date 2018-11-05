@@ -173,7 +173,7 @@ process as documented on https://mongoosejs.com/docs/models.html :
 
    *and then return data using routes I setup*
 
-    1: create a mongo connection using - mydbname
+    1: create a mongoose connection using - mydbname
 
     2: create schema and declare models
 
@@ -181,7 +181,7 @@ process as documented on https://mongoosejs.com/docs/models.html :
 
     4: seed data using ....
 
-      the insertMany method on the document/collection
+      the insertMany method on the document/collection from step 3
 
           I wrote a module for this in seed-data/insertData.js
 
@@ -189,11 +189,13 @@ process as documented on https://mongoosejs.com/docs/models.html :
 
           these are run by index.js when the express server starts
 
-          on each of the user, course, review documents/collections
+          basically...
 
-          if no results returned from a find({})
+            on each of the user, course, review documents/collections
 
-          then an insertMany is performed
+            if no results returned from a find({})
+
+            then an insertMany is performed
 
     5: then with routes set
 

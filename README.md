@@ -205,19 +205,11 @@ process as documented on https://mongoosejs.com/docs/models.html :
 
 *it seems that even though, per the project instructions...*
 
-  *I run the mongo-import cmds,*
+  *I run the mongo-import cmds and am connecting to the course-api db,*
 
-  *and am connecting to the course-api db,*
+  *I am actually not able to access that data other than through mongo shell directly*
 
-  *I am actually not able to access that data,*
-
-  *other than through mongo shell directly*
-
-  *maybe it's necessary to break from mongoose.js*
-
-  *and use some mongod methods...*
-
-  *and syntax to get this working from mongoimport*
+  *maybe it's necessary to break from mongoose.js and use some mongod methods and syntax to get this working*
 
   *but for now, I am using pure mongoose.js*
 

@@ -182,17 +182,17 @@ process as documented on https://mongoosejs.com/docs/models.html :
 
       the insertMany method on the document/collection
 
-      I wrote a module for this in seed-data/insertData.js
+          I wrote a module for this in seed-data/insertData.js
 
-      which exports initUsers, initCourses, initReviews methods
+          which exports initUsers, initCourses, initReviews methods
 
-      these are run by index.js when the express server starts
+          these are run by index.js when the express server starts
 
-      one each of the user, course, review documents/collections
+          one each of the user, course, review documents/collections
 
-      if no results returned from a find({})
+          if no results returned from a find({})
 
-      then an insertMany is performed
+          then an insertMany is performed
 
     5: then with routes set
 

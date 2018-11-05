@@ -188,7 +188,7 @@ process as documented on https://mongoosejs.com/docs/models.html :
 
           these are run by index.js when the express server starts
 
-          one each of the user, course, review documents/collections
+          on each of the user, course, review documents/collections
 
           if no results returned from a find({})
 

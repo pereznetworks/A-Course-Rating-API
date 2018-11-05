@@ -156,15 +156,46 @@ Populate User.id and Reviews is set when adding data to model
         use mydbname
         db.dropDatabase()
 
-    it is actually better to....
+    process as documented on https://mongoosejs.com/docs/models.html
+
+    *this second set of steps...
+
+    was the only I could get data into the document/collections
+
+     I created from the models I declared in my code*
 
     1: create a mongo connection using - mydbname
     2: create schema and declare models
     3: create documents from the models
 
     4: seed data using ....
+
         the insertMany method on the document/collection
 
-    *it seems that even I running the mongo-import cmds per the project instructions, and am connecting to the course-api db, I am actually not able to access that data*
+        I wrote a module for this in seed-data/insertData.js
 
-    *this second set of steps was the only I could get data into the document I created from the models I declared in my code*
+        which exports initUsers, initCourses, initReviews methods
+
+        these are run by index.js when the express server starts
+
+        one each of the user, course, review documents/collections
+
+          if no results returned from a find({})
+
+             then an insertMany is run
+
+    5: then with routes set
+
+        can run queries on these documents/collections
+
+        which Returns json data as expected
+
+    *it seems that even though, per the project instructions...
+
+      I run the mongo-import cmds,
+
+      and am connecting to the course-api db,
+
+      I am actually not able to access that data,
+
+      other than through mongo shell directly*

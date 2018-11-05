@@ -10,7 +10,7 @@
 
    // give the conneciton a name ...
       // with no args...
-         // defaults to port 27017 and 'db' as database name
+         // defaults to port 27017 and 'course-api' as database name
 
           var myMongooseConnectionName = startMongo.startdb();
 
@@ -32,7 +32,7 @@ const connect = function(port, dbName){
     }
 
     if (!dbName){
-      let dbName = 'db';
+      let dbName = 'course-api';
     }
 
     // connecting to mongod db
@@ -42,7 +42,7 @@ const connect = function(port, dbName){
         to MongoClient.connect.
     */
 
-    mongoose.connect(`mongodb://localhost:${port}/${dbName}`, { useNewUrlParser: true });
+    mongoose.connect(`mongodb://localhost:${port}/${dbName}`, { useNewUrlParser: true, dbName: dbName});
 
     // return the mongoose connection
     return mongoose.connection;
@@ -58,7 +58,7 @@ var onErr = function(err){
 // place within callback function db.once('open', function(){ startMongo.onceConnected()} )
 var onceConnected = function(){
   // may change how message are logged
-	console.log("**Mongod status**\ndb connection successful");
+	console.log(`**Mongod status**\ndb connection successful`);
 };
 
 

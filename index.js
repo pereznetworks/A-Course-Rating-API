@@ -5,11 +5,6 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 
-// bringing in mongod data models
-const User = require('./models.js').User;
-const Course = require('./models.js').Course;
-const Review = require('./models.js').Review;
-
 // set the port
 app.set('port', process.env.PORT || 5000);
 
@@ -32,7 +27,16 @@ db.once("open", function(){
 // morgan gives us http request logging
 app.use(morgan('dev'));
 
-// TODO add additional routes here
+// import insertData methods
+const initCourses = require('./seed-data/insertData.js').initCourses;
+const initReviews = require('./seed-data/insertData.js').initReviews;
+const initUsers = require('./seed-data/insertData.js').initUsers;
+
+// test if seedData has been inserted into db.course-api
+// if not insert data, logs to console on err or success
+initCourses();
+initReviews();
+initUsers();
 
 // send a friendly greeting for the root route
 app.get('/', (req, res) => {
@@ -41,6 +45,16 @@ app.get('/', (req, res) => {
   });
 });
 
+// importing user and course routes
+const userRoutes = require('./routes/users.js');
+const courseRoutes = require('./routes/courses.js');
+
+app.use(courseRoutes);
+app.use(userRoutes);
+
+app.use('/api/courses', courseRoutes);
+app.use('/api/courses/:id', courseRoutes);
+
 // uncomment this route in order to test the global error handler
 // app.get('/error', function (req, res) {
 //   throw new Error('Test error');
@@ -48,8 +62,9 @@ app.get('/', (req, res) => {
 
 // send 404 if no other route matched
 app.use((req, res) => {
-  res.status(404).json({
-    message: 'Route Not Found'
+  res.status(404)
+	res.json({
+    message: 'Route Not Found',
   })
 })
 
@@ -58,7 +73,8 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).json({
     message: err.message,
-    error: {}
+    error: err.status,
+		details: err.stack
   });
 });
 
@@ -66,3 +82,5 @@ app.use((err, req, res, next) => {
 const server = app.listen(app.get('port'), () => {
   console.log(`Express server is listening on port ${server.address().port}`);
 });
+
+module.exports = db;

@@ -110,8 +110,54 @@ Setup schema for Users, Courses and Reviews
 
 Will try to add as much validation to schema layer as possible
 
-Associated User.id in Courses and Reviews is set when adding data to model
+In the Courses model schema ...
 
- mongod does throw an 'invalid path' when trying to set this at schema level
+Populate User.id and Reviews is set when adding data to model
 
- mongoose docs, under [Schemas](https://mongoosejs.com/docs/guide.html), do not actually show an example of how to do this
+ fieldName {
+              type: Schema.Types.ObjectId,
+              ref: 'modelToGetFieldNameValuefrom'
+            }
+
+ then need to use populate(fieldname).exec(function()) to fill in the values
+
+# Setup and test routes
+
+  when a route actually tried to access a mongoose db :
+
+    (node:28756) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+
+    to git rid of the warning...
+      at the beginning of each js defining a schema
+    or,
+      in the beginning of routes.js accessing the docs generated from that schema
+
+      mongoose.set('useCreateIndex', true)
+
+# Mongo db getting started note:
+
+  although the steps in the project requirement indicate to...
+
+    1: import seed data using - mydbname
+    2: create a mongo connection using - mydbname
+    3: create schema and declare models to match
+
+  it is actually better to....
+
+    1: create a mongo connection using - mydbname
+    2: create schema and declare models
+    3: create documents from the models
+
+    4: seed data using ....
+        the insertMany method on the model
+        or
+        with mongod running in 1 term, mongoimport cmds from another...
+
+  I ended up having to start over
+
+    I used the basic Mongo shell cmds
+
+    mongo
+      show dbs
+      use mydbname
+      db.dropDatabase()

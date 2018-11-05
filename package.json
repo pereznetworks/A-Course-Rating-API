@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "mongod --fork --logpath ./logs/mongod.log",
-    "start": "nodemon --inspect ./src/index.js localhost 5000",
+    "start": "nodemon --inspect ./index.js localhost 5000",
     "downMongod": "mongo admin --eval 'db.shutdownServer()'"
   },
   "author": "",

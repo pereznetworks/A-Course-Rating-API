@@ -167,13 +167,9 @@ That did not work for me:
 
 process as documented on https://mongoosejs.com/docs/models.html :
 
-  *this second set of steps...*
+  *this second set of steps... was the only I could get data into the document/collections*
 
-   *was the only I could get data into the document/collections*
-
-   *I created from the models I declared*
-
-   *and then return data using routes I setup*
+   *I created from the models I declared and then return data using routes I setup*
 
     1: create a mongoose connection using - mydbname
 

@@ -200,20 +200,20 @@ process as documented on https://mongoosejs.com/docs/models.html :
 
       which Returns json data as expected
 
-  *it seems that even though, per the project instructions...*
+*it seems that even though, per the project instructions...*
 
-    *I run the mongo-import cmds,*
+  *I run the mongo-import cmds,*
 
-    *and am connecting to the course-api db,*
+  *and am connecting to the course-api db,*
 
-    *I am actually not able to access that data,*
+  *I am actually not able to access that data,*
 
-    *other than through mongo shell directly*
+  *other than through mongo shell directly*
 
-    *maybe it's necessary to break from mongoose.js*
+  *maybe it's necessary to break from mongoose.js*
 
-    *and use some mongod methods...*
+  *and use some mongod methods...*
 
-    *and syntax to get this working from mongoimport*
+  *and syntax to get this working from mongoimport*
 
-    *but for now, I am using pure mongoose.js*
+  *but for now, I am using pure mongoose.js*

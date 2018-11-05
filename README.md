@@ -137,6 +137,8 @@ Populate User.id and Reviews is set when adding data to model
 
 ## Mongodb getting started note:
 
+**-So... while getting routes to work, I ended up taking a little detour_**
+
 although the steps in the project requirement indicate to:
 
     1: running mongod in 1 term (project root dir)

@@ -28,7 +28,7 @@ Verified that I had the latest [MongoDB installed.](http://treehouse.github.io/i
 
 With mongod running, seeded my MongoDB database with data.
 
-see [Mongod Getting Start note below](#mongo-db-getting-started-note:)
+see [Mongod Getting Start note below](#mongodb-getting-started-note:)
 ```
 terminal$ mongoimport --db course-api --collection courses --type=json --jsonArray --file courses.json
 
@@ -135,7 +135,7 @@ Populate User.id and Reviews is set when adding data to model
 
       mongoose.set('useCreateIndex', true)
 
-## Mongo db *getting started note:*
+## Mongodb *getting started note:*
 
 although the steps in the project requirement indicate to:
 

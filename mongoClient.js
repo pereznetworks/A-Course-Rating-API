@@ -42,7 +42,14 @@ const connect = function(port, dbName){
         to MongoClient.connect.
     */
 
-    mongoose.connect(`mongodb://localhost:${port}/${dbName}`, { useNewUrlParser: true, dbName: dbName});
+    mongoose.connect(
+      `mongodb://localhost:${port}/${dbName}`,
+       {
+         useNewUrlParser: true,
+         useCreateIndex: true,
+         autoIndex: true
+       }
+     );
 
     // return the mongoose connection
     return mongoose.connection;

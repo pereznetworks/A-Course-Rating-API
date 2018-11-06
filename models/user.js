@@ -23,13 +23,21 @@ var isEmail = require('validator').isEmail;
 module.exports.userSchema = new Schema({
 
     id: Schema.Types.ObjectId,
-    fullName: {type: String, required: [true, `Please type user's full name.`], trim: true},
+    fullName: {
+                        type: String,
+                    required: [true, `Please type user's full name.`],
+                        trim: true
+              },
     emailAddress: {
-                    type: String,
-                    required: [true, `Please type user's email address.`],
-                    unique: true,
-                    trim: true,
-                    validate: { validator: isEmail , message: 'Please type a valid email address.' }
+                        type: String,
+                    required: true,
+                      unique: true,
+                       index: true,
+                    // validate: { validator: isEmail , message: 'Please type a valid email address.' }
                   },
-    password: {type: String, required: true}
+    password: {
+                        type: String,
+                    required: true,
+                       index: true
+              }
 });

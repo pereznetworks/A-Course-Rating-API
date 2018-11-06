@@ -13,17 +13,21 @@ var user = require('../models').user;
 // GET /api/users 200 - Returns the currently authenticated user
 
 userRoutes.get("/api/users", function(req, res, next){
-  // add auth/perms checks
-	user.find({}, function(err, doc){
+  // add auth check
+	// simulating a logged in user
+	// TODO: use router.param and auth middleware method and...
+	// TODO: for logged in user will send req.session.userId
+	loggedInUserId = '57029ed4795118be119cc437'
+	user.find({}, function(err, user){
 		if(err){
        return next(err)
-    } else if(!doc){
-			err = new Error("No Users Found");
+    } else if(!user){
+			err = new Error("Oops, no user found");
 			err.status = 404;
 			return next(err);
 		}
-    // TODO: return only the Course "_id" and "title" properties
-		res.json(doc);
+    // TODO: return the authenticated user's profile or just name of
+		res.json(user);
     res.status(200);
 	});
 });

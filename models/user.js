@@ -33,7 +33,7 @@ module.exports.userSchema = new Schema({
                     required: true,
                       unique: true,
                        index: true,
-                    // validate: { validator: isEmail , message: 'Please type a valid email address.' }
+                    validate: { validator: isEmail , message: 'Please type a valid email address.' }
                   },
     password: {
                         type: String,

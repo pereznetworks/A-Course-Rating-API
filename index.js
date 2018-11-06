@@ -58,7 +58,7 @@ app.use(userRoutes);
 
 app.use('/api/courses', courseRoutes);
 app.use('/api/courses/:id', courseRoutes);
-
+app.use('/api/users', userRoutes);
 // uncomment this route in order to test the global error handler
 // app.get('/error', function (req, res) {
 //   throw new Error('Test error');

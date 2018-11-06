@@ -155,11 +155,14 @@ resigned myself to going back to mongoimport ....
 
 and figuring out why I could not access course-api db
 
-I took a second look at my mongoClient.js connect method....
+    I took a second look at my mongoClient.js connect method....
 
-it was because I was somehow missing the dbName is my mongoClient.js
+    it was because I was somehow missing the dbName is my mongoClient.js
 
-for now am accessing course-api data and moving on...
+    for now am accessing course-api data and moving on...
+
+    mongoClient.js fixed
+    insertData.js not fixed yet - but not using it for now
 
 ## Lots more to do :
 

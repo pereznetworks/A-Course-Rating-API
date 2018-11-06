@@ -11,12 +11,8 @@ app.set('port', process.env.PORT || 5000);
 // my own modular mongoose connection method and callbacks
 const mongoClient = require('./mongoClient.js')
 
-const port = 27017;
-
-const dbName = 'course-api';
-
 // connecting to mongodb...
-const db = mongoClient.connect(port, dbName);
+const db = mongoClient.connect();
 
 // if error in connection...
 db.on("error", function(err){

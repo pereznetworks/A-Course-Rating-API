@@ -28,11 +28,11 @@ const connect = function(port, dbName){
 
     // adding some configurability options
     if (!port ){
-      let port = 27017;
+       port = 27017;
     }
 
     if (!dbName){
-      let dbName = 'course-api';
+      dbName = 'course-api';
     }
 
     // connecting to mongod db

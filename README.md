@@ -106,16 +106,16 @@ so mongod process starts as part of npm start
 
 important mongod connection note: dont forget your dbName...
 
-    ```
-    var port = 27017;
-    var dbName;
+```
+var port = 27017;
+var dbName;
 
-    mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
+mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
-    // a connection to the localhost will be made
-    // but if your trying to connect to a specific db, you wont be
+// a connection to the localhost will be made
+// but if your trying to connect to a specific db, you wont be
 
-    ```
+```
 
 ## Setup Schemas and compiled Models:
 

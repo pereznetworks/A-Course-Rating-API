@@ -117,7 +117,6 @@ important mongod connection note: dont forget your dbName...
 
     ```
 
-
 ## Setup Schemas and compiled Models:
 
 Setup schema for Users, Courses and Reviews

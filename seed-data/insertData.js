@@ -9,6 +9,7 @@ var user = require('../models').user;
 var review = require('../models').review;
 
 // seedData object
+// TODO: fix seedData syntax
 const seedData = {
   courses: [
     {

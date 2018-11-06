@@ -27,17 +27,36 @@ var isEmail = require('validator').isEmail;
 module.exports.courseSchema = new Schema({
 
   id: Schema.Types.ObjectId,
-  user: {type: Schema.Types.ObjectId, ref: 'User', required: [true, `Oops, no user is associated wth this Course`]},
-  title: {type: String, required: [true, `Please type a title for the course.`]},
-  description: {type: String, required: [true, `Please type a description for the course.`]},
+  user: {
+                    type: Schema.Types.ObjectId,
+                     ref: 'User',
+                required: [true, `Oops, no user is associated wth this Course`]
+         },
+  title: {
+                    type: String,
+                required: [true, `Please type a title for the course.`]
+         },
+  description: {
+                    type: String,
+                required: [true, `Please type a description for the course.`]
+               },
   estimatedTime: String,
   materialsNeeded: String,
   steps: [
             {
               stepNumber: Number,
-              title: {type: String, required: [true, `Please type a title for this step of the course.`]},
-              description: {type: String, required: [true, `Please type a description for this step of the course.`]}
+              title: {
+                              type: String,
+                          required: [true, `Please type a title for this step of the course.`]
+                     },
+              description: {
+                              type: String,
+                          required: [true, `Please type a description for this step of the course.`]}
             }
           ],
-  reviews: [{type: Schema.Types.ObjectId, ref: 'User'}]
+  reviews: [
+              {type: Schema.Types.ObjectId,
+                ref: 'User'
+              }
+            ]
 });

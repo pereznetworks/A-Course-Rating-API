@@ -31,16 +31,20 @@ db.once("open", function(){
 // morgan gives us http request logging
 app.use(morgan('dev'));
 
-// // import insertData methods
-// const initCourses = require('./seed-data/insertData.js').initCourses;
-// const initReviews = require('./seed-data/insertData.js').initReviews;
-// const initUsers = require('./seed-data/insertData.js').initUsers;
-//
-// // test if seedData has been inserted into db.course-api
-// // if not insert data, logs to console on err or success
-// initCourses();
-// initReviews();
-// initUsers();
+/* import insertData methods
+.. this does not work,
+.. there are syntax problems in the seed-data object
+TODO: fix the syntax problems in the seed-data object
+const initCourses = require('./seed-data/insertData.js').initCourses;
+const initReviews = require('./seed-data/insertData.js').initReviews;
+const initUsers = require('./seed-data/insertData.js').initUsers;
+
+// test if seedData has been inserted into db.course-api
+// if not insert data, logs to console on err or success
+initCourses();
+initReviews();
+initUsers();
+*/
 
 // send a friendly greeting for the root route
 app.get('/', (req, res) => {

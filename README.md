@@ -28,7 +28,6 @@ Verified that I had the latest [MongoDB installed.](http://treehouse.github.io/i
 
 With mongod running, seeded my MongoDB database with data.
 
-see [Mongod Getting Start Note](#mongodb-getting-started-note) below
 ```
 terminal$ mongoimport --db course-api --collection courses --type=json --jsonArray --file courses.json
 
@@ -89,21 +88,35 @@ but it worked... so I was good to go..].
 
 Modular Mongoose db connection method:
 
-./startMongo.js methods, startdb(), onErr(), onceConnected()
+    ./startMongo.js methods, startdb(), onErr(), onceConnected()
 
 NPM package.json changes:
 
-aded prestart, and downMongod script cmds to npm package.json
+    added prestart, and downMongod script cmds to npm package.json
 
 so mongod process starts as part of npm start
 
-Added { useNewUrlParser: true } to mongoose.connection
+    Added { useNewUrlParser: true } to mongoose.connection
 
-(node:93931) DeprecationWarning:
+    (node:93931) DeprecationWarning:
 
-current URL string parser is deprecated, and will be removed in a future version.
+    current URL string parser is deprecated, and will be removed in a future version.
 
-To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+    To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+
+important mongod connection note: dont forget your dbName...
+
+    ```
+    var port = 27017;
+    var dbName;
+
+    mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
+
+    // a connection to the localhost will be made
+    // but if your trying to connect to a specific db, you wont be
+
+    ```
+
 
 ## Setup Schemas and compiled Models:
 
@@ -134,82 +147,6 @@ Populate User.id and Reviews is set when adding data to model
       in the beginning of routes.js accessing the docs generated from that schema
 
       mongoose.set('useCreateIndex', true)
-
-## Mongodb getting started note:
-
-**So, while getting routes to work, I ended up taking a little detour..**
-
-although the steps in the project requirement indicate to:
-
-    1: running mongod in 1 term (project root dir)
-
-       and in 2nd term (same project root dir)
-
-       mongoimport seed data using - mydbname
-
-    2: then, create a mongo connection using - mydbname
-
-    3: and, create models from schema and and doc/collection to match
-
-    4: then work on routes,
-
-       that will run queries on these and return json data
-
-That did not work for me:
-
-    I ended up having to start over, used these basic Mongo shell cmds
-
-    mongod in 1 term
-    mongo shell in 2nd term
-      show dbs
-      use mydbname
-      db.dropDatabase()
-
-process as documented on https://mongoosejs.com/docs/models.html :
-
-  *this second set of steps... was the only I could get data into the document/collections...*
-
-   *that I created from the models I declared and then return any data using routes I setup*
-
-    1: create a mongoose connection using - mydbname
-
-    2: create schema and declare models
-
-    3: create documents from the models
-
-    4: seed data using ....
-
-      the insertMany method on the document/collection from step 3
-
-          I wrote a module for this in seed-data/insertData.js
-
-          which exports initUsers, initCourses, initReviews methods
-
-          these are run by index.js when the express server starts
-
-          basically...
-
-            on each of the user, course, review documents/collections
-
-            if no results returned from a find({})
-
-            then an insertMany is performed
-
-    5: then with routes set
-
-      can run queries on these documents/collections
-
-      which Returns json data as expected
-
-*it seems that even though, per the project instructions...*
-
-  *I run the mongo-import cmds and am connecting to the course-api db,*
-
-  *I am actually not able to access that data other than through mongo shell directly*
-
-  *maybe it's necessary to break from mongoose.js and use some mongod methods and syntax to get this working*
-
-  *but for now, I am using pure mongoose.js*
 
 ## Lots more to do :
 

@@ -147,6 +147,18 @@ Populate User.id and Reviews is set when adding data to model
 
       mongoose.set('useCreateIndex', true)
 
+## DB connection, data validation detour:
+
+insertData.js is not working at present, will have to fix later
+
+resigned myself to going back to mongoimport ....
+
+and figuring out why I could not access course-api db
+
+it was because I was somehow missing the dbName is my mongoClient.js
+
+for now am accessing course-api data and moving on...
+
 ## Lots more to do :
 
   ...

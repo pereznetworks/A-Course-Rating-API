@@ -17,8 +17,8 @@ userRoutes.get("/api/users", function(req, res, next){
 	// simulating a logged in user
 	// TODO: use router.param and auth middleware method and...
 	// TODO: for logged in user will send req.session.userId
-	loggedInUserId = '57029ed4795118be119cc437'
-	user.findById(loggedInUserId, function(err, user){
+	testUserId = '57029ed4795118be119cc437'
+	user.findById(testUserId, function(err, user){
 		if(err){
        return next(err)
     } else if(!user){

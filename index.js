@@ -44,7 +44,7 @@ app.use(morgan('dev'));
 	initCourses();
 	initReviews();
 	initUsers();
-	
+
 */
 
 // send a friendly greeting for the root route
@@ -80,7 +80,8 @@ app.use((req, res) => {
 // global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(err.status || 500).json({
+  res.status(err.status || 500)
+	res.json({
     message: err.message,
     error: err.status,
 		details: err.stack

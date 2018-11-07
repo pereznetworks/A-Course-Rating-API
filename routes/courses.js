@@ -14,6 +14,7 @@
 
 courseRoutes.get("/api/courses", function(req, res, next){
   // add auth/perms checks
+
 	course.find({}, function(err, courses){
 		if(err){
        return next(err)
@@ -37,7 +38,9 @@ courseRoutes.get("/api/courses", function(req, res, next){
 
 courseRoutes.get("/api/courses/:id", function(req, res, next){
   // add auth/perms checks
-	course.findById({_id: req.params.id}, function(err, course){
+  const testCourseId = "57029ed4795118be119cc440";
+  const courseId = req.params.id;
+	course.findById(req.params.id, function(err, course){
 		if(err){
        return next(err)
      };
@@ -46,7 +49,7 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
       return next(err);
 		} else {
       // TODO: all Course properties and related documents for the provided course ID
-		  req.course = doc;
+		  res.json(course);
       res.status(200);
     }
 	});

@@ -28,18 +28,23 @@ db.once("open", function(){
 app.use(morgan('dev'));
 
 /* import insertData methods
-.. this does not work,
-.. there are syntax problems in the seed-data object
-TODO: fix the syntax problems in the seed-data object
-const initCourses = require('./seed-data/insertData.js').initCourses;
-const initReviews = require('./seed-data/insertData.js').initReviews;
-const initUsers = require('./seed-data/insertData.js').initUsers;
 
-// test if seedData has been inserted into db.course-api
-// if not insert data, logs to console on err or success
-initCourses();
-initReviews();
-initUsers();
+	TODO: fix the syntax problems in the seed-data object
+	.. this does not work,
+	.. there are syntax problems in the seed-data object
+	.. for now using mongoimport to import seed-data
+
+	const initCourses = require('./seed-data/insertData.js').initCourses;
+	const initReviews = require('./seed-data/insertData.js').initReviews;
+	const initUsers = require('./seed-data/insertData.js').initUsers;
+
+	// test if seedData has been inserted into db.course-api
+	// if not insert data, logs to console on err or success
+
+	initCourses();
+	initReviews();
+	initUsers();
+	
 */
 
 // send a friendly greeting for the root route

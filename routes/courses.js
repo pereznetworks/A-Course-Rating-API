@@ -22,8 +22,11 @@ courseRoutes.get("/api/courses", function(req, res, next){
       let err = new Error('Sorry, no courses found');
 			return next(err);
 		} else {
-      // TODO: return only the Course "_id" and "title" properties
-  		res.json(courses);
+      // returning only the Course "_id" and "title" properties
+      const coursesArray = courses.map((item, index)=>{
+        return {id: item._id, title: item._doc.title}
+      })
+  		res.json(coursesArray);
       res.status(200);
     }
 	});

@@ -34,8 +34,6 @@ courseRoutes.get("/api/courses", function(req, res, next){
 });
 
 // GET /api/course/:courseId 200 - Returns all Course properties and related documents for the provided course ID
-// TODO: When returning a single course for the GET /api/courses/:courseId route, use Mongoose population to load the related user and reviews documents.
-
 courseRoutes.get("/api/courses/:id", function(req, res, next){
   // add auth/perms checks
   const testCourseId = "57029ed4795118be119cc440";
@@ -48,7 +46,9 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
       let err = new Error('Sorry, no course found by that id');
       return next(err);
 		} else {
-      // TODO: all Course properties and related documents for the provided course ID
+      // return all Course properties
+      // TODO: and related documents for the provided course ID
+      // use Mongoose population to load the related user and reviews documents.
 		  res.json(course);
       res.status(200);
     }

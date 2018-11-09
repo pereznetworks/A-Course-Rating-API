@@ -174,7 +174,7 @@ and figuring out why I could not access course-api db
 
   when defining schema in a separate js files:
 
-    …… make sure to use the correct syntax for the module.exports and import using the same syntax
+    …… make sure to use the correct syntax for the module.exports and then import using the same syntax
 
     other wise your code may not throw an error but your schema won’t get properly imported
 
@@ -186,13 +186,11 @@ and figuring out why I could not access course-api db
 
     so I set up breakpoints where the new user and new course were passed to the callback functions
 
-    after testing both
+    after testing both...
 
     I saw in chrome dev-tools both the new user and new course object, of course were blank other than the id and v fields
 
-    but there was an odd property
-
-    wait for it
+    but there was an odd property, wait for it...
 
     schema: undefined????  
 
@@ -204,11 +202,8 @@ and figuring out why I could not access course-api db
 
     perfectly formatted new user and new course, complete with all the fields required
 
-    :penguindance:
-
     that’s once mistake I won’t make again
 
-    :sweat_smile: 
 
 ## Lots more to do :
 

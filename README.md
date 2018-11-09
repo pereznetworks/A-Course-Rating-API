@@ -184,7 +184,7 @@ and figuring out why I could not access course-api db
 
   just blank course/user with only an id, v fields ????
 
-  so I set up breakpoints where the new user and new course were passed to the callback functions
+  using Chrome dev-tools, I set up breakpoints where the new user and new course were passed to the callback functions
 
   after testing both...
 

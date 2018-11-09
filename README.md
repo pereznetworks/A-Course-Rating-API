@@ -218,7 +218,9 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - queryObject, a.k.a ... {propertyName: 'string or value'}
 
-    - then, setting a new promise to be able use findQuery(user, {})
+    - then, setting a new promise to be able use Promise#then
+
+      - findQuery(user, {}).then()
 
   - this will simplify the code in users and courses routes  
 

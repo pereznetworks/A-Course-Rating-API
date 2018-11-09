@@ -22,7 +22,7 @@ var isEmail = require('validator').isEmail;
 
 */
 
-module.exports.reviewSchema = new Schema({
+module.exports = new Schema({
   id: Schema.Types.ObjectId,
   user: {type: [Schema.Types.ObjectId], required: [true, `This value should come from User._id`]},
   postedOn: {type: Date, default: Date.now},

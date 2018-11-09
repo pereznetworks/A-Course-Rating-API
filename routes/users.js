@@ -4,6 +4,8 @@
 
 var express = require('express');
 var userRoutes = express.Router();
+// importing mongoose
+var mongoose = require("mongoose");
 
 // importing course-api documents
 var course = require('../models').course;
@@ -18,7 +20,7 @@ userRoutes.get("/api/users", function(req, res, next){
 	// TODO: use router.param and auth middleware method and...
 	// TODO: for logged in user will send req.session.userId
 	testUserId = '57029ed4795118be119cc437'
-	user.findById(testUserId, function(err, user){
+	user.find({}, function(err, user){
 		if(err){
        return next(err)
     } else if(!user){
@@ -55,16 +57,19 @@ userRoutes.post("/api/users", function(req, res, next){
 			return next(err);
 		}
 
-		// create an object with form input
-		var newUser = {
-			emailAddress: req.body.email,
-			fullName: req.body.name,
-			password: req.body.password
-		};
+		var emailAddress = req.body.emailAddress.toString();
+		var fullName = req.body.fullName.toString();
+		var password = req.body.password.toString();
 
-		// creating the new user
-		// TODO: will create method auto set an _id...?
-		user.create(newUser, function (error, user) {
+		// create an object with form input
+		var newUser = new user({
+			emailAddress: emailAddress,
+			fullName: fullName,
+			password: password
+		})
+
+		// make sure newUser get saves to the db
+		newUser.save(function (error, user) {
 			if (error) {
 				return next(error);
 			} else {

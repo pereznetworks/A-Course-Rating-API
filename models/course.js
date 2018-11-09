@@ -24,7 +24,7 @@ var isEmail = require('validator').isEmail;
     reviews (Array of ObjectId values: [_id values from the reviews collection])
 */
 
-module.exports.courseSchema = new Schema({
+module.exports = new Schema({
 
   id: Schema.Types.ObjectId,
   user: {

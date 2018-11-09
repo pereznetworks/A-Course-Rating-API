@@ -3,6 +3,7 @@
 // load npm modules
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser')
 const app = express();
 
 // set the port
@@ -26,6 +27,10 @@ db.once("open", function(){
 
 // morgan gives us http request logging
 app.use(morgan('dev'));
+
+// user body-parser, set to json
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json())
 
 /* import insertData methods
 

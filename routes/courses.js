@@ -3,6 +3,9 @@
  */
 
  var express = require('express');
+ // importing mongoose
+ var mongoose = require("mongoose");
+ 
  var courseRoutes = express.Router();
 
  // importing course-api documents

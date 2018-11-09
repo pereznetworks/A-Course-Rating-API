@@ -174,35 +174,35 @@ and figuring out why I could not access course-api db
 
   when defining schema in a separate js files:
 
-    …… make sure to use the correct syntax for the module.exports and then import using the same syntax
+  …… make sure to use the correct syntax for the module.exports and then import using the same syntax
 
-    other wise your code may not throw an error but your schema won’t get properly imported
+  other wise your code may not throw an error but your schema won’t get properly imported
 
-    the only indication of a problem was when I tried to add a new user or a new course and only the id for the course/user was created and the other fields were ignored ???
+  the only indication of a problem was when I tried to add a new user or a new course and only the id for the course/user was created and the other fields were ignored ???
 
-    no errors thrown….no validation errors either ???
+  no errors thrown….no validation errors either ???
 
-    just blank course/user with only an id, v fields ????
+  just blank course/user with only an id, v fields ????
 
-    so I set up breakpoints where the new user and new course were passed to the callback functions
+  so I set up breakpoints where the new user and new course were passed to the callback functions
 
-    after testing both...
+  after testing both...
 
-    I saw in chrome dev-tools both the new user and new course object, of course were blank other than the id and v fields
+  I saw in chrome dev-tools both the new user and new course object, of course were blank other than the id and v fields
 
-    but there was an odd property, wait for it...
+  but there was an odd property, wait for it...
 
-    schema: undefined????  
+  schema: undefined????  
 
-    I traced back into my code and saw the my module.exports syntax was different from how I was importing into my routes js file
+  I traced back into my code and saw the my module.exports syntax was different from how I was importing into my routes js file
 
-    !!!!
+  !!!!
 
-    once fixed, wala!
+  once fixed, wala!
 
-    perfectly formatted new user and new course, complete with all the fields required
+  perfectly formatted new user and new course, complete with all the fields required
 
-    that’s once mistake I won’t make again
+  that’s once mistake I won’t make again
 
 
 ## Lots more to do :

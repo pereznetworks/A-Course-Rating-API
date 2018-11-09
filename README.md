@@ -194,9 +194,9 @@ and figuring out why I could not access course-api db
 
   schema: undefined????  
 
-  I traced back into my code and saw the my module.exports syntax was different from how I was importing into my routes js file
+  I traced back into my code
 
-  !!!!
+  and saw the my module.exports syntax was different from how I was importing into my users routes js file !!!!
 
   once fixed, wala!
 

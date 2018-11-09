@@ -12,7 +12,7 @@ var course = require('../data/models').course;
 var review = require('../data/models').review;
 var user = require('../data/models').user;
 
-var runFindQuery = require('../data/documents/runFindQuery.js');
+var runFindQuery = require('../data/documentMethods').runFindQuery;
 // GET /api/users 200 - Returns the currently authenticated user
 
 userRoutes.get("/api/users", function(req, res, next){

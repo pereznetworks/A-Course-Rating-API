@@ -10,7 +10,7 @@ const app = express();
 app.set('port', process.env.PORT || 5000);
 
 // my own modular mongoose connection method and callbacks
-const mongoClient = require('./mongoClient.js')
+const mongoClient = require('./utils/mongoClient.js')
 
 // connecting to mongodb...
 const db = mongoClient.connect();
@@ -28,13 +28,13 @@ db.once("open", function(){
 // morgan gives us http request logging
 app.use(morgan('dev'));
 
-// user body-parser, set to json
-// parse various different custom JSON types as JSON
+// all routes can use body-parser to parse json formatted data sent in req.body
+// so req.body must be an object with key/value properties
 app.use(bodyParser.json())
 
 /* import insertData methods
 
-	TODO: fix the syntax problems in the seed-data object
+	//TODO: fix the syntax problems in the seed-data object
 	.. this does not work,
 	.. there are syntax problems in the seed-data object
 	.. for now using mongoimport to import seed-data

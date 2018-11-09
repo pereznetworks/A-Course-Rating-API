@@ -5,13 +5,13 @@
  var express = require('express');
  // importing mongoose
  var mongoose = require("mongoose");
- 
+
  var courseRoutes = express.Router();
 
  // importing course-api documents
- var course = require('../models').course;
- var review = require('../models').review;
- var user = require('../models').user;
+ var course = require('../data/models').course;
+ var review = require('../data/models').review;
+ var user = require('../data/models').user;
 
 // GET /api/courses 200 - Returns the Course "_id" and "title" properties
 

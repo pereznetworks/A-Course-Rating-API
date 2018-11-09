@@ -204,6 +204,28 @@ and figuring out why I could not access course-api db
 
   that’s once mistake I won’t make again
 
+## modularize mongoose db document methods
+
+  first modularize mongoose db document method...
+
+  after importing mongoose ...
+
+  findQuery basically does a find
+
+  using a 2 parameters:
+
+  - document (compiled from a model)
+  and
+
+  - queryObject, a.k.a ... {propertyName: 'string or value'}
+
+  using promise#then to be able use findQuery(user, {})
+
+  this will simplify the code in users and courses routes  
+
+  will be creating a separate js module...
+
+  for each mongoose db method needed 
 
 ## Lots more to do :
 

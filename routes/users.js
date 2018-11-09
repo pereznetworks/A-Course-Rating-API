@@ -8,30 +8,46 @@ var userRoutes = express.Router();
 var mongoose = require("mongoose");
 
 // importing course-api documents
-var course = require('../models').course;
-var review = require('../models').review;
-var user = require('../models').user;
+var course = require('../data/models').course;
+var review = require('../data/models').review;
+var user = require('../data/models').user;
 
+var findQuery = require('../data/documents/findQuery.js');
 // GET /api/users 200 - Returns the currently authenticated user
 
 userRoutes.get("/api/users", function(req, res, next){
   // add auth check
-	// simulating a logged in user
 	// TODO: use router.param and auth middleware method and...
 	// TODO: for logged in user will send req.session.userId
-	testUserId = '57029ed4795118be119cc437'
-	user.find({}, function(err, user){
-		if(err){
-       return next(err)
-    } else if(!user){
-			err = new Error("Oops, no user found");
-			err.status = 404;
+	// can simulate a logged in user
+	// testUserId = {id: 57029ed4795118be119cc437}
+	// no auth/sessions setup yet, just gets all users...
+
+	const result = findQuery(user, {}).then(result => {
+
+		if (!result.status){
 			return next(err);
+		} else {
+			res.json(result.user);
+			res.status(results.status);
 		}
-    // TODO: return the authenticated user's entire profile...?
-		res.json(user);
-    res.status(200);
+
 	});
+
+	// user.find({}, function(err, user){
+	// 	if(err){
+  //      return next(err)
+  //   } else if(!user){
+	// 		err = new Error("Oops, no user found");
+	// 		err.status = 404;
+	// 		return next(err);
+	// 	}
+  //   // TODO: return the authenticated user's entire profile...?
+	// 	res.json(user);
+  //   res.status(200);
+	// });
+
+
 });
 
 /* TODO: IDEA: router.param AUTH middleware,
@@ -42,7 +58,7 @@ userRoutes.get("/api/users", function(req, res, next){
  */
 
 // POST /api/users 201 - Creates a user, sets the Location header to "/", and returns no content
-// this requires the user info be sent as properties in req.body, like from an html form
+// this requires the user info be sent as properties in req.body object
 userRoutes.post("/api/users", function(req, res, next){
 
 	if (req.body.fullName &&

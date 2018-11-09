@@ -39,17 +39,17 @@ terminal$ mongoimport --db course-api --collection reviews --type=json --jsonArr
 
 Step 4:
 
-I checked my development environment
+- I checked my development environment
 
-Chrome Dev Tools and the npm package.json and npm environment
+- Chrome Dev Tools and the npm package.json and npm environment
 
-I added --inspect to the npm start nodemon command,
+- I added --inspect to the npm start nodemon command,
 
-so I can also use Chrome's node.js dev-tools.
+  - so I can also use Chrome's node.js dev-tools.
 
-If you add the --inspect flag after running npm install...
+- If you add the --inspect flag after running npm install...
 
-you get a real neat console message...
+  - you get a real neat console message...
 
 ```
 module.js:545
@@ -58,53 +58,53 @@ throw err;
 Error: Cannot find module '../lib/cli'
 ```
 
-I neede to rm -rf node_modules and do npm install again
+  - I needed to rm -rf node_modules and do npm install again
 
-After running npm install,
+- After running npm install,
 
-in a second terminal tab(same folder), restarted mongod
+  - in a second terminal tab(same folder), restarted mongod
 
-then in the first terminal, ran npm start
+  - then in the first terminal, ran npm start
 
-then I browsed to http://localhost:5000 in Chrome browser
+  - then I browsed to http://localhost:5000 in Chrome browser
 
-and checked out the started src/index.js in the Node.js Dev-Tools
+  - able to check out the src/index.js in the Node.js Dev-Tools
 
 Steps 5 and 6:
 
-Setup Postman
+- Setup Postman
 
-After installing (Postman)[https://www.getpostman.com/.]
+  - After installing (Postman)[https://www.getpostman.com/.]
 
-then ran it ..import CourseAPI.postman_collection.jso
+  - import CourseAPI.postman_collection.jso
 
-the collection of connection request urls
+  - which is the collection of connection request urls
 
-at the beginning could only test the / *(root)* url req,
+- at the beginning could only test the / *(root)* url req,
 
-but it worked... so I was good to go..].
+  - but it worked... so I was good to go..].
 
 ## Setting Up Database Connection:
 
-Modular Mongoose db connection method:
+- Modular Mongoose db connection method:
 
-    ./startMongo.js methods, startdb(), onErr(), onceConnected()
+  ./startMongo.js methods, startdb(), onErr(), onceConnected()
 
-NPM package.json changes:
+- NPM package.json changes:
 
-    added prestart, and downMongod script cmds to npm package.json
+  added prestart, and downMongod script cmds to npm package.json
 
-so mongod process starts as part of npm start
+- so mongod process starts as part of npm start
 
-    Added { useNewUrlParser: true } to mongoose.connection
+  Added { useNewUrlParser: true } to mongoose.connection
 
-    (node:93931) DeprecationWarning:
+  (node:93931) DeprecationWarning:
 
-    current URL string parser is deprecated, and will be removed in a future version.
+  current URL string parser is deprecated, and will be removed in a future version.
 
-    To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+  To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
 
-important mongod connection note: dont forget your dbName...
+- important mongod connection note: dont forget your dbName...
 
 ```
 var port = 27017;
@@ -119,113 +119,112 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 ## Setup Schemas and compiled Models:
 
-Setup schema for Users, Courses and Reviews
+- Setup schema for Users, Courses and Reviews
 
-Will try to add as much validation to schema layer as possible
+  - Will try to add as much validation to schema layer as possible
 
-In the Courses model schema ...
+- In the Courses model schema ...
 
-Populate User.id and Reviews is set when adding data to model
+  - Populate User.id and Reviews is set when adding data to model
 
- fieldName {
-              type: Schema.Types.ObjectId,
-              ref: 'modelToGetFieldNameValuefrom'
-            }
+  - fieldName: {
+                type: Schema.Types.ObjectId,
+                ref: 'modelToGetFieldNameValuefrom'
+              }
 
- then need to use populate(fieldname).exec(function()) to fill in the values
+  - then need to use populate(fieldname).exec(function()) to fill in    the values...
+
+  - when? I think, when a req comes in to run query on a course??
 
 ## Setup and test routes
 
-  when a route actually tried to access a mongoose db :
+- when a route actually tried to access a mongoose db :
 
-    (node:28756) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
+  - (node:28756) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
 
-    to git rid of the warning...
-      at the beginning of each js defining a schema
-    or,
-      in the beginning of routes.js accessing the docs generated from that schema
+  - to git rid of the warning...
+    at the beginning of each js defining a schema
 
-      mongoose.set('useCreateIndex', true)
+  or,
+
+  - in the beginning of routes.js accessing the docs generated from that schema
+
+    mongoose.set('useCreateIndex', true)
 
 ## DB connection, data validation detour:
 
-insertData.js is not working at present, will have to fix later
+- insertData.js is not working at present, will have to fix later
 
-resigned myself to going back to mongoimport ....
+  - resigned myself to going back to mongoimport ....
 
-and figuring out why I could not access course-api db
+  - and figuring out why I could not access course-api db
 
-    I took a second look at my mongoClient.js connect method....
+- I took a second look at my mongoClient.js connect method....
 
-    it was because I was somehow missing the dbName is my mongoClient.js
+  - it was because I was somehow missing the dbName is my mongoClient.js
 
-    for now am accessing course-api data and moving on...
+  - for now am accessing course-api data and moving on...
 
-    mongoClient.js fixed
+  - mongoClient.js fixed
     insertData.js not fixed yet - but not using it for now
 
 ## module exports Schema detour:
 
-  after a few days dealing with a family emergency....
+- after a few days dealing with a family emergency....
 
-  finally got back to building some more of my course-api…
+  - finally got back to building some more of my course-api…
 
-  note to self…
+- note to self:
 
-  when defining schema in a separate js files:
+  - when defining schema in a separate js files:
 
-  …… make sure to use the correct syntax for the module.exports and then import using the same syntax
+  - make sure to use the correct syntax for the module.exports and then import using the same syntax
 
-  other wise your code may not throw an error but your schema won’t get properly imported
+  - other wise your code may not throw an error but your schema won’t get properly imported
 
-  the only indication of a problem was when I tried to add a new user or a new course and only the id for the course/user was created and the other fields were ignored ???
+  - the only indication of a problem was when I tried to add a new user or a new course and only the id for the course/user was created and the other fields were ignored ???
 
-  no errors thrown….no validation errors either ???
+  - no errors thrown….no validation errors either ???
 
-  just blank course/user with only an id, v fields ????
+  - just blank course/user with only an id, v fields ????
 
-  using Chrome dev-tools, I set up breakpoints where the new user and new course were passed to the callback functions
+  - using Chrome dev-tools, I set up breakpoints where the new user and new course were passed to the callback functions
 
-  after testing both...
+  - after testing both...
 
-  I saw in chrome dev-tools both the new user and new course object, of course were blank other than the id and v fields
+  - I saw in chrome dev-tools both the new user and new course object, of course were blank other than the id and v fields
 
-  but there was an odd property, wait for it...
+  - but there was an odd property, wait for it...
 
-  schema: undefined????  
+  - schema: undefined????  
 
-  I traced back into my code
+  - I traced back into my code
 
-  and saw the my module.exports syntax was different from how I was importing into my users routes js file !!!!
+  - and saw the my module.exports syntax was different from how I was importing into my users routes js file !!!!
 
-  once fixed, wala!
+  - once fixed, wala!
 
-  perfectly formatted new user and new course, complete with all the fields required
+  - perfectly formatted new user and new course, complete with all the fields required
 
-  that’s once mistake I won’t make again
+  - that’s once mistake I won’t make again
 
 ## modularize mongoose db document methods
 
-  first modularize mongoose db document method...
+  - after importing mongoose ...
 
-  after importing mongoose ...
+  - findQuery basically does a find using a 2 parameters:
 
-  findQuery basically does a find
+    - document (compiled from a model)
 
-  using a 2 parameters:
+    - queryObject, a.k.a ... {propertyName: 'string or value'}
 
-  - document (compiled from a model)
-  and
+    - then, setting a new promise to be able use findQuery(user, {})
 
-  - queryObject, a.k.a ... {propertyName: 'string or value'}
+  - this will simplify the code in users and courses routes  
 
-  using promise#then to be able use findQuery(user, {})
+    - will be creating a separate js module...
 
-  this will simplify the code in users and courses routes  
-
-  will be creating a separate js module...
-
-  for each mongoose db method needed 
+    - for each mongoose db method needed
 
 ## Lots more to do :
 

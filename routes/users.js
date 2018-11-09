@@ -12,7 +12,7 @@ var course = require('../data/models').course;
 var review = require('../data/models').review;
 var user = require('../data/models').user;
 
-var findQuery = require('../data/documents/findQuery.js');
+var runFindQuery = require('../data/documents/runFindQuery.js');
 // GET /api/users 200 - Returns the currently authenticated user
 
 userRoutes.get("/api/users", function(req, res, next){
@@ -23,7 +23,7 @@ userRoutes.get("/api/users", function(req, res, next){
 	// testUserId = {id: 57029ed4795118be119cc437}
 	// no auth/sessions setup yet, just gets all users...
 
-	const result = findQuery(user, {}).then(result => {
+	const result = runFindQuery(user, {}).then(result => {
 
 		if (!result.status){
 			return next(err);

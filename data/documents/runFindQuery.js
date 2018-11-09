@@ -2,7 +2,7 @@
   // methods for creating, updating, deleting, querying db.Users
 */
 
-// import mongoose, so use it;s db  document/model methods
+// import mongoose, so use it's db document/model methods
 var mongoose = require("mongoose");
 
 
@@ -11,7 +11,7 @@ var mongoose = require("mongoose");
 // var review = require('../data/models').review;
 // var user = require('../data/models').user;
 
-const findQuery = function(documentToDoQuery, queryObject){
+const runFindQuery = function(documentToDoQuery, queryObject){
 
   return new Promise(resolve => {
     documentToDoQuery.find(queryObject, function(err, user){
@@ -29,4 +29,4 @@ const findQuery = function(documentToDoQuery, queryObject){
   })
 };
 
-module.exports.findQuery = findQuery;
+module.exports = runFindQuery;

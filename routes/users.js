@@ -79,10 +79,10 @@ userRoutes.post("/api/users", function(req, res, next){
 				if (!result.status) {
 					return next(err);
 				} else {
-					// set location header to '/' and return no content
+					// set status and location header to '/' and return no content
 					res.status(result.status);
 					res.setHeader('Location', '/');
-					return next()
+					res.end();
 				}
 
 		}).catch(err => {

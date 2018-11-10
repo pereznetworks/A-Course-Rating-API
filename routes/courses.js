@@ -13,49 +13,74 @@
  var review = require('../data/models').review;
  var user = require('../data/models').user;
 
-// GET /api/courses 200 - Returns the Course "_id" and "title" properties
+ // wrapped mongoose methods in my own promise-based modular methods
+ var runFindQuery = require('../data/documentMethods').runFindQuery;
+ var createNew = require('../data/documentMethods').createNew;
 
+// GET /api/courses 200 - Returns the Course "_id" and "title" properties
 courseRoutes.get("/api/courses", function(req, res, next){
   // add auth/perms checks
 
-	course.find({}, function(err, courses){
-		if(err){
-       return next(err)
-    }
-		if(!courses) {
-      let err = new Error('Sorry, no courses found');
-			return next(err);
-		} else {
-      // returning only the Course "_id" and "title" properties
-      const coursesArray = courses.map((item, index)=>{
-        return {id: item._id, title: item._doc.title}
-      })
-  		res.json(coursesArray);
-      res.status(200);
-    }
-	});
+  return runFindQuery(course, {}).then(result => {
+
+      if (!result.status){
+  			let err = result;
+  			return next(err);
+  		} else if (!result.doc) {
+        let err = new Error('Sorry, no courses found');
+        return next(err);
+      } else {
+        // returning only the Course "_id" and "title" properties
+        const coursesArray = result.doc.map((item, index)=>{
+          return {id: item._id, title: item._doc.title}
+        });
+        res.json(coursesArray);
+        res.status(200);
+      }
+   });
 });
+
 
 // GET /api/course/:courseId 200 - Returns all Course properties and related documents for the provided course ID
 courseRoutes.get("/api/courses/:id", function(req, res, next){
   // add auth/perms checks
-  const testCourseId = "57029ed4795118be119cc440";
+  // const testCourseId = "57029ed4795118be119cc440";
   const courseId = req.params.id;
-	course.findById(req.params.id, function(err, course){
-		if(err){
-       return next(err)
-     };
-    if(!course) {
-      let err = new Error('Sorry, no course found by that id');
-      return next(err);
-		} else {
-      // return all Course properties
-      // TODO: and related documents for the provided course ID
-      // use Mongoose population to load the related user and reviews documents.
-		  res.json(course);
-      res.status(200);
-    }
-	});
+
+  return runFindQuery(course, {_id: courseId}).then(result => {
+
+      if (!result.status){
+        let err = result;
+        return next(err);
+      } else if (!result.doc) {
+        let err = new Error('Sorry, no course found by that id');
+        return next(err);
+      } else {
+        // return all Course properties
+        // TODO: and related documents for the provided course ID
+        // use Mongoose population to load the related user and reviews documents.
+  		  res.json(result.doc);
+        res.status(200);
+      }
+
+   });
+
+	// course.findById(req.params.id, function(err, course){
+	// 	if(err){
+  //      return next(err)
+  //    };
+  //   if(!course) {
+  //     let err = new Error('Sorry, no course found by that id');
+  //     return next(err);
+	// 	} else {
+  //     // return all Course properties
+  //     // TODO: and related documents for the provided course ID
+  //     // use Mongoose population to load the related user and reviews documents.
+	// 	  res.json(course);
+  //     res.status(200);
+  //   }
+	// });
+
 });
 
 

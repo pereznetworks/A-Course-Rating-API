@@ -10,15 +10,15 @@ var mongoose = require("mongoose");
 const runFindQuery = function(documentToDoQuery, queryObject){
 
   return new Promise((resolve, reject) => {
-    documentToDoQuery.find(queryObject, function(err, user){
+    documentToDoQuery.find(queryObject, function(err, doc){
       if(err){
         reject(err);
-      } else if(!user){
-        const err = new Error("Oops, no user found");
+      } else if(!doc){
+        const err = new Error(`Oops, no ${documentToDoQuery} found`);
         err.status = 404;
         reject(err);
       } else {
-        const result = {user: user, status: 200};
+        const result = {doc: doc, status: 200};
         resolve(result);
       }
     });

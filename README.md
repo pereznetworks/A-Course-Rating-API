@@ -218,7 +218,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
       - documentFromModel (compiled from a model)
 
-      - searhcQueryObject, a.k.a ... {propertyName: 'string or value', }
+      - searchQueryObject, a.k.a ... {propertyName: 'string or value', }
 
     - then, setting a new promise to be able use Promise#then syntax
 

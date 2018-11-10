@@ -18,7 +18,7 @@ const runFindQuery = function(documentToDoQuery, queryObject){
         err.status = 404;
         reject(err);
       } else {
-        const result = {doc: doc, status: 200};
+        const result = {doc: doc, status: 201};
         resolve(result);
       }
     });

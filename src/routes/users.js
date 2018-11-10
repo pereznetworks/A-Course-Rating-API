@@ -31,7 +31,7 @@ userRoutes.get("/api/users", function(req, res, next){
 			let err = result;
 			return next(err);
 		} else {
-			res.json(result.user);
+			res.json(result.doc);
 			res.status(result.status);
 		}
 

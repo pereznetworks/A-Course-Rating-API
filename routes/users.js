@@ -12,10 +12,11 @@ var course = require('../data/models').course;
 var review = require('../data/models').review;
 var user = require('../data/models').user;
 
+// wrapped mongoose methods in my own promise-based modular methods
 var runFindQuery = require('../data/documentMethods').runFindQuery;
 var createNew = require('../data/documentMethods').createNew;
-// GET /api/users 200 - Returns the currently authenticated user
 
+// GET /api/users 200 - Returns the currently authenticated user
 userRoutes.get("/api/users", function(req, res, next){
   // add auth check
 	// TODO: use router.param and auth middleware method and...
@@ -24,7 +25,7 @@ userRoutes.get("/api/users", function(req, res, next){
 	// testUserId = {id: 57029ed4795118be119cc437}
 	// no auth/sessions setup yet, just gets all users...
 
-	runFindQuery(user, {}).then(result => {
+	return runFindQuery(user, {}).then(result => {
 
 		if (!result.status){
 			let err = result;
@@ -35,6 +36,12 @@ userRoutes.get("/api/users", function(req, res, next){
 		}
 
 	}).catch(err => {
+			res.status(400)
+			res.json({
+				message: err.message,
+				error: err.status,
+				details: err.stack
+			});
 			return next(err);
 	}); // end runFindQuery
 
@@ -67,7 +74,7 @@ userRoutes.post("/api/users", function(req, res, next){
 		var fullName = req.body.fullName.toString();
 		var password = req.body.password.toString();
 
-		createNew(user, req.body).then((result) =>{
+		return createNew(user, req.body).then(result =>{
 
 				if (!result.status) {
 					return next(err);
@@ -75,11 +82,13 @@ userRoutes.post("/api/users", function(req, res, next){
 					// set location header to '/' and return no content
 					res.status(result.status);
 					res.setHeader('Location', '/');
+					return next()
 				}
 
 		}).catch(err => {
 				return next(err);
-		});
+		}); // end createNew
+
 		// create an object with form input
 		// var newUser = new user({
 		// 	emailAddress: emailAddress,

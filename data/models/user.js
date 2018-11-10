@@ -33,7 +33,7 @@ module.exports = new Schema({
     emailAddress: {
                         type: String,
                     required: true,
-                      unique: true,
+                      unique: [true, 'That email address is already associated with another user account.'],
                     validate: { validator: isEmail , message: `Please type a valid email address.` }
                   },
     password: {

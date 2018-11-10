@@ -232,6 +232,21 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
       - for each mongoose db method needed
 
+  - for user documents
+
+    - findQuery and createNew document methods working
+
+    - even getting a email unique validation error, when using dup email
+
+  - can not test findQuery and createNew with courses and reviews documents
+
 ## Lots more to do :
 
-  ...
+  - current issues...
+
+    - need to catch validation errors, to make errors user friendly
+
+    - need to prevent this...
+
+      - after success create new User...
+      - express router goes to default no route found handler

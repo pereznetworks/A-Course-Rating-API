@@ -10,10 +10,7 @@ var createNew = function(documentToDoCreate, objectDataValues){
 
   return new Promise((resolve, reject) => {
     // create an object with form input
-    var document = new documentToDoCreate(objectDataValues);
-
-    // make sure newUser get saves to the db
-      document.save(function (err, doc) {
+    documentToDoCreate.create(objectDataValues, function (err, doc) {
         if (err) {
           reject(err);
         } else {

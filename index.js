@@ -69,6 +69,8 @@ app.use(userRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/courses/:id', courseRoutes);
 app.use('/api/users', userRoutes);
+
+
 // uncomment this route in order to test the global error handler
 // app.get('/error', function (req, res) {
 //   throw new Error('Test error');
@@ -85,12 +87,22 @@ app.use((req, res) => {
 // global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(err.status || 500)
-	res.json({
-    message: err.message,
-    error: err.status,
-		details: err.stack
-  });
+	if (err.name = 'MongoError'){
+		res.status(400);
+		res.json({
+			message: err.message,
+			status: 400,
+			details: err.stack
+		});
+	} else {
+  	res.status(500)
+		res.json({
+			message: err.message,
+			status: 500,
+			details: err.stack
+		});
+	}
+
 });
 
 // start listening on our port

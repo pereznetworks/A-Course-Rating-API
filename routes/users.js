@@ -13,7 +13,7 @@ var review = require('../data/models').review;
 var user = require('../data/models').user;
 
 var runFindQuery = require('../data/documentMethods').runFindQuery;
-var createUser = require('../data/documentMethods').createUser;
+var createNew = require('../data/documentMethods').createNew;
 // GET /api/users 200 - Returns the currently authenticated user
 
 userRoutes.get("/api/users", function(req, res, next){
@@ -24,7 +24,7 @@ userRoutes.get("/api/users", function(req, res, next){
 	// testUserId = {id: 57029ed4795118be119cc437}
 	// no auth/sessions setup yet, just gets all users...
 
-	const result = runFindQuery(user, {}).then(result => {
+	runFindQuery(user, {}).then(result => {
 
 		if (!result.status){
 			let err = result;
@@ -65,7 +65,7 @@ userRoutes.post("/api/users", function(req, res, next){
 		var fullName = req.body.fullName.toString();
 		var password = req.body.password.toString();
 
-		createUser(user, req.body).then(result =>{
+		createNew(user, req.body).then(result =>{
 
 				if (!result.status) {
 					return next(error);

@@ -6,7 +6,7 @@
 // import mongoose, so use it's db document/model methods
 var mongoose = require("mongoose");
 
-var createUser = function(documentToDoCreate, objectDataValues){
+var createNew = function(documentToDoCreate, objectDataValues){
 
 
   return new Promise(resolve => {
@@ -14,11 +14,11 @@ var createUser = function(documentToDoCreate, objectDataValues){
     var document = new documentToDoCreate(objectDataValues);
 
     // make sure newUser get saves to the db
-      document.save(function (err, user) {
+      document.save(function (err, doc) {
         if (err) {
           resolve(err);
         } else {
-          const result = {user: user, status: 201};
+          const result = {doc: doc, status: 201};
           resolve(result);
         }
     });
@@ -26,4 +26,4 @@ var createUser = function(documentToDoCreate, objectDataValues){
 
 };
 
-module.exports = createUser;
+module.exports = createNew;

@@ -1,7 +1,7 @@
 // importing methods here, so I can import them elsewhere more simply
 
 var runFindQuery = require('./runFindQuery.js');
-var createUser = require('./createUser.js');
+var createNew = require('./createNew.js');
 
 module.exports.runFindQuery = runFindQuery;
-module.exports.createUser = createUser;
+module.exports.createNew = createNew;

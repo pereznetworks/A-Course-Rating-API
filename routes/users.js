@@ -34,6 +34,8 @@ userRoutes.get("/api/users", function(req, res, next){
 			res.status(result.status);
 		}
 
+	}).catch(err => {
+			return next(err);
 	}); // end runFindQuery
 
 }); // end /api/users route
@@ -75,6 +77,8 @@ userRoutes.post("/api/users", function(req, res, next){
 					res.setHeader('Location', '/');
 				}
 
+		}).catch(err => {
+				return next(err);
 		});
 		// create an object with form input
 		// var newUser = new user({

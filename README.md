@@ -242,7 +242,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - findQuery working with get /api/courses and get /api/courses/:id
 
-    - now to test with post /api/courses and reviews routes
+    - now to test with post /api/courses and reviews routes 
 
 ## Lots more to do :
 

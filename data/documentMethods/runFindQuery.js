@@ -1,15 +1,11 @@
-/* mongo db document methods
-  // methods for creating, updating, deleting, querying db.Users
+/* run find query using 2 paramters
+  ...document from compiled model
+  ...queryObject, containing key/value pairs of sub-document/s to find
 */
 
 // import mongoose, so use it's db document/model methods
 var mongoose = require("mongoose");
 
-
-// // importing course-api documents
-// var course = require('../data/models').course;
-// var review = require('../data/models').review;
-// var user = require('../data/models').user;
 
 const runFindQuery = function(documentToDoQuery, queryObject){
 

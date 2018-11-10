@@ -13,6 +13,7 @@ var review = require('../data/models').review;
 var user = require('../data/models').user;
 
 var runFindQuery = require('../data/documentMethods').runFindQuery;
+var createUser = require('../data/documentMethods').createUser;
 // GET /api/users 200 - Returns the currently authenticated user
 
 userRoutes.get("/api/users", function(req, res, next){
@@ -26,29 +27,16 @@ userRoutes.get("/api/users", function(req, res, next){
 	const result = runFindQuery(user, {}).then(result => {
 
 		if (!result.status){
+			let err = result;
 			return next(err);
 		} else {
 			res.json(result.user);
 			res.status(results.status);
 		}
 
-	});
+	}); // end runFindQuery
 
-	// user.find({}, function(err, user){
-	// 	if(err){
-  //      return next(err)
-  //   } else if(!user){
-	// 		err = new Error("Oops, no user found");
-	// 		err.status = 404;
-	// 		return next(err);
-	// 	}
-  //   // TODO: return the authenticated user's entire profile...?
-	// 	res.json(user);
-  //   res.status(200);
-	// });
-
-
-});
+}); // end /api/users route
 
 /* TODO: IDEA: router.param AUTH middleware,
 	 will need to validate the password and encrypt it
@@ -77,24 +65,37 @@ userRoutes.post("/api/users", function(req, res, next){
 		var fullName = req.body.fullName.toString();
 		var password = req.body.password.toString();
 
-		// create an object with form input
-		var newUser = new user({
-			emailAddress: emailAddress,
-			fullName: fullName,
-			password: password
-		})
+		createUser(user, req.body).then(result =>{
 
-		// make sure newUser get saves to the db
-		newUser.save(function (error, user) {
-			if (error) {
-				return next(error);
-			} else {
-				// set location header to '/' and return no content
-				res.status(201)
-				res.setHeader('Location', '/');
+				if (!result.status) {
+					return next(error);
+				} else {
+					// set location header to '/' and return no content
+					res.status(result.status);
+					res.setHeader('Location', '/');
+				}
 
-			}
 		});
+		// create an object with form input
+		// var newUser = new user({
+		// 	emailAddress: emailAddress,
+		// 	fullName: fullName,
+		// 	password: password
+		// })
+		//
+		// // make sure newUser get saves to the db
+		// newUser.save(function (error, user) {
+		// 	if (error) {
+		// 		return next(error);
+		// 	} else {
+		// 		// set location header to '/' and return no content
+		// 		res.status(201)
+		// 		res.setHeader('Location', '/');
+		//
+		// 	}
+		// });
+
+
 	} else {
       var err = new Error('All fields required.');
       err.status = 400;

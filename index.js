@@ -10,7 +10,7 @@ const app = express();
 app.set('port', process.env.PORT || 5000);
 
 // my own modular mongoose connection method and callbacks
-const mongoClient = require('./utils/mongoClient.js')
+const mongoClient = require('./src/utils/mongoClient.js')
 
 // connecting to mongodb...
 const db = mongoClient.connect();
@@ -39,9 +39,9 @@ app.use(bodyParser.json())
 	.. there are syntax problems in the seed-data object
 	.. for now using mongoimport to import seed-data
 
-	const initCourses = require('./seed-data/insertData.js').initCourses;
-	const initReviews = require('./seed-data/insertData.js').initReviews;
-	const initUsers = require('./seed-data/insertData.js').initUsers;
+	const initCourses = require('./src/seed-data/insertData.js').initCourses;
+	const initReviews = require('./src/seed-data/insertData.js').initReviews;
+	const initUsers = require('./src/seed-data/insertData.js').initUsers;
 
 	// test if seedData has been inserted into db.course-api
 	// if not insert data, logs to console on err or success
@@ -59,24 +59,20 @@ app.get('/', (req, res) => {
   });
 });
 
-// importing user and course routes
-const userRoutes = require('./routes/users.js');
-const courseRoutes = require('./routes/courses.js');
+// importing user and course router modules
+const userRoutes = require('./src/routes/users.js');
+const courseRoutes = require('./src/routes/courses.js');
 
+// tells express app to use these router modules
 app.use(courseRoutes);
 app.use(userRoutes);
 
+// tells express app which paths to use with which routes
 app.use('/api/courses', courseRoutes);
 app.use('/api/courses/:id', courseRoutes);
 app.use('/api/users', userRoutes);
 
-
-// uncomment this route in order to test the global error handler
-// app.get('/error', function (req, res) {
-//   throw new Error('Test error');
-// });
-
-// send 404 if no other route matched
+// send 404 if no other route matched and no error once processing a route
 app.use((req, res) => {
   res.status(404)
 	res.json({
@@ -85,6 +81,7 @@ app.use((req, res) => {
 })
 
 // global error handler
+// for an err to get here just need to next(err) from any route
 app.use((err, req, res, next) => {
   console.error(err.stack);
 	if (err.name = 'MongoError'){

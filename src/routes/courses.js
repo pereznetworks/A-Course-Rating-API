@@ -9,13 +9,13 @@
  var courseRoutes = express.Router();
 
  // importing course-api documents
- var course = require('../data/models').course;
- var review = require('../data/models').review;
- var user = require('../data/models').user;
+ var course = require('../models').course;
+ var review = require('../models').review;
+ var user = require('../models').user;
 
  // wrapped mongoose methods in my own promise-based modular methods
- var runFindQuery = require('../data/documentMethods').runFindQuery;
- var createNew = require('../data/documentMethods').createNew;
+ var runFindQuery = require('../documentMethods').runFindQuery;
+ var createNew = require('../documentMethods').createNew;
 
 // GET /api/courses 200 - Returns the Course "_id" and "title" properties
 courseRoutes.get("/api/courses", function(req, res, next){
@@ -93,6 +93,8 @@ courseRoutes.post("/api/courses", function(req, res, next){
 					// set status and location header to '/' and return no content
 					res.status(result.status);
 					res.setHeader('Location', '/');
+          // without this express router will try to continue to process routes
+          // which will result an a 404 route found error
 					res.end();
 				}
 

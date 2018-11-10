@@ -9,14 +9,14 @@ var mongoose = require("mongoose");
 
 const runFindQuery = function(documentToDoQuery, queryObject){
 
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     documentToDoQuery.find(queryObject, function(err, user){
       if(err){
-        resolve(err);
+        reject(err);
       } else if(!user){
         const err = new Error("Oops, no user found");
         err.status = 404;
-        resolve(err);
+        reject(err);
       } else {
         const result = {user: user, status: 200};
         resolve(result);

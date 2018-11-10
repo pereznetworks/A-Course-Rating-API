@@ -8,15 +8,14 @@ var mongoose = require("mongoose");
 
 var createNew = function(documentToDoCreate, objectDataValues){
 
-
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     // create an object with form input
     var document = new documentToDoCreate(objectDataValues);
 
     // make sure newUser get saves to the db
       document.save(function (err, doc) {
         if (err) {
-          resolve(err);
+          reject(err);
         } else {
           const result = {doc: doc, status: 201};
           resolve(result);

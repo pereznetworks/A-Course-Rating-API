@@ -31,7 +31,7 @@ userRoutes.get("/api/users", function(req, res, next){
 			return next(err);
 		} else {
 			res.json(result.user);
-			res.status(results.status);
+			res.status(result.status);
 		}
 
 	}); // end runFindQuery
@@ -65,10 +65,10 @@ userRoutes.post("/api/users", function(req, res, next){
 		var fullName = req.body.fullName.toString();
 		var password = req.body.password.toString();
 
-		createNew(user, req.body).then(result =>{
+		createNew(user, req.body).then((result) =>{
 
 				if (!result.status) {
-					return next(error);
+					return next(err);
 				} else {
 					// set location header to '/' and return no content
 					res.status(result.status);

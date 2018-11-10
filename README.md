@@ -212,13 +212,15 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - after importing mongoose ...
 
-  - findQuery basically does a find using a 2 parameters:
+  - methods basically do the call the mongoose method
 
-    - documentFromModel (compiled from a model)
+    - takes at least 2 parameters:
 
-    - searhcQueryObject, a.k.a ... {propertyName: 'string or value', }
+      - documentFromModel (compiled from a model)
 
-    - then, setting a new promise to be able use Promise#then
+      - searhcQueryObject, a.k.a ... {propertyName: 'string or value', }
+
+    - then, setting a new promise to be able use Promise#then syntax
 
       - findQuery(documentFromModel, searchQueryObject).then().catch()
       - createNew(documentFromModel, searchQueryObject).then().catch()

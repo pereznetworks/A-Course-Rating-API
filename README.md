@@ -214,19 +214,21 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - findQuery basically does a find using a 2 parameters:
 
-    - document (compiled from a model)
+    - documentFromModel (compiled from a model)
 
-    - queryObject, a.k.a ... {propertyName: 'string or value'}
+    - searhcQueryObject, a.k.a ... {propertyName: 'string or value', }
 
     - then, setting a new promise to be able use Promise#then
 
-      - findQuery(user, {}).then()
+      - findQuery(documentFromModel, searchQueryObject).then().catch()
+      - createNew(documentFromModel, searchQueryObject).then().catch()
 
   - this will simplify the code in users and courses routes  
 
-    - will be creating a separate js module...
+    - will be creating a separate js module...in the documentMethods folder
+    - then exporting from documentMethods/index.js
 
-    - for each mongoose db method needed
+      - for each mongoose db method needed
 
 ## Lots more to do :
 

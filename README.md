@@ -223,11 +223,13 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
     - then, setting a new promise to be able use Promise#then syntax
 
       - findQuery(documentFromModel, searchQueryObject).then().catch()
+      
       - createNew(documentFromModel, searchQueryObject).then().catch()
 
   - this will simplify the code in users and courses routes  
 
     - will be creating a separate js module...in the documentMethods folder
+
     - then exporting from documentMethods/index.js
 
       - for each mongoose db method needed
@@ -238,7 +240,9 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - even getting a email unique validation error, when using dup email
 
-  - can not test findQuery and createNew with courses and reviews documents
+  - findQuery with /api/courses and /api/courses/:id
+
+    - now to test with create course and reviews
 
 ## Lots more to do :
 

@@ -223,7 +223,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
     - then, setting a new promise to be able use Promise#then syntax
 
       - findQuery(documentFromModel, searchQueryObject).then().catch()
-      
+
       - createNew(documentFromModel, searchQueryObject).then().catch()
 
   - this will simplify the code in users and courses routes  
@@ -249,8 +249,3 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
   - current issues...
 
     - need to catch validation errors, to make errors user friendly
-
-    - need to prevent this...
-
-      - after success create new User...
-      - express router goes to default no route found handler

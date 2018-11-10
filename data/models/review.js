@@ -23,7 +23,7 @@ var isEmail = require('validator').isEmail;
 */
 
 module.exports = new Schema({
-  id: Schema.Types.ObjectId,
+  id:  mongoose.Schema.Types.ObjectId,
   user: {type: [Schema.Types.ObjectId], required: [true, `This value should come from User._id`]},
   postedOn: {type: Date, default: Date.now},
   rating: {type: Number, required: true, min: [1, 'A minimum rating of 1 is required.'], max: [5, 'The highest rating possible is 5.'] },

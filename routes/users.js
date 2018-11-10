@@ -70,9 +70,11 @@ userRoutes.post("/api/users", function(req, res, next){
 			return next(err);
 		}
 
-		var emailAddress = req.body.emailAddress.toString();
-		var fullName = req.body.fullName.toString();
-		var password = req.body.password.toString();
+		/* future section for parsing and validating ??
+			// var emailAddress = req.body.emailAddress.toString();
+			// var fullName = req.body.fullName.toString();
+			// var password = req.body.password.toString();
+		*/
 
 		return createNew(user, req.body).then(result =>{
 
@@ -88,26 +90,6 @@ userRoutes.post("/api/users", function(req, res, next){
 		}).catch(err => {
 				return next(err);
 		}); // end createNew
-
-		// create an object with form input
-		// var newUser = new user({
-		// 	emailAddress: emailAddress,
-		// 	fullName: fullName,
-		// 	password: password
-		// })
-		//
-		// // make sure newUser get saves to the db
-		// newUser.save(function (error, user) {
-		// 	if (error) {
-		// 		return next(error);
-		// 	} else {
-		// 		// set location header to '/' and return no content
-		// 		res.status(201)
-		// 		res.setHeader('Location', '/');
-		//
-		// 	}
-		// });
-
 
 	} else {
       var err = new Error('All fields required.');

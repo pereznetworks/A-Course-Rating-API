@@ -28,7 +28,7 @@ module.exports = new Schema({
 
   id: Schema.Types.ObjectId,
   user: {
-                    type: Schema.Types.ObjectId,
+                    type:  mongoose.Schema.Types.ObjectId,
                      ref: 'User',
                 required: [true, `Oops, no user is associated wth this Course`]
          },
@@ -45,13 +45,8 @@ module.exports = new Schema({
   steps: [
             {
               stepNumber: Number,
-              title: {
-                              type: String,
-                          required: [true, `Please type a title for this step of the course.`]
-                     },
-              description: {
-                              type: String,
-                          required: [true, `Please type a description for this step of the course.`]}
+              title: String,
+              description: String
             }
           ],
   reviews: [

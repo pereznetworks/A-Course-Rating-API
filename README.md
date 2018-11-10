@@ -234,18 +234,26 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
       - for each mongoose db method needed
 
-  - documentMethods working with get /api/users and post /api/users documents
+  - documentMethods working with ...
 
-    - findQuery and createNew document methods working
+    - get /api/users and post /api/users documents
 
-    - even getting a email unique validation error, when using dup email
+      - findQuery and createNew document methods working
 
-  - findQuery working with get /api/courses and get /api/courses/:id
+      - even getting a email unique validation error, when using dup email
 
-    - now to test with post /api/courses and reviews routes 
+    - get /api/courses, get /api/courses/:id and post /api/courses
+
+      - now to test with put /api/courses and reviews routes
 
 ## Lots more to do :
 
   - current issues...
 
-    - need to catch validation errors, to make errors user friendly
+    - Validation : need to catch validation errors, to make errors user friendly
+
+  - to be built...
+
+    - user auth
+    - current user logged-in check(session-based?)
+    - require logged user for all routes..except root '/'

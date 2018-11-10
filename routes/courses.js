@@ -37,8 +37,8 @@ courseRoutes.get("/api/courses", function(req, res, next){
         res.json(coursesArray);
         res.status(200);
       }
-   });
-});
+   }); // end runFindQuery
+}); // end get /api/courses route
 
 
 // GET /api/course/:courseId 200 - Returns all Course properties and related documents for the provided course ID
@@ -62,29 +62,50 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
   		  res.json(result.doc);
         res.status(200);
       }
+   }); // end runFindQuery
 
-   });
-
-	// course.findById(req.params.id, function(err, course){
-	// 	if(err){
-  //      return next(err)
-  //    };
-  //   if(!course) {
-  //     let err = new Error('Sorry, no course found by that id');
-  //     return next(err);
-	// 	} else {
-  //     // return all Course properties
-  //     // TODO: and related documents for the provided course ID
-  //     // use Mongoose population to load the related user and reviews documents.
-	// 	  res.json(course);
-  //     res.status(200);
-  //   }
-	// });
-
-});
+}); // end get /api/courses/:id route
 
 
 // POST /api/courses 201 - Creates a course, sets the Location header, and returns no content
+courseRoutes.post("/api/courses", function(req, res, next){
+
+	if ( req.body.user &&
+		req.body.title &&
+		req.body.description &&
+    req.body.steps
+    ) {
+
+    /* future section for parsing and validating ??
+      // var userId = req.body.userId.toString();
+      // var title = req.body.title.toString();
+      // var description = req.body.description.toString();
+      // var estimatedTime = req.body.estimatedTime.toString();
+      // var materialsNeeded = req.body.materialsNeeded.toString();
+      // var steps = req.body.steps.toString();
+    */
+
+	 return createNew(course, req.body).then(result =>{
+
+				if (!result.status) {
+					return next(err);
+				} else {
+					// set status and location header to '/' and return no content
+					res.status(result.status);
+					res.setHeader('Location', '/');
+					res.end();
+				}
+
+		}).catch(err => {
+				return next(err);
+		}); // end createNew
+
+	} else {
+      var err = new Error('All fields required.');
+      err.status = 400;
+      return next(err);
+  }
+}); // end /api/courses post create user route
 
 // PUT /api/courses/:courseId 204 - Updates a course and returns no content
 

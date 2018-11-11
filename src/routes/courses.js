@@ -16,6 +16,7 @@
  // wrapped mongoose methods in my own promise-based modular methods
  var runFindQuery = require('../documentMethods').runFindQuery;
  var createNew = require('../documentMethods').createNew;
+var updateDoc = require('../documentMethods').updateDoc;
 
 // GET /api/courses 200 - Returns the Course "_id" and "title" properties
 courseRoutes.get("/api/courses", function(req, res, next){
@@ -35,7 +36,7 @@ courseRoutes.get("/api/courses", function(req, res, next){
           return {id: item._id, title: item._doc.title}
         });
         res.json(coursesArray);
-        res.status(200);
+        res.status(result.status);
       }
    }); // end runFindQuery
 }); // end get /api/courses route
@@ -60,7 +61,7 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
         // TODO: and related documents for the provided course ID
         // use Mongoose population to load the related user and reviews documents.
   		  res.json(result.doc);
-        res.status(200);
+        res.status(result.status);
       }
    }); // end runFindQuery
 
@@ -110,6 +111,50 @@ courseRoutes.post("/api/courses", function(req, res, next){
 }); // end /api/courses post create user route
 
 // PUT /api/courses/:courseId 204 - Updates a course and returns no content
+courseRoutes.put("/api/courses/:id", function(req, res, next){
+
+	if ( req.body.user &&
+		req.body.title &&
+		req.body.description &&
+    req.body.steps
+    ) {
+
+    /* future section for parsing and validating ??
+      // var userId = req.body.userId.toString();
+      // var title = req.body.title.toString();
+      // var description = req.body.description.toString();
+      // var estimatedTime = req.body.estimatedTime.toString();
+      // var materialsNeeded = req.body.materialsNeeded.toString();
+      // var steps = req.body.steps.toString();
+    */
+
+   var docId = req.params.id;
+   var updateDataObject = req.body;
+	 return updateDoc(course, docId, updateDataObject).then(result =>{
+
+				if (!result.status) {
+					return next(err);
+				} else {
+					// set status and location header to '/' and return no content
+					res.status(result.status);
+					res.setHeader('Location', '/');
+          // without this express router will try to continue to process routes
+          // which will result an a 404 route found error
+					res.end();
+				}
+
+		}).catch(err => {
+				return next(err);
+		}); // end createNew
+
+	} else {
+      var err = new Error('All fields required.');
+      err.status = 400;
+      return next(err);
+  }
+}); // end /api/courses post create user route
+
+
 
 // POST /api/courses/:courseId/reviews 201 - Creates a review for the specified course ID, sets the Location header to the related course, and returns no content
 

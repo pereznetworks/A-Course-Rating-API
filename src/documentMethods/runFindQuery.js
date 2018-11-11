@@ -1,5 +1,5 @@
 /* run find query using 2 paramters
-  ...document from compiled model
+  ...document from compiled model to use to run find query
   ...queryObject, containing key/value pairs of sub-document/s to find
 */
 
@@ -18,7 +18,7 @@ const runFindQuery = function(documentToDoQuery, queryObject){
         err.status = 404;
         reject(err);
       } else {
-        const result = {doc: doc, status: 201};
+        const result = {doc: doc, status: 200};
         resolve(result);
       }
     });

@@ -1,6 +1,6 @@
 /* create user using 2 paramters
-  ...document from compiled model
-  ...queryObject, containing key/value pairs of sub-document/s to create
+  ...document from compiled model top use to run create cmd
+  ...objectDataValues, containing key/value pairs of sub-document/s to create
 */
 
 // import mongoose, so use it's db document/model methods

@@ -1,5 +1,5 @@
 /* create user using 2 paramters
-  ...document from compiled model top use to run create cmd
+  ...document from compiled model to use to run create cmd
   ...objectDataValues, containing key/value pairs of sub-document/s to create
 */
 

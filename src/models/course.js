@@ -40,8 +40,12 @@ module.exports = new Schema({
                     type: String,
                 required: [true, `Please type a description for the course.`]
                },
-  estimatedTime: String,
-  materialsNeeded: String,
+  estimatedTime: {
+                    type: String
+                  },
+  materialsNeeded: {
+                    type: String
+                  },
   steps: [
             {
               stepNumber: Number,
@@ -50,8 +54,8 @@ module.exports = new Schema({
             }
           ],
   reviews: [
-              {type: Schema.Types.ObjectId,
-                ref: 'User'
+              {type: mongoose.Schema.Types.ObjectId,
+                ref: 'Reviews'
               }
             ]
 });

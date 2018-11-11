@@ -71,11 +71,7 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
 // POST /api/courses 201 - Creates a course, sets the Location header, and returns no content
 courseRoutes.post("/api/courses", function(req, res, next){
 
-	if ( req.body.user &&
-		req.body.title &&
-		req.body.description &&
-    req.body.steps
-    ) {
+	if ( req.body.user && req.body.title & req.body.description && req.body.steps) {
 
     /* future section for parsing and validating ??
       // var userId = req.body.userId.toString();
@@ -113,11 +109,7 @@ courseRoutes.post("/api/courses", function(req, res, next){
 // PUT /api/courses/:courseId 204 - Updates a course and returns no content
 courseRoutes.put("/api/courses/:id", function(req, res, next){
 
-	if ( req.body.user &&
-		req.body.title &&
-		req.body.description &&
-    req.body.steps
-    ) {
+	if ( req.body.user &&	req.body.title && req.body.description && req.body.steps) {
 
     /* future section for parsing and validating ??
       // var userId = req.body.userId.toString();
@@ -145,7 +137,7 @@ courseRoutes.put("/api/courses/:id", function(req, res, next){
 
 		}).catch(err => {
 				return next(err);
-		}); // end createNew
+		}); // end updateDoc
 
 	} else {
       var err = new Error('All fields required.');
@@ -157,5 +149,25 @@ courseRoutes.put("/api/courses/:id", function(req, res, next){
 
 
 // POST /api/courses/:courseId/reviews 201 - Creates a review for the specified course ID, sets the Location header to the related course, and returns no content
+// POST /api/courses 201 - Creates a course, sets the Location header, and returns no content
+courseRoutes.post("/api/courses/:courseId/reviews", function(req, res, next){
+
+  /*  really doing 2 db tasks:
+
+      creating a new review...
+        verify that new review gets...
+          user.Id
+          a date posted
+          rating
+          and a optional text
+
+      updating course.reviews array with a the id a the new review...
+
+      the user_id for the review should be the user posting the review
+      so the user_id will be the id logged in user
+  */
+
+
+}); // end /api/courses post create user route
 
 module.exports = courseRoutes;

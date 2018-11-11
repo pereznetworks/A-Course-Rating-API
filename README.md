@@ -222,9 +222,11 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - then, setting a new promise to be able use Promise#then syntax
 
-      - findQuery(documentFromModel, searchQueryObject).then().catch()
+      - findQuery(documentToDoQuery, searchQueryObject).then().catch()
 
-      - createNew(documentFromModel, searchQueryObject).then().catch()
+      - createNew(documentToDoCreate, objectDataValues).then().catch()
+
+      - updateDoc(documentToDoUpdate, docId, updateDataObject).then().catch()
 
   - this will simplify the code in users and courses routes  
 
@@ -236,15 +238,17 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - documentMethods working with ...
 
-    - get /api/users and post /api/users documents
+  - using findQuery, createNew, updateDoc document methods for..
 
-      - findQuery and createNew document methods working
+    - get /api/users and post /api/users documents
 
       - even getting a email unique validation error, when using dup email
 
-    - get /api/courses, get /api/courses/:id and post /api/courses
+    - get /api/courses, get /api/courses/:id
 
-      - now to test with put /api/courses and reviews routes
+    - post /api/courses and put /api/coursesArray
+
+      - now to do reviews routes
 
 ## Lots more to do :
 

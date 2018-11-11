@@ -1,7 +1,8 @@
-/* update document using 2 paramters
+/* update document using 3 paramters
   ...document from compiled model to use to run update cmd
-  ...dataValuesString, containing ...
-     `id, $set: { key: value pairs of sub-document/s to find and update}`
+  ... id of document to update
+  ... updateDataObject, containing ...
+      { key: value pairs of sub-document/s to find and update}
 */
 
 // import mongoose, so use it's db document/model methods

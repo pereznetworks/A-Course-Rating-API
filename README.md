@@ -208,7 +208,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - that’s once mistake I won’t make again
 
-## modularize mongoose db document methods
+## modularize mongoose db document methods:
 
   - after importing mongoose ...
 
@@ -236,7 +236,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
       - for each mongoose db method needed
 
-  - documentMethods working with ...
+## documentMethods working with:
 
   - using findQuery, createNew, updateDoc document methods for..
 
@@ -248,9 +248,9 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - post /api/courses and put /api/coursesArray
 
-      - now to do reviews routes
+    - post /api/courses/:id/reviews for creating a new course review
 
-## Lots more to do :
+## Lots more to do:
 
   - current issues...
 

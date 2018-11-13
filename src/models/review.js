@@ -25,7 +25,7 @@ var isEmail = require('validator').isEmail;
 module.exports = new Schema({
   id:  mongoose.Schema.Types.ObjectId,
   user: {
-          type: [mongoose.Schema.Types.ObjectId],
+          type: mongoose.Schema.Types.ObjectId,
           ref: 'User',
           required: [true, `This value should come from User._id`]
         },

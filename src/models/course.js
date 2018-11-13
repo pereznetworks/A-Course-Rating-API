@@ -29,7 +29,7 @@ module.exports = new Schema({
   id: Schema.Types.ObjectId,
   user: {
                     type:  mongoose.Schema.Types.ObjectId,
-                     ref: 'User',
+                     ref: 'users',
                 required: [true, `Oops, no user is associated wth this Course`]
          },
   title: {
@@ -54,8 +54,9 @@ module.exports = new Schema({
             }
           ],
   reviews: [
-              {type: mongoose.Schema.Types.ObjectId,
-                ref: 'Reviews'
+              {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'reviews'
               }
-            ]
+           ]
 });

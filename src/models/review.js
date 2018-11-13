@@ -27,7 +27,7 @@ module.exports = new Schema({
   user: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'User',
-          required: [true, `This value should come from User._id`]
+          required: [true, `This value should come from logged in User._id`]
         },
   postedOn: {
               type: Date,
@@ -35,7 +35,7 @@ module.exports = new Schema({
             },
   rating: {
             type: Number,
-            required: true,
+            required: [true, `A rating is required, min of 1, max of 5`],
             min: [1, 'A minimum rating of 1 is required.'],
             max: [5, 'The highest rating possible is 5.']
           },

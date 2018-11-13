@@ -28,18 +28,17 @@ module.exports = new Schema({
         },
     fullName: {
                         type: String,
-                    required: true,
+                    required: [true, 'Please enter the first and last name of the user.']
               },
     emailAddress: {
                         type: String,
-                    required: true,
+                    required: [true, 'Please type the email address of the user'],
                       unique: [true, 'That email address is already associated with another user account.'],
                     validate: { validator: isEmail , message: `Please type a valid email address.` }
                   },
     password: {
                         type: String,
-                    required: true,
-                      unique: true,
+                    required: [true, 'A password is required'],
                        index: true
               }
 });

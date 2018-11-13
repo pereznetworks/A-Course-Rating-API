@@ -58,17 +58,17 @@ userRoutes.get("/api/users", function(req, res, next){
 // this requires the user info be sent as properties in req.body object
 userRoutes.post("/api/users", function(req, res, next){
 
-	if (req.body.fullName &&
-		req.body.emailAddress &&
-		req.body.password &&
-		req.body.confirmPassword) {
-
-		// confirm that user typed same password twice
-		if (req.body.password !== req.body.confirmPassword) {
-			var err = new Error('Passwords do not match.');
-			err.status = 400;
-			return next(err);
-		}
+	// if (req.body.fullName &&
+	// 	req.body.emailAddress &&
+	// 	req.body.password &&
+	// 	req.body.confirmPassword) {
+	//
+	// 	// confirm that user typed same password twice
+	// 	if (req.body.password !== req.body.confirmPassword) {
+	// 		var err = new Error('Passwords do not match.');
+	// 		err.status = 400;
+	// 		return next(err);
+	// 	}
 
 		/* future section for parsing and validating ??
 			// var emailAddress = req.body.emailAddress.toString();
@@ -93,11 +93,11 @@ userRoutes.post("/api/users", function(req, res, next){
 				return next(err);
 		}); // end createNew
 
-	} else {
-      var err = new Error('All fields required.');
-      err.status = 400;
-      return next(err);
-  }
+	// } else {
+  //     var err = new Error('All fields required.');
+  //     err.status = 400;
+  //     return next(err);
+  // }
 }); // end /api/users post create user route
 
 module.exports = userRoutes;

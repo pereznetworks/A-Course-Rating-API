@@ -230,11 +230,17 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - this will simplify the code in users and courses routes  
 
-    - will be creating a separate js module...in the documentMethods folder
+    - will be creating a separate .js module...in the documentMethods folder
 
     - then exporting from documentMethods/index.js
 
       - for each mongoose db method needed
+
+      - then can re-use with no-modifiction on different models
+
+        - may need to modify to ensure various model property types
+
+          ... and query scenarios are accounted for
 
 ## documentMethods working with:
 
@@ -246,7 +252,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - get /api/courses, get /api/courses/:id
 
-    - post /api/courses and put /api/coursesArray
+    - post /api/courses (creating new) and put /api/courses (updating existing)
 
     - post /api/courses/:id/reviews for creating a new course review
 

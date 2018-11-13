@@ -10,6 +10,7 @@ const runFindQuery = function(documentToDoQuery, queryObject, selectItem){
 
   if (selectItem){
     return new Promise((resolve, reject) => {
+      // the select.query method seems to workin only on instances on a document
       documentToDoQuery.find(queryObject, selectItem, function(err, doc){
         if(err){
           reject(err);

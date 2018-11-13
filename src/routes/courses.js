@@ -67,54 +67,13 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
 
 }); // end get /api/courses/:id route
 
-// GET /api/course/:courseId/reviews 200
-// Returns all reviews for a specific course
-courseRoutes.get("/api/courses/:id/reviews", function(req, res, next){
-  // add auth/perms checks
-  // const testCourseId = "57029ed4795118be119cc440";
-  const courseId = req.params.id;
+/* TODO: need a way to get review id's from a course's review array converted into an object
+  // GET /api/course/:courseId/reviews 200
+  // Returns all reviews for a specific course
+  courseRoutes.get("/api/courses/:id/reviews", function(req, res, next){
 
-  return runFindQuery(course, {_id: courseId}).then(result => {
-
-      if (!result.status){
-        let err = result;
-        return next(err);
-      } else if (!result.doc) {
-        let err = new Error('Sorry, no course found by that id');
-        return next(err);
-      } else {
-        // return only the Course's review id's
-        // TODO: and related documents for the provided course ID
-        let reviewsArray = result.doc[0].reviews;
-
-        let reviewIds = reviewsArray.reduce(function(result, reviewsObjectId){
-          for(var key in reviewsObjectId) {
-                  result[key] = reviewsObjectId[key];
-              }
-          return result;
-        }, {});
-
-        return runFindQuery(review, result.doc[0].reviews).then(result => {
-          if (!result.status){
-            let err = result;
-            return next(err);
-          } else if (!result.doc) {
-            let err = new Error('Sorry, no reviews found for that course_id');
-            return next(err);
-          } else {
-            res.json(result.doc);
-            res.status(result.status);
-          }
-        }).catch(err => {
-    				return next(err);
-    		});
-      }
-   }).catch(err => {
-       return next(err);
-   }); // end runFindQuery
-
-}); // end get /api/courses/:id route
-
+  }); // end get /api/courses/:courseId/reviews route
+*/
 
 // POST /api/courses 201 - Creates a course, sets the Location header, and returns no content
 courseRoutes.post("/api/courses", function(req, res, next){

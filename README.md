@@ -256,11 +256,13 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - post /api/courses/:id/reviews for creating a new course review
 
+## Validation
+
+    schema validation working
+
+    errors send to global error handler and json formatted error sent to user
+
 ## Lots more to do:
-
-  - current issues...
-
-    - Validation : need to catch validation errors, to make errors user friendly
 
   - to be built...
 

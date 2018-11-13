@@ -258,9 +258,9 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 ## Validation:
 
-    schema validation working
+    - schema validation working
 
-    errors send to global error handler and json formatted error sent to user
+    - errors send to global error handler and json formatted error sent to user
 
 ## Lots more to do:
 

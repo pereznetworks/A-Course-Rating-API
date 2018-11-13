@@ -256,7 +256,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - post /api/courses/:id/reviews for creating a new course review
 
-## Validation
+## Validation:
 
     schema validation working
 

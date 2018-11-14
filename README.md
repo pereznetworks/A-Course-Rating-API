@@ -268,6 +268,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
     the calls next() so user.create will store it
 
     - note: this in the pre-save hook refers to the model, which has the data properties that will be used by user.create to create the new user
+    
 ## Lots more to do:
 
   - to be built...

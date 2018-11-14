@@ -1,0 +1,79 @@
+[
+  {
+    "_id": "57029ed4795118be119cc439",
+    "fullName": "Sam Smith",
+    "emailAddress": "sam@smith.com",
+    "password": "password",
+    "__v": 0
+  }
+  {
+    "_id": "57029ed4795118be119cc437",
+    "fullName": "Joe Smith",
+    "emailAddress": "joe@smith.com",
+    "password": "password",
+    "__v": 0
+  }
+  {
+    "_id": "57029ed4795118be119cc438",
+    "fullName": "Sam Jones",
+    "emailAddress": "sam@jones.com",
+    "password": "password",
+    "__v": 0
+  }
+  {
+    "_id": "5be635ca4f5cc2a6a89bfe81",
+    "fullName": "Jared Smithson",
+    "emailAddress": "jared@smithson.com",
+    "password": "password!#",
+    "__v": 0
+  }
+  {
+    "_id": "5be71f3781cbd4b7fcfd174f",
+    "fullName": "Harely Davidson",
+    "emailAddress": "harley@davidson.com",
+    "password": "keepout!!",
+    "__v": 0
+  }
+  {
+    "_id": "5be7202789c8a0bae4873fde",
+    "fullName": "Tony Stark",
+    "emailAddress": "tony@stark.com",
+    "password": "iamironman!!",
+    "__v": 0
+  }
+  {
+    "_id": "5be7217889c8a0bae4873fdf",
+    "fullName": "Mark Watney",
+    "emailAddress": "markwatney@nasa.com",
+    "password": "captainblondbeard!!",
+    "__v": 0
+  }
+  {
+    "_id": "5be72d1c741941ff929d4800",
+    "fullName": "Bruce Banner",
+    "emailAddress": "brucebanner@hulk.com",
+    "password": "angermanagement",
+    "__v": 0
+  }
+  {
+    "_id": "5be72e53ee30670404249d68",
+    "fullName": "Bruce Wayne",
+    "emailAddress": "bruce@batcave.com",
+    "password": "imbatman",
+    "__v": 0
+  }
+  {
+    "_id": "5be74936c04d282f4154bddf",
+    "fullName": "Jack Ryan",
+    "emailAddress": "jackryan@historicalsociety.com",
+    "password": "iamreallywithnsa",
+    "__v": 0
+  }
+  {
+    "_id": "5beb59e8698d67665c184e00",
+    "fullName": "Jared Fredrick",
+    "emailAddress": "jared@fredrick.com",
+    "password": "password!@",
+    "__v": 0
+  }
+]

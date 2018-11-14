@@ -260,12 +260,21 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - schema validation working
 
-    - errors send to global error handler and json formatted error sent to user
+    - errors sent to global error handler and json formatted error sent to user
 
+## Store encrypted passwords:
+
+  - added pre-save hook method on user model that hashes user.password
+    the calls next() so user.create will store it
+
+    - note: this in the pre-save hook refers to the model, which has the data properties that will be used by user.create to create the new user
 ## Lots more to do:
 
   - to be built...
 
     - user auth
-    - current user logged-in check(session-based?)
-    - require logged user for all routes..except root '/'
+
+    - then compare submitted password when auth'ing creds
+      submmited password gets hashed, if hash matches, then creds are auth'ed
+    - checking for current user logged-in check(session-based?)
+    - require logged-in and auth'ed cred's for all routes..except root '/'

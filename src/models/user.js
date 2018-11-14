@@ -7,7 +7,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // using bcrypt to to encrypt the passwords
-// var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 
 // using Validator.js to validate email address
 // may use for others as well
@@ -20,7 +20,7 @@ var isEmail = require('validator').isEmail;
     password (String, required)
 */
 
-module.exports = new Schema({
+const userSchema = new Schema({
 
 
     id: {
@@ -42,3 +42,17 @@ module.exports = new Schema({
                        index: true
               }
 });
+
+// hash password before saving to database
+userSchema.pre('save', function(next) {
+  var user = this;
+  bcrypt.hash(user.password, 10, function(err, hash) {
+    if (err) {
+      return next(err);
+    }
+    user.password = hash;
+    next();
+  })
+});
+
+module.exports = userSchema;

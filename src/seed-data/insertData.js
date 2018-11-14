@@ -10,6 +10,7 @@ var review = require('../models').review;
 
 // seedData object
 // TODO: fix seedData syntax
+// IDEA: read data from json files...
 const seedData = {
   courses: [
     {

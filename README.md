@@ -282,6 +282,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
       - if no email matches or password does not match then returns callback(err)
 
       - if authenticated, returns callback(null, user)
+      
 ## Requiring auth on get /api/user and course put and post routes:
 
   - post /api/user

@@ -269,6 +269,8 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - note: 'this' in the pre-save hook refers to the model, which has the data properties that will be used by user.create to create the new user
 
+    - reference for info in bcyrpt: https://github.com/ncb000gt/node.bcrypt.js/
+
 ## Lots more to do:
 
   - to be built...

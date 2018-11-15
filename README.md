@@ -212,11 +212,13 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - after importing mongoose ...
 
-  - methods basically do the call the mongoose method
+  - methods basically do what the the mongoose method does
+
+    - Only wrapped in new Promise
 
     - takes at least 2 parameters:
 
-      - documentFromModel (compiled from a model)
+      - documentFromModel (document compiled from a model)
 
       - searchQueryObject, a.k.a ... {propertyName: 'string or value', }
 
@@ -238,9 +240,9 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
       - then can re-use with no-modifiction on different models
 
-        - may need to modify to ensure various model property types
+        - can then add features to fit various queries, model property types, etc...
 
-          ... and query scenarios are accounted for
+          ... and other scenarios not yet accounted for
 
 ## documentMethods working with:
 
@@ -282,7 +284,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
       - if no email matches or password does not match then returns callback(err)
 
       - if authenticated, returns callback(null, user)
-      
+
 ## Requiring auth on get /api/user and course put and post routes:
 
   - post /api/user

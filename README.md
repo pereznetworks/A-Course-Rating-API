@@ -275,9 +275,9 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - added static authenticate method on the user schema
 
-    - uses find then bcrypt compare
+    - uses find then bcrypt to compare
 
-      - not using my modular document methods, since this is at the schema level
+      - not using my modular document methods here, since this is at the schema level
 
       - if no email matches or password does not match then returns next(err)
 

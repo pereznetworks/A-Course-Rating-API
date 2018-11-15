@@ -80,15 +80,6 @@ courseRoutes.post("/api/courses", function(req, res, next){
 
 	if ( req.body.user && req.body.title & req.body.description && req.body.steps) {
 
-    /* future section for parsing and validating ??
-      // var userId = req.body.userId.toString();
-      // var title = req.body.title.toString();
-      // var description = req.body.description.toString();
-      // var estimatedTime = req.body.estimatedTime.toString();
-      // var materialsNeeded = req.body.materialsNeeded.toString();
-      // var steps = req.body.steps.toString();
-    */
-
 	 return createNew(course, req.body).then(result =>{
 
 				if (!result.status) {
@@ -118,15 +109,6 @@ courseRoutes.put("/api/courses/:id", function(req, res, next){
 
 	if ( req.body.user &&	req.body.title && req.body.description && req.body.steps) {
 
-    /* future section for parsing and validating ??
-      // var userId = req.body.userId.toString();
-      // var title = req.body.title.toString();
-      // var description = req.body.description.toString();
-      // var estimatedTime = req.body.estimatedTime.toString();
-      // var materialsNeeded = req.body.materialsNeeded.toString();
-      // var steps = req.body.steps.toString();
-    */
-
    var docId = req.params.id;
    var updateDataObject = req.body;
 	 return updateDoc(course, docId, updateDataObject).then(result =>{
@@ -153,26 +135,9 @@ courseRoutes.put("/api/courses/:id", function(req, res, next){
   }
 }); // end /api/courses post create user route
 
-
-
 // POST /api/courses/:courseId/reviews 201
 // Creates a review for the specified course ID, sets the Location header to the related course, and returns no content
 courseRoutes.post("/api/courses/:courseId/reviews", function(req, res, next){
-
-  /*  creating a new review...
-        verify that new review gets...
-          user.Id
-          a date posted
-          rating
-          and a optional text
-
-      updating course.reviews array should occur auto'ly via schema
-
-      the user_id for the review should be the user posting the review
-
-      so the user_id will be the id logged in user
-      will have implement auth/permisisions before testing getting a course reviews
-  */
 
   if ( req.body) {
 
@@ -182,11 +147,6 @@ courseRoutes.post("/api/courses/:courseId/reviews", function(req, res, next){
           reviewRating: req.body.rating,
           reviewText: req.body.review
       };
-
-    /* future section for auth check, parsing and validating ??
-      // var rating = req.body.userId;
-      // var reviewText = req.body.review.toString();
-    */
 
    return createNew(review, req.body).then(result =>{
 
@@ -217,8 +177,6 @@ courseRoutes.post("/api/courses/:courseId/reviews", function(req, res, next){
        		}); // end updateDoc
 
         } // end if (req.body)
-
-
 
     }).catch(err => {
         return next(err);

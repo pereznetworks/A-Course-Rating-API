@@ -18,12 +18,6 @@ var createNew = require('../documentMethods').createNew;
 
 // GET /api/users 200 - Returns the currently authenticated user
 userRoutes.get("/api/users", function(req, res, next){
-  // add auth check
-	// TODO: use router.param and auth middleware method and...
-	// TODO: for logged in user will send req.session.userId
-	// can simulate a logged in user
-	// testUserId = {id: 57029ed4795118be119cc437}
-	// no auth/sessions setup yet, just gets all users...
 
 	return runFindQuery(user, {}).then(result => {
 
@@ -58,24 +52,6 @@ userRoutes.get("/api/users", function(req, res, next){
 // this requires the user info be sent as properties in req.body object
 userRoutes.post("/api/users", function(req, res, next){
 
-	// if (req.body.fullName &&
-	// 	req.body.emailAddress &&
-	// 	req.body.password &&
-	// 	req.body.confirmPassword) {
-	//
-	// 	// confirm that user typed same password twice
-	// 	if (req.body.password !== req.body.confirmPassword) {
-	// 		var err = new Error('Passwords do not match.');
-	// 		err.status = 400;
-	// 		return next(err);
-	// 	}
-
-		/* future section for parsing and validating ??
-			// var emailAddress = req.body.emailAddress.toString();
-			// var fullName = req.body.fullName.toString();
-			// var password = req.body.password.toString();
-		*/
-
 		return createNew(user, req.body).then(result =>{
 
 				if (!result.status) {
@@ -84,7 +60,7 @@ userRoutes.post("/api/users", function(req, res, next){
 					// set status and location header to '/' and return no content
 					res.status(result.status);
 					res.setHeader('Location', '/');
-					// without this express router will try to continue to process routes
+					// without res.end(), the express router will try to continue to process routes
 					// which will result an a 404 route found error
 					res.end();
 				}
@@ -93,11 +69,6 @@ userRoutes.post("/api/users", function(req, res, next){
 				return next(err);
 		}); // end createNew
 
-	// } else {
-  //     var err = new Error('All fields required.');
-  //     err.status = 400;
-  //     return next(err);
-  // }
 }); // end /api/users post create user route
 
 module.exports = userRoutes;

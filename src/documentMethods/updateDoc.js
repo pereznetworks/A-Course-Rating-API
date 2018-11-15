@@ -13,7 +13,7 @@ var updateDoc = function(documentToDoUpdate, docId, updateDataObject, arrayName)
   if (arrayName){
     // if arrayName, find doc and push new values onto that doc.arrayName then save doc
     return new Promise((resolve, reject) => {
-      // create an object with form input
+      // find the doc by id
       documentToDoUpdate.find(docId, function (err, doc) {
           if (err) {
             reject(err);
@@ -36,10 +36,10 @@ var updateDoc = function(documentToDoUpdate, docId, updateDataObject, arrayName)
       });
     });
   } else {
-    // if property of doc is not an array just findByIdAndUpdate
+    // if property of doc is not an array just finOneAndUpdate
     return new Promise((resolve, reject) => {
       // create an object with form input
-      documentToDoUpdate.findByIdAndUpdate(docId, {$set: updateDataObject}, function (err, doc) {
+      documentToDoUpdate.findOneAndUpdate({title: updateDataObject.title}, {$set: updateDataObject}, function (err, doc) {
           if (err) {
             reject(err);
           } else {

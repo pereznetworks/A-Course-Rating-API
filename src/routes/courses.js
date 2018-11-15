@@ -81,9 +81,12 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
 // POST /api/courses 201 - Creates a course, sets the Location header, and returns no content
 courseRoutes.post("/api/courses",  permsCheck, function(req, res, next){
 
-	if (req.body.title & req.body.description && req.body.steps) {
+	if (req.body.title && req.body.description && req.body.steps) {
 
-	 return createNew(course, req.body).then(result =>{
+   var newCourseData = req.body;
+   newCourseData.user = req.user;
+
+   return createNew(course, newCourseData).then(result =>{
 
 				if (!result.status) {
 					return next(err);
@@ -110,11 +113,14 @@ courseRoutes.post("/api/courses",  permsCheck, function(req, res, next){
 // PUT /api/courses/:courseId 204 - Updates a course and returns no content
 courseRoutes.put("/api/courses/:id",  permsCheck, function(req, res, next){
 
-	if ( req.body.user &&	req.body.title && req.body.description && req.body.steps) {
+	if (req.body.title && req.body.description && req.body.steps) {
 
    var docId = req.params.id;
-   var updateDataObject = req.body;
-	 return updateDoc(course, docId, updateDataObject).then(result =>{
+   var updateCourseData = req.body;
+   // updateCourseData.description = req.body.description;
+   // updateCourseData.user = req.body.steps;
+
+   return updateDoc(course, docId, updateCourseData).then(result =>{
 
 				if (!result.status) {
 					return next(err);
@@ -145,13 +151,13 @@ courseRoutes.post("/api/courses/:courseId/reviews",  permsCheck, function(req, r
   if ( req.body) {
 
     // get data values
-      let objectDataValues = {
-          user: req.body.user,  // once auth is implemented, will need to change this
+      let newReviewData = {
+          user: req.user,
           reviewRating: req.body.rating,
           reviewText: req.body.review
       };
 
-   return createNew(review, req.body).then(result =>{
+   return createNew(review, newReviewData).then(result =>{
 
         if (!result.status) {
           return next(err);

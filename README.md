@@ -313,8 +313,8 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   solution : utils/preUpdatePrep
 
-    - this is NOT for validation
-    - this is simply to take out of the request body only the info needed
+   - this is NOT for validation
+      - this is simply to take out of the request body only the info needed
 
    - req.body is parsed by preUpdatePrep,
       - updateCourseData is passed to updateDoc documentMethod
@@ -323,15 +323,15 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
       - before actual update, validation occurs, if no errors...
       - course is updated
 
-    - in current version of course-api,
+   - in current version of course-api,
       - for updating a document compiled from course or user schema models
       - reviews dont get updated
 
-    - for future version...
+   - for future version...
       - parsing for userSchema is ready
       - user docs may have email address updated and/or password reset
 
-    - may make this a pre-update hook of some-kind
+   - may make this a pre-update hook of some-kind
 
 ## Routes with Auth, Perms and Validation:
 

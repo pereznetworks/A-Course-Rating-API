@@ -267,8 +267,8 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
   - added pre-save hook method on user model that hashes user.password
     the calls next() so user.create will store it
 
-    - note: this in the pre-save hook refers to the model, which has the data properties that will be used by user.create to create the new user
-    
+    - note: 'this' in the pre-save hook refers to the model, which has the data properties that will be used by user.create to create the new user
+
 ## Lots more to do:
 
   - to be built...

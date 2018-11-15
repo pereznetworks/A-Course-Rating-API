@@ -43,6 +43,29 @@ const userSchema = new Schema({
               }
 });
 
+// authenticate input against database documents
+// since this is a method on the user schema, not using modular document methods here
+userSchema.statics.authenticate = function(email, password, callback) {
+  var user = this;
+  user.findOne({ email: email })
+      .exec(function (error, user) {
+        if (error) {
+          return callback(error);
+        } else if ( !user ) {
+          var err = new Error('User not found.');
+          err.status = 401;
+          return callback(err);
+        }
+        bcrypt.compare(password, user.password , function(error, result) {
+          if (result === true) {
+            return callback(null, user);
+          } else {
+            return callback();
+          }
+        })
+      });
+}
+
 // hash password before saving to database
 userSchema.pre('save', function(next) {
   var user = this;

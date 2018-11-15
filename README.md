@@ -271,6 +271,17 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - reference for info in bcyrpt: https://github.com/ncb000gt/node.bcrypt.js/
 
+## Static authenticate method ready:
+
+  - added static authenticate method on the user schema
+
+    - uses find then bcrypt compare
+
+      - not using my modular document methods, since this is at the schema level
+
+      - if no email matches or password does not match then returns next(err)
+
+      - otherwise returns corresponding user document
 ## Lots more to do:
 
   - to be built...

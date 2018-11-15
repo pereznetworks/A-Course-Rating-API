@@ -52,7 +52,7 @@ userSchema.statics.authenticate = function(email, password, callback) {
         if (error) {
           return callback(error);
         } else if ( !user ) {
-          var err = new Error('User not found.');
+          var err = new Error('Email or Password invalid');
           err.status = 401;
           return callback(err);
         }
@@ -60,7 +60,9 @@ userSchema.statics.authenticate = function(email, password, callback) {
           if (result === true) {
             return callback(null, user);
           } else {
-            return callback();
+            var err = new Error('Email or Password invalid');
+            err.status = 401;
+            return callback(err);
           }
         })
       });

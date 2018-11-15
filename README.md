@@ -279,9 +279,9 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
       - not using my modular document methods here, since this is at the schema level
 
-      - if no email matches or password does not match then returns next(err)
+      - if no email matches or password does not match then returns callback(err)
 
-      - otherwise returns corresponding user document
+      - if authenticated, returns callback(null, user)
 ## Lots more to do:
 
   - to be built...

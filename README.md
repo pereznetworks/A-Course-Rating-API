@@ -273,11 +273,12 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - reference for info in bcyrpt: https://github.com/ncb000gt/node.bcrypt.js/
 
-## Static authenticate method ready:
+## Static authenticate method and middleware ready:
 
   - added static authenticate method on the user schema
+  - utils/permsCheck middleware calls user.authenticate
 
-    - uses find then bcrypt to compare
+    - uses user.find then async bcrypt to compare
 
       - not using my modular document methods here, since this is at the schema level
 
@@ -301,3 +302,48 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
   - post and put /api/courses routes
 
     - need modification now that auth is ready and working
+
+      - for new Course, new Review: parse req.body and req.user into 1 object
+      - for update Course : new util to take from req.body only needed data to to update
+
+## New pre update prep Util
+
+  - this was inspired by course update failing after adding the auth and permsCheck
+  - update was failing since course.id was now present and can not be updated...
+
+  solution : utils/preUpdatePrep
+
+    - this is NOT for validation
+    - this is simply to take out of the request body only the info needed
+
+   - req.body is parsed by preUpdatePrep,
+      - updateCourseData is passed to updateDoc documentMethod
+      - this uses ...
+        findOneandUpdate({title:updateCourseData.title}, {$set:updateCourseData})
+      - before actual update, validation occurs, if no errors...
+      - course is updated
+
+    - in current version of course-api,
+      - for updating a document compiled from course or user schema models
+      - reviews dont get updated
+
+    - for future version...
+      - parsing for userSchema is ready
+      - user docs may have email address updated and/or password reset
+
+    - may make this a pre-update hook of some-kind
+
+## Routes with Auth, Perms and Validation:
+
+  - all routes tested again
+
+    - everything is working!!
+
+## prep for project submission:
+
+  - this readme will become dev notes
+
+  - will not be submitting mongo db data dir with project
+
+    - so will have to provide a method or instructions...
+      - for reviewer to setup everything

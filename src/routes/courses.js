@@ -20,6 +20,9 @@
 
  // my own middleware to check if a req has auth'ed creds
  const permsCheck = require('../utils').permsCheck;
+ // my own util, 'parses' the req.body and takes only the data that is needed
+ // used after bodyParser but before validation
+ const preUpdatePrep = require('../utils').preUpdatePrep;
 
 // GET /api/courses 200 - Returns the Course "_id" and "title" properties
 courseRoutes.get("/api/courses", function(req, res, next){
@@ -116,9 +119,7 @@ courseRoutes.put("/api/courses/:id",  permsCheck, function(req, res, next){
 	if (req.body.title && req.body.description && req.body.steps) {
 
    var docId = req.params.id;
-   var updateCourseData = req.body;
-   // updateCourseData.description = req.body.description;
-   // updateCourseData.user = req.body.steps;
+   var updateCourseData = preUpdatePrep(course, req.body);
 
    return updateDoc(course, docId, updateCourseData).then(result =>{
 
@@ -153,8 +154,8 @@ courseRoutes.post("/api/courses/:courseId/reviews",  permsCheck, function(req, r
     // get data values
       let newReviewData = {
           user: req.user,
-          reviewRating: req.body.rating,
-          reviewText: req.body.review
+          rating: req.body.rating,
+          review: req.body.review
       };
 
    return createNew(review, newReviewData).then(result =>{

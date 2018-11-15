@@ -282,13 +282,19 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
       - if no email matches or password does not match then returns callback(err)
 
       - if authenticated, returns callback(null, user)
-## Lots more to do:
+## Requiring auth on get /api/user and course put and post routes:
 
-  - to be built...
+  - post /api/user
 
-    - user auth
+    - now able to create a new user
+    - validate name, email and hash password then store in user db
 
-    - then compare submitted password when auth'ing creds
-      submmited password gets hashed, if hash matches, then creds are auth'ed
-    - checking for current user logged-in check(session-based?)
-    - require logged-in and auth'ed cred's for all routes..except root '/'
+  - get /api/user
+
+    - once logged in
+    - able to check creds on http req auth header
+    - then return json of details of auth'ed user
+
+  - post and put /api/courses routes
+
+    - need modification now that auth is ready and working

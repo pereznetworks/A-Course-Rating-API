@@ -16,8 +16,11 @@ var user = require('../models').user;
 var runFindQuery = require('../documentMethods').runFindQuery;
 var createNew = require('../documentMethods').createNew;
 
+// my own middleware to check if a req has auth'ed creds
+const permsCheck = require('../utils').permsCheck;
+
 // GET /api/users 200 - Returns the currently authenticated user
-userRoutes.get("/api/users", function(req, res, next){
+userRoutes.get("/api/users", permsCheck, function(req, res, next){
 
 	return runFindQuery(user, {}).then(result => {
 

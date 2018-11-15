@@ -18,6 +18,9 @@
  var createNew = require('../documentMethods').createNew;
  var updateDoc = require('../documentMethods').updateDoc;
 
+ // my own middleware to check if a req has auth'ed creds
+ const permsCheck = require('../utils').permsCheck;
+
 // GET /api/courses 200 - Returns the Course "_id" and "title" properties
 courseRoutes.get("/api/courses", function(req, res, next){
   // add auth/perms checks
@@ -76,9 +79,9 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
 */
 
 // POST /api/courses 201 - Creates a course, sets the Location header, and returns no content
-courseRoutes.post("/api/courses", function(req, res, next){
+courseRoutes.post("/api/courses",  permsCheck, function(req, res, next){
 
-	if ( req.body.user && req.body.title & req.body.description && req.body.steps) {
+	if (req.body.title & req.body.description && req.body.steps) {
 
 	 return createNew(course, req.body).then(result =>{
 
@@ -105,7 +108,7 @@ courseRoutes.post("/api/courses", function(req, res, next){
 }); // end /api/courses post create user route
 
 // PUT /api/courses/:courseId 204 - Updates a course and returns no content
-courseRoutes.put("/api/courses/:id", function(req, res, next){
+courseRoutes.put("/api/courses/:id",  permsCheck, function(req, res, next){
 
 	if ( req.body.user &&	req.body.title && req.body.description && req.body.steps) {
 
@@ -137,7 +140,7 @@ courseRoutes.put("/api/courses/:id", function(req, res, next){
 
 // POST /api/courses/:courseId/reviews 201
 // Creates a review for the specified course ID, sets the Location header to the related course, and returns no content
-courseRoutes.post("/api/courses/:courseId/reviews", function(req, res, next){
+courseRoutes.post("/api/courses/:courseId/reviews",  permsCheck, function(req, res, next){
 
   if ( req.body) {
 

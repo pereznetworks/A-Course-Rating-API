@@ -48,7 +48,7 @@ const userSchema = new Schema({
 userSchema.statics.authenticate = function(email, password, callback) {
   var user = this;
   user.findOne({ email: email })
-      .exec(function (error, user) {
+      .exec(function (error, userDoc) {
         if (error) {
           return callback(error);
         } else if ( !user ) {
@@ -56,9 +56,9 @@ userSchema.statics.authenticate = function(email, password, callback) {
           err.status = 401;
           return callback(err);
         }
-        bcrypt.compare(password, user.password , function(error, result) {
+        bcrypt.compare(password, userDoc.password , function(error, result) {
           if (result === true) {
-            return callback(null, user);
+            return callback(null, userDoc);
           } else {
             var err = new Error('Email or Password invalid');
             err.status = 401;

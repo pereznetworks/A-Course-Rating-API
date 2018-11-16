@@ -341,6 +341,8 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 ## prep for project submission:
 
+  - decide on exceeds 
+
   - this readme will become dev notes
 
   - will not be submitting mongo db data dir with project

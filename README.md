@@ -344,7 +344,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
   - additional validation to prevent user who owns course from reviewing that course
 
     - note : `doc._id.equals(otherDoc._id))` works
-      - the above example using equals to compare both `_id`'s'
+      - the above example using equals to compare both `_id`
       - need to be sure comparing values, of the same type
       - however, 2 reasons I found many get inconsistent results
         - 1: some mistakenly comparing the entire ObjectID

@@ -5,13 +5,23 @@
 
 // import mongoose, so use it's db document/model methods
 var mongoose = require("mongoose");
+// importing course-api documents
+var course = require('../models').course;
 
-const runFindQuery = function(documentToDoQuery, queryObject, selectItem){
 
-  if (selectItem){
+const runFindQuery = function(documentToDoQuery, queryObject, doPopulate){
+
+  if (documentToDoQuery.modelName === 'course' && doPopulate){
     return new Promise((resolve, reject) => {
       // the select.query method seems to workin only on instances on a document
-      documentToDoQuery.find(queryObject, selectItem, function(err, doc){
+      var reviews = require('../models').review;
+      var users = require('../models').user;
+
+      documentToDoQuery.find(queryObject).populate({
+        path: "reviews",
+        select: 'rating, review',
+        populate: {path: "users", select: '_id, fullname, -emailAddress, -password'}
+      }).exec(function(err, doc){
         if(err){
           reject(err);
         } else if(!doc){
@@ -22,7 +32,7 @@ const runFindQuery = function(documentToDoQuery, queryObject, selectItem){
           const result = {doc: doc, status: 200};
           resolve(result);
         }
-      })
+      });
     })
   } else {
     return new Promise((resolve, reject) => {

@@ -54,7 +54,8 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
   // const testCourseId = "57029ed4795118be119cc440";
   const courseId = req.params.id;
 
-  return runFindQuery(course, {_id: courseId}).then(result => {
+  const populate = true;
+  return runFindQuery(course, {_id: courseId}, populate).then(result => {
 
       if (!result.status){
         let err = result;

@@ -341,7 +341,19 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 ## Exceed #1 finished:
 
-   additional validation to prevent user who owns course to review that course
+  - additional validation to prevent user who owns course to review that course
+
+    - note : `doc._id.equals(otherDoc._id))` works
+      - the above example using equals to compare both `_id`'s'
+      - need to be sure comparing values, of the same type
+      - however, 2 reasons I found many get inconsistent results
+        - 1: some mistakenly comparing the entire ObjectID
+          - this will always be false,  `Doc.ObjectId.equals(otherInstanceOfsameDoc.ObjectId)`
+        - 2: using == or === compares the instance of the doc not the value
+          - `Doc._id.equals == otherInstanceOfsameDoc._Id)` will always be false
+      - can test the property's value type using toString()
+        - `someDoc.ObjectID.toString()`, will stringify an object, not desired in this case
+        - `someDoc._id.toString()`, will stringify into desired 's1o3mel0on3g9n8m5b2e7r'
 
 ## prep for project submission:
 

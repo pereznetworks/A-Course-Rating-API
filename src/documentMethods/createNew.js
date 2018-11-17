@@ -7,18 +7,48 @@
 var mongoose = require("mongoose");
 
 var createNew = function(documentToDoCreate, objectDataValues){
+    let newReviewData;
 
-  return new Promise((resolve, reject) => {
-    // create an object with form input
-    documentToDoCreate.create(objectDataValues, function (err, doc) {
-        if (err) {
-          reject(err);
-        } else {
-          const result = {doc: doc, status: 201};
-          resolve(result);
-        }
-    });
-  });
+    if (documentToDoCreate.modelName === 'review'){
+      // get data values
+       newReviewData = {
+          user: objectDataValues.user,
+          rating: objectDataValues.body.rating,
+      };
+
+      if (objectDataValues.body.review == null){
+         newReviewData.review = '';
+      } else {
+         newReviewData.review = objectDataValues.body.review;
+      }
+
+      return new Promise((resolve, reject) => {
+        // create an object with form input
+        documentToDoCreate.create(newReviewData, function (err, doc) {
+            if (err) {
+              reject(err);
+            } else {
+              const result = {doc: doc, status: 201};
+              resolve(result);
+            }
+        });
+      });
+
+    } else {
+
+      return new Promise((resolve, reject) => {
+        // create an object with form input
+        documentToDoCreate.create(objectDataValues, function (err, doc) {
+            if (err) {
+              reject(err);
+            } else {
+              const result = {doc: doc, status: 201};
+              resolve(result);
+            }
+        });
+      });
+
+    }
 
 };
 

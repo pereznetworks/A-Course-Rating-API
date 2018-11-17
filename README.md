@@ -339,9 +339,13 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - everything is working!!
 
+## Exceed #1 finished:
+
+   additional validation to prevent user who owns course to review that course
+
 ## prep for project submission:
 
-  - decide on exceeds 
+  - decide on exceeds
 
   - this readme will become dev notes
 

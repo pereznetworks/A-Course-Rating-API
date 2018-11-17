@@ -151,44 +151,45 @@ courseRoutes.post("/api/courses/:courseId/reviews",  permsCheck, function(req, r
 
   if ( req.body) {
 
-    // get data values
-      let newReviewData = {
-          user: req.user,
-          rating: req.body.rating,
-          review: req.body.review
-      };
-
-   return createNew(review, newReviewData).then(result =>{
-
-        if (!result.status) {
+    return runFindQuery(course, {_id: req.params.courseId}).then(result =>{
+        if (result.doc[0].user.equals(req.user._id)){
+          var err = new Error('The user who owns the course, cannot review it.');
+          err.status = 400;
           return next(err);
         } else {
+            createNew(review, req).then(result =>{
 
-          // now update course.review array with new review
-          let docId = req.params.courseId;
-          let updateDataObject = {_id:result.doc._id};
-          let reviews = "reviews";
+              if (!result.status) {
+                return next(err);
+              } else {
 
-          updateDoc(course, {_id: docId}, updateDataObject, reviews).then(result =>{
+                // now update course.review array with new review
+                let docId = req.params.courseId;
+                let updateDataObject = {_id:result.doc._id};
+                let reviews = "reviews";
 
-       				if (!result.status) {
-       					return next(err);
-       				} else {
-       					// set status and location header to '/' and return no content
-       					res.status(result.status);
-       					res.setHeader('Location', '/');
-                 // without this express router will try to continue to process routes
-                 // which will result an a 404 route found error
-       					res.end();
-       				}
+                updateDoc(course, {_id: docId}, updateDataObject, reviews).then(result =>{
 
-       		}).catch(err => {
-       				return next(err);
-       		}); // end updateDoc
+             				if (!result.status) {
+             					return next(err);
+             				} else {
+             					// set status and location header to '/' and return no content
+             					res.status(result.status);
+             					res.setHeader('Location', '/');
+                       // without this express router will try to continue to process routes
+                       // which will result an a 404 route found error
+             					res.end();
+             				}
 
-        } // end if (req.body)
+             		}).catch(err => {
+             				return next(err);
+             		}); // end updateDoc
 
-    }).catch(err => {
+              } // end if (!result.status)
+
+          });
+        }
+      }).catch(err => {
         return next(err);
     }); // end createNew review
 

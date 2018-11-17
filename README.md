@@ -341,7 +341,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 ## Exceed #1 finished:
 
-  - additional validation to prevent user who owns course to review that course
+  - additional validation to prevent user who owns course from reviewing that course
 
     - note : `doc._id.equals(otherDoc._id))` works
       - the above example using equals to compare both `_id`'s'

@@ -35,11 +35,11 @@ const permsCheck = function (req, res, next){
         var err = new Error('You must be logged to update a new course.');
         err.status = 401;
         return next(err);
-      } else if (req.method === 'PUT' && reviewCourseUrlPattern.test(req.originalUrl)) {
+      } else if (req.method === 'POST' && reviewCourseUrlPattern.test(req.originalUrl)) {
         var err = new Error('You must be logged to review a course.');
         err.status = 401;
         return next(err);
-      } else if (req.method === 'PUT' && getUserUrlPattern.test(req.originalUrl)) {
+      } else if (req.method === 'GET' && getUserUrlPattern.test(req.originalUrl)) {
         var err = new Error('Your not logged in.');
         err.status = 401;
         return next(err);

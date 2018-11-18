@@ -182,7 +182,9 @@ courseRoutes.post("/api/courses/:courseId/reviews",  permsCheck, function(req, r
 
               } // end if (!result.status)
 
-          }); // end create new review
+          }).catch(err => {
+             return next(err);
+          }); // end update course with review id; // end create new review
         } // end if (current user is course owner)
       }).catch(err => {
         return next(err);

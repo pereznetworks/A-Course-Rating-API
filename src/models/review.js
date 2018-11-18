@@ -26,7 +26,7 @@ module.exports = new Schema({
   id:  mongoose.Schema.Types.ObjectId,
   user: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'users',
+          ref: 'user',
           required: [true, `This value should come from logged in User._id`]
         },
   postedOn: {

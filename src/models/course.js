@@ -56,7 +56,7 @@ module.exports = new Schema({
   reviews: [
               {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'reviews'
+                ref: 'review'
               }
            ]
 });

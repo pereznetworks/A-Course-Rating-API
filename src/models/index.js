@@ -10,11 +10,11 @@ var reviewSchema = require('./review.js');
 var userSchema = require('./user.js');
 
 // creating the documents/collections
-const course = mongoose.model('course', courseSchema);
-const review = mongoose.model('review', reviewSchema);
-const user = mongoose.model('user', userSchema);
+const Course = mongoose.model('course', courseSchema);
+const Review = mongoose.model('review', reviewSchema);
+const User = mongoose.model('user', userSchema);
 
 // exporting the documents
-module.exports.course = course;
-module.exports.review = review;
-module.exports.user = user;
+module.exports.course = Course;
+module.exports.review = Review;
+module.exports.user = User;

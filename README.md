@@ -355,6 +355,30 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
         - `someDoc.ObjectID.toString()`, will stringify an object, not desired in this case
         - `someDoc._id.toString()`, will stringify into desired 's1o3mel0on3g9n8m5b2e7r'
 
+## Exceed #2 doing #2 first:
+
+## documentMethods module detour:
+
+- in my documentMethods module...
+  - found that query.select and .popluate methods not working
+  - when using mongoose directly, not in my promise wrapped documentMethods...
+    - then everything works !!
+    - will have to figure out why later..
+  - removed calls to my documentMethods in all but createNew review route
+
+## Exceed #3 almost finished:
+
+- Course routes
+  - When returning a single course for the GET /api/courses/:courseId route...
+    - use Mongoose deep population to
+      - return only the fullName of the related user on the course model
+      - and each review returned with the course model.
+    - This will hide other user’s private details,
+      - like passwords and emails, from other users.
+    - Example user object returned:
+      - `{ "_id": "wiubfh3eiu23rh89hcwib", "fullName": "Sam Smith" }`
+      - See Project Resources section for more information about deep population.
+
 ## prep for project submission:
 
   - decide on exceeds

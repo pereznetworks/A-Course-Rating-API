@@ -8,11 +8,12 @@ var userRoutes = express.Router();
 var mongoose = require("mongoose");
 
 // importing course-api documents
-var course = require('../models').course;
-var review = require('../models').review;
-var user = require('../models').user;
+var Course = require('../models').course;
+var Review = require('../models').review;
+var User = require('../models').user;
 
 // wrapped mongoose methods in my own promise-based modular methods
+// not used in user routes but might in the future
 var runFindQuery = require('../documentMethods').runFindQuery;
 var createNew = require('../documentMethods').createNew;
 
@@ -22,7 +23,7 @@ const permsCheck = require('../utils').permsCheck;
 // GET /api/users 200 - Returns the currently authenticated user
 userRoutes.get("/api/users", permsCheck, function(req, res, next){
 
-	return runFindQuery(user, {}).then(result => {
+	return runFindQuery(User, {}).then(result => {
 
 		if (!result.status){
 			let err = result;
@@ -55,7 +56,7 @@ userRoutes.get("/api/users", permsCheck, function(req, res, next){
 // this requires the user info be sent as properties in req.body object
 userRoutes.post("/api/users", function(req, res, next){
 
-		return createNew(user, req.body).then(result =>{
+		return createNew(User, req.body).then(result =>{
 
 				if (!result.status) {
 					return next(err);

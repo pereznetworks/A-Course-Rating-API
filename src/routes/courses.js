@@ -9,40 +9,46 @@
  var courseRoutes = express.Router();
 
  // importing course-api documents
- var course = require('../models').course;
- var review = require('../models').review;
- var user = require('../models').user;
+ var Course = require('../models').course;
+ var Review = require('../models').review;
+ var User = require('../models').user;
 
- // wrapped mongoose db methods in my own promise-based modular methods
+ // wrapped mongoose methods in my own promise-based modular methods
  var runFindQuery = require('../documentMethods').runFindQuery;
  var createNew = require('../documentMethods').createNew;
  var updateDoc = require('../documentMethods').updateDoc;
 
+
  // my own middleware to check if a req has auth'ed creds
  const permsCheck = require('../utils').permsCheck;
+
  // my own util, 'parses' the req.body and takes only the data that is needed
- // used after bodyParser but before validation
+ // used after bodyParser but before model validation
  const preUpdatePrep = require('../utils').preUpdatePrep;
 
 // GET /api/courses 200 - Returns the Course "_id" and "title" properties
 courseRoutes.get("/api/courses", function(req, res, next){
-  // add auth/perms checks
 
-  return runFindQuery(course, {}).then(result => {
+  return runFindQuery(Course, {}).then(err, result => {
 
-      if (!result.status){
-  			let err = result;
-  			return next(err);
-  		} else if (!result.doc) {
+      if (err){
+        // this will ussually be a validation error
+  			next(err);
+  		} else if (!result) {
+        // this will ussually not be an error..
+        // valid courseId format, but just 'not found'
         let err = new Error('Sorry, no courses found');
-        return next(err);
+        err.status = 404;
+        next(err);
       } else {
         // returning only the Course "_id" and "title" properties
         const coursesArray = result.doc.map((item, index)=>{
           return {id: item._id, title: item._doc.title}
         });
+        // return list of course title and id's
         res.json(coursesArray);
         res.status(result.status);
+        res.end();
       }
    }); // end runFindQuery
 }); // end get /api/courses route
@@ -54,63 +60,53 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
   // const testCourseId = "57029ed4795118be119cc440";
   const courseId = req.params.id;
 
-  const populate = true;
-  return runFindQuery(course, {_id: courseId}, populate).then(result => {
-
-      if (!result.status){
-        let err = result;
-        return next(err);
-      } else if (!result.doc) {
-        let err = new Error('Sorry, no course found by that id');
-        return next(err);
-      } else {
-        // return all Course properties
-        // TODO: and related documents for the provided course ID
-        // use Mongoose population to load the related user and reviews documents.
-  		  res.json(result.doc);
-        res.status(result.status);
-      }
-   }); // end runFindQuery
+  Course.findById(courseId).populate("reviews").exec(function(err, doc){
+    if(err){
+      // this will ussually be a populate, or invalid courseId, error
+      next(err);
+    } else if(!doc){
+      // this will ussually not be an error..
+      // courseId valid format, but just a 'not found'
+      const err = new Error(`Oops, we did not find that course.`);
+      err.status = 404;
+      next(err);
+    } else {
+      // the .populate method replaces the reviewid's with...
+      // the review rating, review text, and the reviewer's user id and name
+      const result = {doc: doc, status: 200};
+      res.json(result.doc);
+      res.status(result.status);
+      res.end();
+    }
+  });
 
 }); // end get /api/courses/:id route
 
-/* TODO: need a way to get review id's from a course's review array converted into an object
-  // GET /api/course/:courseId/reviews 200
-  // Returns all reviews for a specific course
-  courseRoutes.get("/api/courses/:id/reviews", function(req, res, next){
-
-  }); // end get /api/courses/:courseId/reviews route
-*/
-
 // POST /api/courses 201 - Creates a course, sets the Location header, and returns no content
 courseRoutes.post("/api/courses",  permsCheck, function(req, res, next){
-
+  // testing for these req.body properties here
 	if (req.body.title && req.body.description && req.body.steps) {
-
+   // to assign these as part of one object here
    var newCourseData = req.body;
    newCourseData.user = req.user;
 
-   return createNew(course, newCourseData).then(result =>{
-
-				if (!result.status) {
-					return next(err);
-				} else {
-					// set status and location header to '/' and return no content
-					res.status(result.status);
+    // create an object with form input
+    course.create(newCourseData, function (err, doc) {
+        if (err) {
+          // this is ussually a validation error
+          next(err);
+        } else {
+    			// set status and location header to '/' and return no content
+					res.status(201);
 					res.setHeader('Location', '/');
-          // without this express router will try to continue to process routes
-          // which will result an a 404 route found error
 					res.end();
-				}
-
-		}).catch(err => {
-				return next(err);
-		}); // end createNew
+        }
+    });
 
 	} else {
       var err = new Error('All fields required.');
       err.status = 400;
-      return next(err);
+      next(err);
   }
 }); // end /api/courses post create user route
 
@@ -122,24 +118,33 @@ courseRoutes.put("/api/courses/:id",  permsCheck, function(req, res, next){
    var docId = req.params.id;
    var updateCourseData = preUpdatePrep(course, req.body);
 
-   return updateDoc(course, docId, updateCourseData).then(result =>{
+   Course.find(docId, function (err, doc) {
+       // another condition test here because of ...
+       if (doc[0] && updateCourseData ){
+       // possible point of failure...on next line of code
+         // the .push does not take a call back and does not return anything..
+         // if doc[0] or updateDataObject is not present or not expected format
+         // or if an error occurs pushing onto reviews array
+             // ... then unhandled error
+         doc[0].reviews.push(updateCourseData);
+         doc[0].save(function (err, doc) {
+           if (err) {
+             next(err);
+           } else {
+             res.status(201);
+             res.setHeader('Location', '/');
+           }
+         });
+       } if (err) {
+         next(err);
+       } else { // in case no docId or newCourseData
+         var err = new Error('All fields required.');
+         err.status = 400;
+         next(err);
+       }
+   });
 
-				if (!result.status) {
-					return next(err);
-				} else {
-					// set status and location header to '/' and return no content
-					res.status(result.status);
-					res.setHeader('Location', '/');
-          // without this express router will try to continue to process routes
-          // which will result an a 404 route found error
-					res.end();
-				}
-
-		}).catch(err => {
-				return next(err);
-		}); // end updateDoc
-
-	} else {
+ } else { // in case no req.body properties
       var err = new Error('All fields required.');
       err.status = 400;
       return next(err);
@@ -150,15 +155,19 @@ courseRoutes.put("/api/courses/:id",  permsCheck, function(req, res, next){
 // Creates a review for the specified course ID, sets the Location header to the related course, and returns no content
 courseRoutes.post("/api/courses/:courseId/reviews",  permsCheck, function(req, res, next){
 
-  if ( req.body) {
+  if ( req.body.rating) { // testing for at least a rating property
 
-    return runFindQuery(course, {_id: req.params.courseId}).then(result =>{
+    // not using my documentMethods elsewhere...
+    // due to query.select and deep populate methods not working...
+    // but this works fine and...
+    // this promise-based layered approach makes this less likely to produce errors
+    return runFindQuery(Course, {_id: req.params.courseId}).then(result =>{
         if (result.doc[0].user.equals(req.user._id)){
           var err = new Error('The user who owns the course, cannot review it.');
           err.status = 400;
           return next(err);
         } else {
-            createNew(review, req).then(result =>{
+            createNew(Review, req).then(result =>{
 
               if (!result.status) {
                 return next(err);
@@ -169,7 +178,7 @@ courseRoutes.post("/api/courses/:courseId/reviews",  permsCheck, function(req, r
                 let updateDataObject = {_id:result.doc._id};
                 let reviews = "reviews";
 
-                updateDoc(course, {_id: docId}, updateDataObject, reviews).then(result =>{
+                updateDoc(Course, {_id: docId}, updateDataObject, reviews).then(result =>{
 
              				if (!result.status) {
              					return next(err);
@@ -184,12 +193,12 @@ courseRoutes.post("/api/courses/:courseId/reviews",  permsCheck, function(req, r
 
              		}).catch(err => {
              				return next(err);
-             		}); // end updateDoc
+             		}); // end update course with review id
 
               } // end if (!result.status)
 
-          });
-        }
+          }); // end create new review
+        } // end if (current user is course owner)
       }).catch(err => {
         return next(err);
     }); // end createNew review
@@ -198,7 +207,7 @@ courseRoutes.post("/api/courses/:courseId/reviews",  permsCheck, function(req, r
       var err = new Error('A review rating is required.');
       err.status = 400;
       return next(err);
-  }
+  } // end if (req.body)
 
 }); // end /api/courses/:courseId/reivews post create course review
 

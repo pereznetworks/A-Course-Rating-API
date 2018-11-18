@@ -359,12 +359,21 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 ## documentMethods module detour:
 
-- in my documentMethods module...
-  - found that query.select and .popluate methods not working
+  - in my documentMethods module...
+    - found that there is some scope issue
+      - property refs to other models don't work, so popluate methods not working
+      - also .select does not works, aka: find({field:value}, selectOption, callback())
   - when using mongoose directly, not in my promise wrapped documentMethods...
     - then everything works !!
+  - refactored all routes to use mongoose db methods directly
     - will have to figure out why later..
-  - removed calls to my documentMethods in all but createNew review route
+    - removed calls to my documentMethods
+    - using only in 1 route
+        - post new review route uses my documentMethods
+  - retested all routes
+    - auth, permission check, validation...
+    - and actual CRU db ops working
+  - now back to Exceed number 3 and specifying deep pop of specific fields only
 
 ## Exceed #3 almost finished:
 

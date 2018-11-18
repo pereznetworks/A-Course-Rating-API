@@ -60,7 +60,13 @@ courseRoutes.get("/api/courses/:id", function(req, res, next){
   // const testCourseId = "57029ed4795118be119cc440";
   const courseId = req.params.id;
 
-  Course.findById(courseId).populate("reviews").exec(function(err, doc){
+  Course.findById(courseId).populate({
+    path: "reviews",
+    populate: {
+      path: "user",
+      select: "fullName"
+      }
+    }).exec(function(err, doc){
     if(err){
       // this will ussually be a populate, or invalid courseId, error
       next(err);

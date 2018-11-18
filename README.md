@@ -339,24 +339,6 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
     - everything is working!!
 
-## Exceed #1 finished:
-
-  - additional validation to prevent user who owns course from reviewing that course
-
-    - note : `doc._id.equals(otherDoc._id))` works
-      - the above example using equals to compare both `_id`
-      - need to be sure comparing values, of the same type
-      - however, 2 reasons I found many get inconsistent results
-        - 1: some mistakenly comparing the entire ObjectID
-          - this will always be false,  `Doc.ObjectId.equals(otherInstanceOfsameDoc.ObjectId)`
-        - 2: using == or === compares the instance of the doc not the value
-          - `Doc._id.equals == otherInstanceOfsameDoc._Id` will always be false
-      - can test the property's value type using toString()
-        - `someDoc.ObjectID.toString()`, will stringify an object, not desired in this case
-        - `someDoc._id.toString()`, will stringify into desired 's1o3mel0on3g9n8m5b2e7r'
-
-## Exceed #2 doing #2 first:
-
 ## documentMethods module detour:
 
   - in my documentMethods module...
@@ -375,19 +357,37 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
     - and actual CRU db ops working
   - now back to Exceed number 3 and specifying deep pop of specific fields only
 
+## Exceed #1 finished:
+
+  - additional validation to prevent user who owns course from reviewing that course
+
+    - note : `doc._id.equals(otherDoc._id))` works
+      - the above example using equals to compare both `_id`
+      - need to be sure comparing values, of the same type
+      - however, 2 reasons I found many get inconsistent results
+        - 1: some mistakenly comparing the entire ObjectID
+          - this will always be false,  `Doc.ObjectId.equals(otherInstanceOfsameDoc.ObjectId)`
+        - 2: using == or === compares the instance of the doc not the value
+          - `Doc._id.equals == otherInstanceOfsameDoc._Id` will always be false
+      - can test the property's value type using toString()
+        - `someDoc.ObjectID.toString()`, will stringify an object, not desired in this case
+        - `someDoc._id.toString()`, will stringify into desired 's1o3mel0on3g9n8m5b2e7r'
+
+## Exceed #2 doing #3 first:
+
 ## Exceed #3 almost finished:
 
-- Course routes
-  - When returning a single course for the GET /api/courses/:courseId route...
-    - use Mongoose deep population to
+- on GET /api/course/:id
+  - populate the course review array of review id's
+    - replacing the id's with...
+      - the rating and review, plus reviewer's, user, fullname
+  - using Mongoose deep population to
       - return only the fullName of the related user on the course model
-      - and each review returned with the course model.
-    - This will hide other user’s private details,
-      - like passwords and emails, from other users.
-    - Example user object returned:
-      - `{ "_id": "wiubfh3eiu23rh89hcwib", "fullName": "Sam Smith" }`
-      - See Project Resources section for more information about deep population.
-
+      - and each rating and the review text
+      - all returned with the course model.
+      - by default hides other user’s private details,
+        - like passwords and emails, from other users.
+        
 ## prep for project submission:
 
   - decide on exceeds

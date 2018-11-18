@@ -29,7 +29,7 @@
 // GET /api/courses 200 - Returns the Course "_id" and "title" properties
 courseRoutes.get("/api/courses", function(req, res, next){
 
-  return runFindQuery(Course, {}).then(err, result => {
+  Course.find({}, function(err, result){
 
       if (err){
         // this will ussually be a validation error
@@ -42,7 +42,7 @@ courseRoutes.get("/api/courses", function(req, res, next){
         next(err);
       } else {
         // returning only the Course "_id" and "title" properties
-        const coursesArray = result.doc.map((item, index)=>{
+        const coursesArray = result.map((item, index)=>{
           return {id: item._id, title: item._doc.title}
         });
         // return list of course title and id's
@@ -91,7 +91,7 @@ courseRoutes.post("/api/courses",  permsCheck, function(req, res, next){
    newCourseData.user = req.user;
 
     // create an object with form input
-    course.create(newCourseData, function (err, doc) {
+    Course.create(newCourseData, function (err, doc) {
         if (err) {
           // this is ussually a validation error
           next(err);
@@ -113,42 +113,27 @@ courseRoutes.post("/api/courses",  permsCheck, function(req, res, next){
 // PUT /api/courses/:courseId 204 - Updates a course and returns no content
 courseRoutes.put("/api/courses/:id",  permsCheck, function(req, res, next){
 
-	if (req.body.title && req.body.description && req.body.steps) {
-
    var docId = req.params.id;
-   var updateCourseData = preUpdatePrep(course, req.body);
+   var updatedCourseData = preUpdatePrep(Course, req.body);
 
-   Course.find(docId, function (err, doc) {
+   Course.findByIdAndUpdate({_id: docId}, updatedCourseData, {new:true, runValidators:true},function (err, doc) {
        // another condition test here because of ...
-       if (doc[0] && updateCourseData ){
-       // possible point of failure...on next line of code
-         // the .push does not take a call back and does not return anything..
-         // if doc[0] or updateDataObject is not present or not expected format
-         // or if an error occurs pushing onto reviews array
-             // ... then unhandled error
-         doc[0].reviews.push(updateCourseData);
-         doc[0].save(function (err, doc) {
-           if (err) {
-             next(err);
-           } else {
-             res.status(201);
-             res.setHeader('Location', '/');
-           }
-         });
-       } if (err) {
+       if (err) {
          next(err);
-       } else { // in case no docId or newCourseData
-         var err = new Error('All fields required.');
-         err.status = 400;
-         next(err);
+       } else {
+         // doc.save(function(err) {
+         //   if (err) {
+         //     next(err);
+         //   }
+         // });
+         // set status and location header to '/' and return no content
+         res.status(201);
+         res.setHeader('Location', '/');
+         // without this express router will try to continue to process routes
+         // which will result an a 404 route found error
+         res.end();
        }
    });
-
- } else { // in case no req.body properties
-      var err = new Error('All fields required.');
-      err.status = 400;
-      return next(err);
-  }
 }); // end /api/courses post create user route
 
 // POST /api/courses/:courseId/reviews 201

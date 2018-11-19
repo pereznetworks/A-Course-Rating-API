@@ -357,7 +357,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
     - and actual CRU db ops working
   - now back to Exceed number 3 and specifying deep pop of specific fields only
 
-## Exceed #1 finished:
+## Exceed #1: for Review Model...
 
   - additional validation to prevent user who owns course from reviewing that course
 
@@ -373,20 +373,47 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
         - `someDoc.ObjectID.toString()`, will stringify an object, not desired in this case
         - `someDoc._id.toString()`, will stringify into desired 's1o3mel0on3g9n8m5b2e7r'
 
-## Exceed #2 doing #3 first:
+## Exceed #2: for User Routes...
 
-## Exceed #3 almost finished:
+  - will be writing tests for the following scenarios:
+    - a request to the GET route with the correct credentials
+      - the corresponding user document is returned
+    - a request to the GET /api/courses/:courseId route with the invalid credentials
+      - a 401 status error is returned
 
-- on GET /api/course/:id
-  - populate the course review array of review id's
-    - replacing the id's with...
-      - the rating and review, plus reviewer's, user, fullname
-  - using Mongoose deep population to
-      - return only the fullName of the related user on the course model
-      - and each rating and the review text
-      - all returned with the course model.
-      - by default hides other user’s private details,
-        - like passwords and emails, from other users.
+  - tools used:
+    - test framework
+      - Mocha/Chai
+    - mock http requests
+      - supertest or node-mocks-http
+    - npm
+      - Set up a test script in package.json
+        ```
+        "scripts": {
+           "testUserRouteGoodCreds": "userRouteGoodCreds",
+           "testCourseRouteNoCreds": "courseRouteNoCreds"
+                }
+        ```
+
+  - basic cli functionality:
+    - run cmd, `npm testUserRouteGoodCreds`
+      - custom Mocha/Chai unit test runs supertest req functions
+      - test results returned to std out at terminal
+
+## Exceed #3: for Course Routes..
+
+  - get /api/course/:id popluate course with reviews
+
+  - on GET /api/course/:id
+    - populate the course review array of review id's
+      - replacing the id's with...
+        - the rating and review, plus reviewer's, user, fullname
+    - using Mongoose deep population to
+        - return only the fullName of the related user on the course model
+        - and each rating and the review text
+        - all returned with the course model.
+        - by default hides other user’s private details,
+          - like passwords and emails, from other users.
 
 ## prep for project submission:
 

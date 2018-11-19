@@ -400,6 +400,8 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
       - custom Mocha/Chai unit test runs supertest req functions
       - test results returned to std out at terminal
 
+  - should be able to test all routes and scenarios using this method
+
 ## Exceed #3: for Course Routes..
 
   - get /api/course/:id popluate course with reviews

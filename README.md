@@ -371,7 +371,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
           - `Doc._id.equals == otherInstanceOfsameDoc._Id` will always be false
       - can test the property's value type using toString()
         - `someDoc.ObjectID.toString()`, will stringify an object, not desired in this case
-        - `someDoc._id.toString()`, will stringify into desired 's1o3mel0on3g9n8m5b2e7r'
+        - `someDoc._id.toString()`, will stringify into desired formated string.. 's1o3mel0on3g9n8m5b2e7r'
 
 ## Exceed #2: for User Routes...
 

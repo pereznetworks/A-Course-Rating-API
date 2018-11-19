@@ -417,11 +417,14 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 ## prep for project submission:
 
-  - decide on exceeds
+  - finish exceeds
 
-  - this readme will become dev notes
+  - final code walk-through
+    - re-verify meeting project expectations and exceeds
 
-  - will not be submitting mongo db data dir with project
-
+  - compile simple readme.md for reviewer
+    - will not be submitting mongo db data dir with project
     - so will have to provide a method or instructions...
-      - for reviewer to setup everything
+      - for reviewer to setup everything and test the project
+
+  - this readme will become 'dev notes'

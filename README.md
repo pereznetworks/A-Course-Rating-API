@@ -387,7 +387,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
       - all returned with the course model.
       - by default hides other user’s private details,
         - like passwords and emails, from other users.
-        
+
 ## prep for project submission:
 
   - decide on exceeds

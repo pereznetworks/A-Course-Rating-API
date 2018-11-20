@@ -436,19 +436,23 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
         - by default hides other user’s private details,
           - like passwords and emails, from other users.
 
-## my custom insertData module is fixed:
+## insertData module and cleanDb modules:
 
-  - fixed the json syntax
-  - for users, using a create in a forEach loop
-    - passwords get hashed
-    - uses sample data from original project files
+  - *inserData:*
+  - uses sample data from original project files
+  - if db course-api courses, users, reviews blank inserts data
+  - fixed bugs
+    - fixed the json syntax
+    - for users, using a create in a forEach loop
+    - passwords now get hashed
+  - new
+    - now checks if NODE_ENV is set,  else assumes 'development' mode
 
-  *IDEA:*
-  - use process.env set to development or production
-    - when express server started in development, insertData methods are executed
-    - when express server stopped in development, all data deleted
-  - also set up a db reset
-    - do a reset, so can start and stop with persistence, and reset only when needed
+  - *cleanDb:*
+  - set up as a script in package.json
+  - checks if NODE_ENV is set,  else assumes 'development' mode
+    - deletes all courses, users and reviews
+    - logs "to get fresh data inserted, run npm start, with NODE_ENV set to 'development'"
 
 ## prep for project submission:
 

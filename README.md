@@ -408,10 +408,10 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
             at Function.Module._resolveFilename (module.js:543:15)
             ...
     ```
-      - see https://github.com/mochajs/mocha/issues/2423
+      - I found... https://github.com/mochajs/mocha/issues/2423
         - and just did the following...
           - `rm -rf node_modules` dir and `run npm install`
-          - then `npm test` should work fine
+          - then `npm test` worked fine
 
   - basic cli functionality:
     - run cmd, `npm test`
@@ -438,7 +438,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 ## prep for project submission:
 
-  - DONE: finish exceeds 
+  - DONE: finish exceeds
 
   - final code walk-through
     - re-verify meeting project expectations and exceeds

@@ -6,22 +6,48 @@
 
    // first in your node.js/Express app or index.js....
 
-      var startMongo = require('./startMongo');
+   const connect = require('./src/utils').connect;
+   const onErr = require('./src/utils').onErr;
+   const onceConnected = require('./src/utils').onceConnected;
 
    // give the conneciton a name ...
       // with no args...
-         // defaults to port 27017 and 'course-api' as database name
+         // defaults:
+             port: 27017
+             database dbName: 'course-api'
+             configOptions = {
+                 useNewUrlParser: true,
+                 useCreateIndex: true,
+                 autoIndex: true
+               };
 
-          var myMongooseConnectionName = startMongo.startdb();
+          var myMongooseConnectionName = .connect();
 
-    // you can change the port and name of the db ...
+    // you can change the port and name of the db and even configOptions...
       // pass port as an interger
         // pass the dbName as a string
+          // even pass custom config options as an object
 
-          var myMongooseConnectionName = startdb(27017, 'myDatabaseName');
+            const configOptions = ;
+
+          var myMongooseConnectionName = startdb(27017, 'myDatabaseName', 
+               {useNewUrlParser: true, useCreateIndex: true, autoIndex: true});
+
+    // then ... onErr and onceConnected...
+
+        // if error in connection...
+        db.on("error", function(err){
+        	onErr(err);
+        });
+
+        // if connected and all is good...
+        db.once("open", function(){
+        	onceConnected();
+        });
+
     */
 
-const connect = function(port, dbName){
+const connect = function(port, dbName, configOptions){
 
     // importing mongoose
     var mongoose = require("mongoose");
@@ -35,6 +61,14 @@ const connect = function(port, dbName){
       dbName = 'course-api';
     }
 
+    if (!configOptions){
+      configOptions = {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        autoIndex: true
+      };
+    }
+
     // connecting to mongod db
     /*  DeprecationWarning: current URL string parser is deprecated,
         and will be removed in a future version.
@@ -43,13 +77,7 @@ const connect = function(port, dbName){
     */
 
     mongoose.connect(
-      `mongodb://localhost:${port}/${dbName}`,
-       {
-         useNewUrlParser: true,
-         useCreateIndex: true,
-         autoIndex: true
-       }
-     );
+      `mongodb://localhost:${port}/${dbName}`, configOptions);
 
     // return the mongoose connection
     return mongoose.connection;

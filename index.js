@@ -6,6 +6,9 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser')
 const app = express();
 
+
+const env = process.env.NODE_ENV || 'development';
+
 // set the port
 app.set('port', process.env.PORT || 5000);
 
@@ -34,6 +37,8 @@ app.use(morgan('dev'));
 // so req.body must be an object with key/value properties
 app.use(bodyParser.json())
 
+
+if (env === 'development'){
 /* import insertData methods */
 
 	const initCourses = require('./src/seed-data/insertData.js').initCourses;
@@ -47,6 +52,7 @@ app.use(bodyParser.json())
 	initReviews();
 	initUsers();
 
+}
 
 // send a friendly greeting for the root route
 app.get('/', (req, res) => {
@@ -81,19 +87,22 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
 	if (err.name = 'MongoError'){
 		res.status(err.status);
-		res.json({
-			message: err.message,
-			details: err.stack
-		});
+		if (env === 'development'){
+			res.json({
+				message: err.message,
+				details: err.stack
+			});
+		}
 	} else {
-  	res.status(500)
-		res.json({
-			message: err.message,
-			status: 500,
-			details: err.stack
-		});
+  	res.status(500);
+		if (env === 'development'){
+			res.json({
+				message: err.message,
+				status: 500,
+				details: err.stack
+			});
+		}
 	}
-
 });
 
 // start listening on our port

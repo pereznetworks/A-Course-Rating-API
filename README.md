@@ -347,10 +347,10 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
       - also .select does not works, aka: find({field:value}, selectOption, callback())
   - when using mongoose directly, not in my promise wrapped documentMethods...
     - then everything works !!
-  - refactored all routes to use mongoose db methods directly
+  - refactored all Course routes to use mongoose db methods directly
     - will have to figure out why later..
     - removed calls to my documentMethods
-    - using only in 1 route
+    - using only in 1 route and User routes
         - post new review route uses my documentMethods
   - retested all routes
     - auth, permission check, validation...
@@ -376,31 +376,50 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 ## Exceed #2: for User Routes...
 
   - will be writing tests for the following scenarios:
-    - a request to the GET route with the correct credentials
+    - a request to the GET /api/user route with the correct credentials
       - the corresponding user document is returned
-    - a request to the GET /api/courses/:courseId route with the invalid credentials
+    - a request to the GET /api/user route with the invalid credentials
       - a 401 status error is returned
 
   - tools used:
     - test framework
       - Mocha/Chai
-    - mock http requests
-      - supertest or node-mocks-http
+      - supertest
+      - use Postman to generate the auth headers
     - npm
-      - Set up a test script in package.json
+      - Setup pretest, test, and posttest in package.json
+      - the npm test cmd will run among others...
+        - tests on User routes as described above
         ```
         "scripts": {
-           "testUserRouteGoodCreds": "userRouteGoodCreds",
-           "testCourseRouteNoCreds": "courseRouteNoCreds"
+          "pretest": "mongod --config etc/mongod.conf",
+          "test": "node_modules/.bin/mocha --exit --no-warnings",
+          "posttest": "mongo admin --eval 'db.shutdownServer()'",
                 }
         ```
+    - at the console, when running `npm test` I got the error...
+    ``` > mocha
+
+          module.js:545
+          throw err;
+          ^
+
+          Error: Cannot find module './options'
+            at Function.Module._resolveFilename (module.js:543:15)
+            ...
+    ```
+      - see https://github.com/mochajs/mocha/issues/2423
+        - and just did the following...
+          - `rm -rf node_modules` dir and `run npm install`
+          - then `npm test` should work fine
 
   - basic cli functionality:
-    - run cmd, `npm testUserRouteGoodCreds`
-      - custom Mocha/Chai unit test runs supertest req functions
-      - test results returned to std out at terminal
+    - run cmd, `npm test`
+      - Mocha will run all js files in /test folder
+      - result will be std out'ed to console
 
-  - should be able to test all routes and scenarios using this method
+  - eventually...
+    - should be able to test all routes and scenarios using this method
 
 ## Exceed #3: for Course Routes..
 
@@ -419,7 +438,7 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 ## prep for project submission:
 
-  - finish exceeds
+  - DONE: finish exceeds 
 
   - final code walk-through
     - re-verify meeting project expectations and exceeds

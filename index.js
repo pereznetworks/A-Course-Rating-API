@@ -85,12 +85,11 @@ app.use((req, res) => {
 // global error handler
 // for an err to get here just need to next(err) from any route
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  //console.error(err.stack);
 	if (err.name = 'MongoError'){
-		res.status(400);
+		res.status(err.status);
 		res.json({
 			message: err.message,
-			status: 400,
 			details: err.stack
 		});
 	} else {
@@ -109,4 +108,4 @@ const server = app.listen(app.get('port'), () => {
   console.log(`Express server is listening on port ${server.address().port}`);
 });
 
-module.exports = db;
+module.exports = server;

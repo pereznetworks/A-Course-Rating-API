@@ -39,7 +39,7 @@ const permsCheck = function (req, res, next){
         var err = new Error('You must be logged to review a course.');
         err.status = 401;
         return next(err);
-      } else if (req.method === 'GET' && getUserUrlPattern.test(req.originalUrl)) {
+      } else if (req.method === 'GET' && getUsersUrlPattern.test(req.originalUrl)) {
         var err = new Error('Your not logged in.');
         err.status = 401;
         return next(err);

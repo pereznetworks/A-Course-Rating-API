@@ -23,7 +23,7 @@ const permsCheck = require('../utils').permsCheck;
 // GET /api/users 200 - Returns the currently authenticated user
 userRoutes.get("/api/users", permsCheck, function(req, res, next){
 
-	return runFindQuery(User, {}).then(result => {
+	return runFindQuery(User, {_id: req.user._id.toString()}).then(result => {
 
 		if (!result.status){
 			let err = result;
@@ -34,12 +34,6 @@ userRoutes.get("/api/users", permsCheck, function(req, res, next){
 		}
 
 	}).catch(err => {
-			res.status(400)
-			res.json({
-				message: err.message,
-				error: err.status,
-				details: err.stack
-			});
 			return next(err);
 	}); // end runFindQuery
 

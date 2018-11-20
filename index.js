@@ -34,12 +34,7 @@ app.use(morgan('dev'));
 // so req.body must be an object with key/value properties
 app.use(bodyParser.json())
 
-/* import insertData methods
-
-	//TODO: fix the syntax problems in the seed-data object
-	.. this does not work,
-	.. there are syntax problems in the seed-data object
-	.. for now using mongoimport to import seed-data
+/* import insertData methods */
 
 	const initCourses = require('./src/seed-data/insertData.js').initCourses;
 	const initReviews = require('./src/seed-data/insertData.js').initReviews;
@@ -52,7 +47,6 @@ app.use(bodyParser.json())
 	initReviews();
 	initUsers();
 
-*/
 
 // send a friendly greeting for the root route
 app.get('/', (req, res) => {

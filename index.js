@@ -85,7 +85,6 @@ app.use((req, res) => {
 // global error handler
 // for an err to get here just need to next(err) from any route
 app.use((err, req, res, next) => {
-  //console.error(err.stack);
 	if (err.name = 'MongoError'){
 		res.status(err.status);
 		res.json({

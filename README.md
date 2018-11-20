@@ -357,19 +357,6 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
     - and actual CRU db ops working
   - now back to Exceed number 3 and specifying deep pop of specific fields only
 
-## insertData fixed
-
-  - fixed the json syntax
-  - for users, using a create in a forEach loop
-    - passwords get hashed
-    - uses sample data from original project files
-
-  *IDEA:*
-  - use process.env set to development or production
-    - when express server started in development, insertData methods are executed
-    - when express server stopped in development, all data deleted
-    - so each time express server started in development, get fresh clean data
-
 ## Exceed #1: for Review Model...
 
   - additional validation to prevent user who owns course from reviewing that course
@@ -448,6 +435,20 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
         - all returned with the course model.
         - by default hides other user’s private details,
           - like passwords and emails, from other users.
+
+## my custom insertData module is fixed:
+
+  - fixed the json syntax
+  - for users, using a create in a forEach loop
+    - passwords get hashed
+    - uses sample data from original project files
+
+  *IDEA:*
+  - use process.env set to development or production
+    - when express server started in development, insertData methods are executed
+    - when express server stopped in development, all data deleted
+  - also set up a db reset
+    - do a reset, so can start and stop with persistence, and reset only when needed
 
 ## prep for project submission:
 

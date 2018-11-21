@@ -43,9 +43,7 @@ describe('\nGET http://localhost:5000/api/users', function() {
       .expect(200, {
         _id: "57029ed4795118be119cc437",
         fullName: "Joe Smith",
-        emailAddress: "joe@smith.com",
-        password: "$2b$10$Ludw9XaEucBOPsksxZeI7eZzJQyN8rYkMt2Q1jAh8wuOxAV25PF22",
-        __v: 0
+        emailAddress: "joe@smith.com"
       }, done);
   });
 });

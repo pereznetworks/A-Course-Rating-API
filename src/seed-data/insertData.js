@@ -110,15 +110,15 @@ const seedData = {
     },
     {
       _id: "57029ed4795118be119cc438",
-      fullName: "Dave Jones",
-      emailAddress: "dave@jones.com",
+      "fullName": "Sam Jones",
+      "emailAddress": "sam@jones.com",
       password: "password#",
       __v: 0
     },
     {
       _id: "57029ed4795118be119cc439",
-      fullName: "Sam Smithson",
-      emailAddress: "sam@smithson.com",
+      "fullName": "Sam Smith",
+      "emailAddress": "sam@smith.com",
       password: "password%",
       __v: 0
     }

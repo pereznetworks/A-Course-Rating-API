@@ -1,25 +1,25 @@
 [
   {
-    "_id": "57029ed4795118be119cc439",
-    "fullName": "Sam Smith",
-    "emailAddress": "sam@smith.com",
-    "password": "password",
-    "__v": 0
-  }
-  {
     "_id": "57029ed4795118be119cc437",
     "fullName": "Joe Smith",
     "emailAddress": "joe@smith.com",
-    "password": "password",
+    "password": "password!",
     "__v": 0
-  }
+  },
   {
     "_id": "57029ed4795118be119cc438",
     "fullName": "Sam Jones",
     "emailAddress": "sam@jones.com",
-    "password": "password",
+    "password": "password#",
     "__v": 0
-  }
+  },
+  {
+    "_id": "57029ed4795118be119cc439",
+    "fullName": "Sam Smith",
+    "emailAddress": "sam@smith.com",
+    "password": "password%",
+    "__v": 0
+  },
   {
     "_id": "5be635ca4f5cc2a6a89bfe81",
     "fullName": "Jared Smithson",
@@ -52,7 +52,7 @@
     "_id": "5be72d1c741941ff929d4800",
     "fullName": "Bruce Banner",
     "emailAddress": "brucebanner@hulk.com",
-    "password": "angermanagement",
+    "password": "ineedangermanagement",
     "__v": 0
   }
   {
@@ -66,7 +66,7 @@
     "_id": "5be74936c04d282f4154bddf",
     "fullName": "Jack Ryan",
     "emailAddress": "jackryan@historicalsociety.com",
-    "password": "iamreallywithnsa",
+    "password": "iamreallywiththensa",
     "__v": 0
   }
   {

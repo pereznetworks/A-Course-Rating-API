@@ -29,7 +29,7 @@ userRoutes.get("/api/users", permsCheck, function(req, res, next){
 			let err = result;
 			return next(err);
 		} else {
-			let user = [{_id: result.doc[0]._id, fullName: result.doc[0].fullName, emailAddress: result.doc[0].emailAddress }]
+			let user = {_id: result.doc[0]._id, fullName: result.doc[0].fullName, emailAddress: result.doc[0].emailAddress };
 			res.json(user);
 			res.status(result.status);
 		}

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# tbis was written and works on macOS X using a bash shell
+# the express course-api server /src code does not use this
+# it's here only for developers who know what this is for...
+  
 echo -e 'import data using mongo-import...'
 echo -e 'importing courses...\n'
 mongoimport --db course-api --collection courses --type=json --jsonArray --file courses.json

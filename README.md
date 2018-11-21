@@ -63,6 +63,20 @@
       - http://localhost:5000
         - open Developer Tools and open dedicated DevTools for Node.js
 
+  - 5:) if after messing around with user, review or course data...
+      - and for what ever reason.... you need to start over
+      - ctrl-c to stop the course-api rest express server
+      - npm stop
+        - to make sure mongod is down
+      - npm run runMongod
+        - to start it again...
+      - npm run cleanDb
+        - will remove all users, courses and reviews...
+      - npm stop
+        - to make mongod is down again
+      - just run npm start again
+        - and the a fresh copy of sample data will be inserted, again
+
 # More detail on what *npm start* does:
 
 - npm start, will do the following:
@@ -94,4 +108,4 @@
 
   for the few and the brave...
 
-  [my devloper notes](https://github.com/pereznetworks/TD-Project11/blob/master/devnotes.md) 
+  [my devloper notes](https://github.com/pereznetworks/TD-Project11/blob/master/devnotes.md)

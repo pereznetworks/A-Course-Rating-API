@@ -1,4 +1,4 @@
-## TD-Project11: Developer Notes 
+## TD-Project11: Developer Notes
 
 ## Before Starting to code:
 
@@ -454,16 +454,30 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
     - deletes all courses, users and reviews
     - logs "to get fresh data inserted, run npm start, with NODE_ENV set to 'development'"
 
+## User data:
+
+  - so I changed the users I create in my insertData module
+
+    - the \_id's, fullNames, emailAddress ...
+      - are from the original project files sample data  
+
+      - I had to vary the password some,
+        - due to no dups in the user model validation
+
+      - user data found in src/seed-data/more-users.json
+        the first 3 users are inserted by my insertData module
+
+      - other user data samples are included for fun
+        - can add these using the POST /api/users request in POSTMAN..
+          - using the CourseAPI.postman_collection.json requests
+
 ## prep for project submission:
 
   - DONE: finish exceeds
 
-  - final code walk-through
+  - DONE: final code walk-through
     - re-verify meeting project expectations and exceeds
 
-  - compile simple readme.md for reviewer
-    - will not be submitting mongo db data dir with project
-    - so will have to provide a method or instructions...
-      - for reviewer to setup everything and test the project
+  - DONE: compile simple readme.md for reviewer
 
   - this readme will become 'dev notes'

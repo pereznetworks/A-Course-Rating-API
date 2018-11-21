@@ -8,10 +8,6 @@ const app = express();
 
 const env = process.env.NODE_ENV || 'development';
 
-// check for data/db folder, create full path if not exist
-var checkForFolder = require('../utils/checkForFolder.js').checkForFolder;
-checkForFolder(`../../data/db`);
-
 // set the port
 app.set('port', process.env.PORT || 5000);
 

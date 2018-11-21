@@ -6,11 +6,11 @@
 
   - 1:) download a copy of this repo
 
-  - 2:) from a terminal prompt cd the root of the repo folder
+  - 2:) from a terminal prompt, cd the root of the repo folder
 
   - 3:) create folders
       - from the root of the repo folder
-        - run the following cmd to setup the project
+        - run the following cmds to setup the project
           - mkdir data
           - mkdir data/db
           - mkdir logs
@@ -20,8 +20,9 @@
 
   - 1:) npm start
       - runs the course-api rest express server
-        - runs and connects mongod
-        - insertData checks courses, reviews and users collections for data
+        - runs and connects to mongod, course-api db
+        - my custom insertData module then ...
+          - checks courses, reviews and users collections for data
           - if none exist, it inserts the data
           - with the exception of passwords...
             - the users created are the same as form the sample project files
@@ -37,7 +38,8 @@
 
   - 2:) use Postman
       - import test/CourseAPI.postman_collection.json
-      - test responses GET/POST/PUT requests
+      - with the course-api rest express server running
+        - test responses GET/POST/PUT requests
 
   - 3:) after running npm start, at least once, you can run npm test
 
@@ -86,4 +88,4 @@
               - inserts course and review data
               - create users, hashing passwords
 
-      - waits and listen for http req on localhost:5000
+      - waits and listens for http req on localhost:5000

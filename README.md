@@ -89,3 +89,9 @@
               - create users, hashing passwords
 
       - waits and listens for http req on localhost:5000
+
+# Developer Notes:
+
+  for the few and the brave...
+
+  [my devloper notes](https://github.com/pereznetworks/TD-Project11/blob/master/devnotes.md) 

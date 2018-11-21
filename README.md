@@ -75,7 +75,7 @@
       - npm run cleanDb
         - will remove all users, courses and reviews...
       - npm stop
-        - to make mongod is down again
+        - to make sure mongod is down again
       - just run npm start again
         - and then a fresh copy of sample data will be inserted
 

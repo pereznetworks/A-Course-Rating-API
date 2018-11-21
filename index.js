@@ -85,7 +85,11 @@ app.use((req, res) => {
 // for an err to get here just need to next(err) from any route
 app.use((err, req, res, next) => {
 	if (err.name = 'MongoError'){
-		res.status(err.status);
+		if (err.code == 11000){
+			res.status(400)
+		} else {
+			res.status(err.status || 400 );
+		}
 		if (env === 'development'){
 			res.json({
 				message: err.message,

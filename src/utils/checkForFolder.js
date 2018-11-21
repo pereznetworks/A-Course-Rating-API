@@ -13,6 +13,7 @@ const checkForFolder = function(pathtoDataFolder){
         dataFolder = pathtoDataFolder;
        }
       // makes dir, if already exist send error: EEXIST
+      // will create entire path to dest folder
       fs.mkdir(dataFolder, { recursive: true }, (err) => {
         if (err) console.log(err);
       });

@@ -1,36 +1,21 @@
 var request = require('supertest');
 var expect = require('chai').expect;
 
-//sample test - use when setting up new npm/mocha
-describe('\nmake sure my Mocha is ready, 8 shots please ', function () {
-  // test spec, aka... unit test
-  it('running Mocha test using npm, expect(true) to be ok ', function () {
-    expect(true).to.be.ok;  // 'it' is a Mocha function; 'ok' is an assertion method in chai
-  });
-});
-
-/* testing course-api rest server routes
+/* testing course-api rest server User routes
    pretest script in npm package.json...
       pretest script does...
         mongod --config etc/mongod.conf
    const app = require('../index.js') --- launches express server itself
-      after the tests, successful or not...
-        mongo admin --eval 'db.shutdownServer()
+      after the tests, successful or not
+        log results to console
+      if tests are successful
+        then posttest will down the mongod deamon
+      if tests fail
+        it must do manually by...
+          npm run downMongod
 */
 
 const app = require('../index.js');
-
-/* Home Route or root path */
-
-describe('\nGET http://localhost:5000', function() {
-  it('when browsing to home path, ', function(done) {
-    request(app)
-      .get('/')
-      .expect(200, {
-                    "message": "Welcome to the Course Review API"
-                   }, done);
-  });
-});
 
 /* User Routes */
 
@@ -52,15 +37,34 @@ describe('\nGET http://localhost:5000/api/users', function() {
       .get('/api/users')
       .set({'Accept': 'application/json',
             'cache-control': 'no-cache',
-            'Authorization': 'Basic am9lQHNtaXRoLmNvbTohcGFzc3dvcmRA'
+            'Authorization': 'Basic am9lQHNtaXRoLmNvbTpwYXNzd29yZCE'
            })
       .expect('Content-Type', /json/)
-      .expect(200, [{
-        "_id": "5bed2763880ec93d1596578d",
-        "fullName": "Joe Smith",
-        "emailAddress": "joe@smith.com",
-        "password": "$2b$10$7eyFUx9n9Npu0hTobhM2O.K/XZwz7WKJTmlFU0ldJuBUAvFPg.6zW",
-        "__v": 0
-        }], done);
+      .expect(200, [
+          {
+              "fullName": "Joe Smith",
+              "emailAddress": "joe@smith.com",
+          }
+      ], done);
   });
 });
+
+// //sample test - use when setting up new npm/mocha
+// describe('\nmake sure my Mocha is ready, 8 shots please ', function () {
+//   // test spec, aka... unit test
+//   it('running Mocha test using npm, expect(true) to be ok ', function () {
+//     expect(true).to.be.ok;  // 'it' is a Mocha function; 'ok' is an assertion method in chai
+//   });
+// });
+
+/* Home Route or root path */
+
+// describe('\nGET http://localhost:5000', function() {
+//   it('when browsing to home path, ', function(done) {
+//     request(app)
+//       .get('/')
+//       .expect(200, {
+//                     "message": "Welcome to the Course Review API"
+//                    }, done);
+//   });
+// });

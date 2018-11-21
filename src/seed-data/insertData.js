@@ -11,6 +11,9 @@ var Review = require('../models').review;
 // seedData object
 // TODO: fix seedData syntax
 // IDEA: read data from json files...
+
+var checkForFolder = require('../utils/checkForFolder.js').checkForFolder;
+
 const seedData = {
   courses: [
     {
@@ -124,8 +127,10 @@ const seedData = {
   ]
 };
 
-// seedData methods to test if data has already been inserted
+// check for data/db folder, create it if it does not exist
+checkForFolder(`../../data/db`);
 
+// seedData methods to test if data has already been inserted
 const initCourses = function(){
   Course.find({}, function(err, result){
     if (err){

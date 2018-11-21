@@ -65,9 +65,9 @@
 
 # More detail on what *npm start* does:
 
-- "nodemon --ignore data/ --ignore logs/ --inspect ./index.js localhost 5000"
+- npm start, will do the following:
 
-  - npm start, will do the following:
+  - "nodemon --ignore data/ --ignore logs/ --inspect ./index.js localhost 5000"
 
     - tells nodemon to ignore files in the logs and data folders
 

@@ -2,7 +2,7 @@
 
 # For the Reviewer, or any daring developer:
 
-- this project is setup for Project 11 Meet Expectations and Extra features 
+- this project is setup for Project 11 Meet Expectations and Extra features
 
 - to get started with this project, do these setup tasks:
 
@@ -71,13 +71,13 @@
       - npm stop
         - to make sure mongod is down
       - npm run runMongod
-        - to start it again...
+        - starts Mongod and exits back to a prompt
       - npm run cleanDb
         - will remove all users, courses and reviews...
       - npm stop
         - to make mongod is down again
       - just run npm start again
-        - and the a fresh copy of sample data will be inserted, again
+        - and then a fresh copy of sample data will be inserted
 
 # More detail on what *npm start* does:
 

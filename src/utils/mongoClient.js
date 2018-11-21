@@ -30,7 +30,7 @@
 
             const configOptions = ;
 
-          var myMongooseConnectionName = startdb(27017, 'myDatabaseName', 
+          var myMongooseConnectionName = startdb(27017, 'myDatabaseName',
                {useNewUrlParser: true, useCreateIndex: true, autoIndex: true});
 
     // then ... onErr and onceConnected...
@@ -93,7 +93,7 @@ var onErr = function(err){
 // place within callback function db.once('open', function(){ startMongo.onceConnected()} )
 var onceConnected = function(){
   // may change how message are logged
-	console.log(`**Mongod status**\ndb connection successful`);
+	console.log(`**Mongod status**\ndb connection successful\n`);
 };
 
 

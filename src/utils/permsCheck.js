@@ -49,7 +49,7 @@ const permsCheck = function (req, res, next){
       // okay, so there are creds..but are the really auth'ed ?
       // use the user schema authenticate static method to check the supplied creds
       // check the credentials against the database
-      user.authenticate(creds.email, creds.pass, function (err, userDoc) {
+      user.authenticate(creds.name, creds.pass, function (err, userDoc) {
         if (err || !userDoc) {
           // if no user and there is an error
           // then pass the error to the next function

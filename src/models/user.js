@@ -47,7 +47,7 @@ const userSchema = new Schema({
 // since this is a method on the user schema, not using modular document methods here
 userSchema.statics.authenticate = function(email, password, callback) {
   var user = this;
-  user.findOne({ email: email })
+  user.findOne({ emailAddress: email })
       .exec(function (error, userDoc) {
         if (error) {
           return callback(error);

@@ -40,12 +40,13 @@ describe('\nGET http://localhost:5000/api/users', function() {
             'Authorization': 'Basic am9lQHNtaXRoLmNvbTpwYXNzd29yZCE'
            })
       .expect('Content-Type', /json/)
-      .expect(200, [
-          {
-              "fullName": "Joe Smith",
-              "emailAddress": "joe@smith.com",
-          }
-      ], done);
+      .expect(200, {
+        _id: "57029ed4795118be119cc437",
+        fullName: "Joe Smith",
+        emailAddress: "joe@smith.com",
+        password: "$2b$10$Ludw9XaEucBOPsksxZeI7eZzJQyN8rYkMt2Q1jAh8wuOxAV25PF22",
+        __v: 0
+      }, done);
   });
 });
 

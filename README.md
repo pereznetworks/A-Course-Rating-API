@@ -2,6 +2,8 @@
 
 # For the Reviewer, or any daring developer:
 
+- this project is setup for Project 11 Meet Expectations and Extra features 
+
 - to get started with this project, do these setup tasks:
 
   - 1:) download a copy of this repo

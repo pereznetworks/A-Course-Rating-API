@@ -35,25 +35,32 @@ const cleanDb = function(){
 
     Course.deleteMany({}).then(function (doc) {
       console.log(`removed all courses\n`);
-      }).catch(function (err) {
-        console.log(err)
-      });
-    User.deleteMany({}).then(function (doc) {
-      console.log(`removed all users..\n`);
-      }).catch(function (err) {
-        console.log(err)
-      });
-    Review.deleteMany({}).then(function (doc) {
-      console.log(`removed all reviews\n`);
-      console.log('to insert a fresh copy of sample reviews data...\n');
-      console.log('run npm start, with NODE_ENV set to `development`\n');
-      }).catch(function (err) {
-        console.log(err)
-      });
+    }).then(function(){
+      User.deleteMany({}).then(function (doc) {
+        console.log(`removed all users..\n`);
+        }).catch(function (err) {
+          console.log(err);
+          console.log('CTRL-C to exit');
+        });
+    }).then(function(){
+      Review.deleteMany({}).then(function (doc) {
+        console.log(`removed all reviews\n`);
+        console.log('to insert a fresh copy of sample reviews data...\n');
+        console.log('run npm start, with NODE_ENV set to `development`\n');
+        console.log('CTRL-C to exit');
+        }).catch(function (err) {
+          console.log(err);
+          console.log('CTRL-C to exit');
+        });
+    }).catch(function (err) {
+      console.log(err);
+      console.log('CTRL-C to exit');
+    });
 
   } else {
 
-    console.log('sorry, this utility is only for development mode');
+    console.log('sorry, this utility is only for development mode\n');
+    console.log('CTRL-C to exit');
 
   }
 };

@@ -10,7 +10,7 @@
     "prestart": "mongod --config etc/mongod.conf",
     "start": "nodemon --ignore data/ --ignore logs/ --inspect ./index.js localhost 5000",
     "downMongod": "mongo admin --eval 'db.shutdownServer()'",
-    "cleanDb": "nodemon --ignore data/ --ignore logs/ ./src/seed-data/cleanDb.js"
+    "cleanDb": "node ./src/seed-data/cleanDb.js"
   },
   "author": "",
   "license": "ISC",

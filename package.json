@@ -8,7 +8,7 @@
     "test": "node_modules/.bin/mocha --exit --no-warnings",
     "posttest": "mongo admin --eval 'db.shutdownServer()'",
     "prestart": "mongod --config etc/mongod.conf",
-    "start": "node --ignore data/ --ignore logs/ --inspect ./index.js localhost 5000",
+    "start": "node --inspect ./index.js localhost 5000",
     "stop": "mongo admin --eval 'db.shutdownServer()'",
     "runMongod": "mongod --config etc/mongod.conf",
     "cleanDb": "node ./src/seed-data/cleanDb.js"

@@ -1,5 +1,11 @@
 ## TD-Project11: Build a Course Rating API With Express:
 
+# for beginners who do not know how to work-around module dependencies....
+  - as of 11/26
+    - Nodemon not recommended
+    - see NPM alert GHSA-mh6f-8j2x-4483 : critical severity
+  - when a fix is released will place Nodemon back in as dev dependency
+
 # For the Reviewer, or any daring developer:
 
 - this project is setup for Project 11 Meet Expectations and Extra features

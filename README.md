@@ -118,11 +118,11 @@
   will put nodemon back in once nodemon or its deps fix or remove the errant module
 
   given alert GHSA-mh6f-8j2x-4483
-  following the dependencies up to top most module
-  nodemon requires pstree.remy  
-  pstree.remy requires pstree
-  pstree requires event-stream
-  event-stream requires the malicious module flatmap-stream
+  - following the dependencies up to top most module
+    - nodemon requires pstree.remy  
+    - pstree.remy requires pstree
+    - pstree requires event-stream
+    - event-stream requires the malicious module, flatmap-stream
 
   GHSA-mh6f-8j2x-4483 : critical severity
   Vulnerable versions: > 0

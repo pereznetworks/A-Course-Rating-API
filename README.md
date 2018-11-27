@@ -114,10 +114,12 @@
 
 # Developer Notes:
 
-- for now removing nodemon from the development deps
-  will put nodemon back in once nodemon or its deps fix or remove the errant module
+- erroring on the side of caution...
+  - for now removing nodemon from the development deps
+  - will put nodemon back in once nodemon or its deps fix or remove the errant module
 
-  given alert GHSA-mh6f-8j2x-4483
+
+- given alert GHSA-mh6f-8j2x-4483
   - following the dependencies up to top most module
     - nodemon requires pstree.remy  
     - pstree.remy requires pstree

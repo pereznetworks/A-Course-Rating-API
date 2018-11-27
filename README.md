@@ -108,6 +108,23 @@
 
 # Developer Notes:
 
-  for the few and the brave...
+- for now removing nodemon from the development deps
+  will put nodemon back in once nodemon or its deps fix or remove the errant module
+
+  given alert GHSA-mh6f-8j2x-4483
+  following the dependencies up to top most module
+  nodemon requires pstree.remy  
+  pstree.remy requires pstree
+  pstree requires event-stream
+  event-stream requires the malicious module flatmap-stream
+
+  GHSA-mh6f-8j2x-4483 : critical severity
+  Vulnerable versions: > 0
+  Patched version: No fix
+  The NPM package flatmap-stream is considered malicious. A malicious actor added this package as a dependency to the NPM event-stream package in versions 3.3.6 and later. Users of event-stream are encouraged to downgrade to the last non-malicious version, 3.3.4.
+
+  Users of flatmap-stream are encouraged to remove the dependency entirely.
+
+- for the few and the brave...
 
   [my devloper notes](https://github.com/pereznetworks/TD-Project11/blob/master/devnotes.md)

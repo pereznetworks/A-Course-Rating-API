@@ -1,4 +1,4 @@
-# Ignore Mongo's Log dir and a few other log types 
+# Ignore Mongo's Log dir and a few other log types
 logs
 *.log
 npm-debug.log*
@@ -37,6 +37,7 @@ build/Release
 
 # Dependency directories
 node_modules/
+node_modules*/
 jspm_packages/
 
 # TypeScript v1 declaration files

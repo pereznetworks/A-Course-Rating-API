@@ -5,6 +5,11 @@
     - Nodemon not recommended
     - see NPM alert GHSA-mh6f-8j2x-4483 : critical severity
   - when a fix is released will place Nodemon back in as dev dependency
+  - for now changed npm start
+    - instead of:
+      - "nodemon --ignore data/ --ignore logs/ --inspect ./index.js localhost 5000"
+    - changed to:
+      - "node --inspect ./index.js localhost 5000"
 
 # For the Reviewer, or any daring developer:
 

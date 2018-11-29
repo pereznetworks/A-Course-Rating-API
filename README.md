@@ -2,9 +2,14 @@
 
 # for beginners who do not know how to work-around module dependencies....
   - as of 11/26
-    - Nodemon not recommended
-    - see NPM alert GHSA-mh6f-8j2x-4483 : critical severity
-  - when a fix is released will place Nodemon back in as dev dependency
+    - I recommend only using Nodemon with modification
+      - remove anything that uses flatmap-stream
+      - nodemon uses pstree, ->  event-stream@3.3.6 -> flatmap-stream
+      - for specifics on the notice
+        - see [below under Development Notes](#development-notes)
+  - by the time you are reading this...
+    - the errant flatmap-stream module may have been removed from event-stream
+    - otherwise, when a fix is released will place [Nodemon](https://www.npmjs.com/package/nodemon) back in as dev dependency
   - for now changed npm start
     - instead of:
       - "nodemon --ignore data/ --ignore logs/ --inspect ./index.js localhost 5000"
@@ -117,12 +122,11 @@
 
       - waits and listens for http req on localhost:5000
 
-# Developer Notes:
+## Developer Notes:
 
-- erroring on the side of caution...
+- error on the side of caution...
   - for now removing nodemon from the development deps
   - will put nodemon back in once nodemon or its deps fix or remove the errant module
-
 
   - given alert regarding flatmap-stream
     - following the dependencies up to top most module

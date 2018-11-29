@@ -6,7 +6,7 @@
       - remove anything that uses flatmap-stream
       - nodemon uses pstree, ->  event-stream@3.3.6 -> flatmap-stream
       - for specifics on the notice
-        - see [below under Development Notes](#develoer-notes)
+        - see [below under Development Notes](#developer-notes)
   - by the time you are reading this...
     - the errant flatmap-stream module may have been removed from event-stream
     - otherwise, when a fix is released will place [Nodemon](https://www.npmjs.com/package/nodemon) back in as dev dependency

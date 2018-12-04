@@ -13,8 +13,8 @@
     "runMongod": "mongod --config etc/mongod.conf",
     "cleanDb": "node ./src/seed-data/cleanDb.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Daniel Perez",
+  "license": "MIT",
   "devDependencies": {
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",

@@ -84,7 +84,7 @@ const connect = function(port, dbName, configOptions){
 
 };
 
-//place with in callfuncton, db.on('error',function(err){ startMongo.onErr(err)} )
+//place with in callback functon, db.on('error',function(err){ startMongo.onErr(err)} )
 var onErr = function(err){
   // may change how error are logged
 	console.error(`**Mongod status**\nconnection error:`, err);

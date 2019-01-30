@@ -1,5 +1,5 @@
 # on macOS filesystems ignore .DS_Store
-.DS_Store
+**/.DS_Store
 
 # Ignore Mongo's Log dir and a few other log types
 logs

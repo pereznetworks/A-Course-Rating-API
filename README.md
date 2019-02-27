@@ -9,7 +9,7 @@
         - see [below under Development Notes](#developer-notes)
   - by the time you are reading this...
     - the errant flatmap-stream module may have been removed from event-stream
-    - otherwise, when a fix is released will place [Nodemon](https://www.npmjs.com/package/nodemon) back in as dev dependency
+    - when a fix is released I will place [Nodemon](https://www.npmjs.com/package/nodemon) back in as dev dependency
   - for now changed npm start
     - instead of:
       - "nodemon --ignore data/ --ignore logs/ --inspect ./index.js localhost 5000"

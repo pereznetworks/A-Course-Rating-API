@@ -1,5 +1,7 @@
 ## TD-Project11: Build a Course Rating API With Express:
 
+this is Project 11, part of TeamTreehouse, Tech Degree, Full Stack JavaScript, Unit 11
+
 # for beginners who do not know how to work-around module dependencies....
   - as of 11/26
     - I recommend only using Nodemon with modification

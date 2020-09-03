@@ -1,4 +1,4 @@
-## TD-Project11: Build a Course Rating API With Express:
+## Building a Course Rating API With Express:
 
 this is Project 11, part of TeamTreehouse, Tech Degree, Full Stack JavaScript, Unit 11
 

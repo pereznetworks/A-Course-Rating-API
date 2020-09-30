@@ -93,8 +93,8 @@
 
 - if after messing around with user, review or course data...
   - and for what ever reason.... you need to start over
-  - ONLY DO THIS IN DEVELOPMENT WHEN USING SAMPLE DATA
-  - DON'T DO THIS WITH ANY PRODUCTION DATABASES
+    - ONLY DO THIS IN DEVELOPMENT WHEN USING SAMPLE DATA
+    - DON'T DO THIS WITH ANY PRODUCTION DATABASES
 
 
 - 1: ctrl-c to stop the course-api rest express server

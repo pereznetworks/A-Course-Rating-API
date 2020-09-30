@@ -65,19 +65,19 @@
 
 ### 3:) after running npm start, at least once, you can run npm test
 
-  - you must run *npm start* at least once
-    - before trying to run *npm test*
-    - otherwise there will be no data to test against
+- you must run *npm start* at least once
+  - before trying to run *npm test*
+  - otherwise there will be no data to test against
 
-  - for now, testing only user routes
-    - GET /api/users - with auth'ed user credentials
-      - status code of 200 and user doc
-    - GET /api/users - without auth'ed user credentials
-      - status code 401 and a 'Your not logged in' Mongo error
+- for now, testing only user routes
+  - GET /api/users - with auth'ed user credentials
+    - status code of 200 and user doc
+  - GET /api/users - without auth'ed user credentials
+    - status code 401 and a 'Your not logged in' Mongo error
 
-  - when complete, the posttest script downs the mongod daemon
-     - however, if any of the test fails, you must run it manually..
-       - ctrl-c to exit and then npm stop
+- when complete, the posttest script downs the mongod daemon
+   - however, if any of the test fails, you must run it manually..
+     - ctrl-c to exit and then npm stop
 
 ### 4:) can use Chrome browser to
   -  chrome:/inspect

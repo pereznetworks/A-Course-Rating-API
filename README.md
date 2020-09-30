@@ -36,6 +36,7 @@
   - adjust this code to use any new syntax of cli and methods accordingly
 
 - 5:) [my dev notes](./devnotes.md)
+  - for those interested in actually building their own from scratch
 
 ## With setup task are complete, your ready to...
 

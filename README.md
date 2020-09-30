@@ -1,19 +1,21 @@
 # Building a Course Rating API With Express:
 
-this is Project 11, part of TeamTreehouse, Tech Degree, Full Stack JavaScript, Unit 11
+- this was originally part of Project 11,
+- Full Stack JavaScript, Unit 11
+- from TeamTreehouse, Tech Degree,
 
-API Requires user login
-API Stores and validates encrypted password
-API USER Route : User Auth
-API Course Route: Access Courses table
-API Reviews Route : Access Reivews Table
-Add Update Method to post a Reivew of a Course
-Mondodb cli and wrapping methods with promise
-Deep Pop of Tables data
-Data Validation
-Testing API Routes
-MongdoDb custom scripting
-...and lots more
+## Features
+- API Requires user login
+- API Stores and validates encrypted password
+- API USER Route : User Auth
+- API Course Route: Access Courses table
+- API Reviews Route : Access Reivews Table
+- Document Methods using Promise
+- Deep Pop of Tables data
+- Data Validation
+- Testing API Routes
+- MongdoDb cli and custom scripting
+...and more
 
 ## To Build Your Own:
 

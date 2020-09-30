@@ -1,10 +1,12 @@
-## TD-Project11: Developer Notes
+## Developer Notes
 
 ## Before Starting to code:
 
-Step 1:
+### Step 1:
 
-I studied [the project files](./build-rest-api-with-express-v3) and copied these to the root of my project folder. So I have a copy to modify and the original.
+- studied [the project files](./build-rest-api-with-express-v3)
+- and copied these to the root of my project folder.
+- So I have a copy to modify and the original.
 
 ```
 projectFolder/  
@@ -22,11 +24,16 @@ projectFolder/
 
 ```
 
-Steps 2 and 3:
+### Step 2:
 
-Verified that I had the latest [MongoDB installed.](http://treehouse.github.io/installation-guides/)
+- Verified that I had the latest [MongoDB installed.](https://www.mongodb.com/try/download/community)
+- Learn mongodb inport and db setup, cli syntax before trying next step
 
-With mongod running, seeded my MongoDB database with data.
+### Step 3:
+
+- *Since the initial work of this project, new verson of mongodb released and syntax may be different*
+
+#### With mongod running, seeded my MongoDB database with data.
 
 ```
 terminal$ mongoimport --db course-api --collection courses --type=json --jsonArray --file courses.json
@@ -37,9 +44,9 @@ terminal$ mongoimport --db course-api --collection reviews --type=json --jsonArr
 
 ```
 
-Step 4:
+### Step 4:
 
-- I checked my development environment
+#### I checked my development environment
 
 - Chrome Dev Tools and the npm package.json and npm environment
 
@@ -51,6 +58,10 @@ Step 4:
 
   - you get a real neat console message...
 
+- Later ended up removing nodemon due to vulnerability issues
+
+#### Oops, missed npm dependency somewhere ...
+
 ```
 module.js:545
 throw err;
@@ -58,43 +69,45 @@ throw err;
 Error: Cannot find module '../lib/cli'
 ```
 
-  - I needed to rm -rf node_modules and do npm install again
+- I needed to rm -rf node_modules and do npm install again
 
-- After running npm install,
+#### Use 2 terminals from the same project root folder
 
-  - in a second terminal tab(same folder), restarted mongod
+- On first terminal, run npm install,
 
-  - then in the first terminal, ran npm start
+- Second terminal, from same folder, start/restart mongod
 
-  - then I browsed to http://localhost:5000 in Chrome browser
+- then in the first terminal, run npm start
 
-  - able to check out the src/index.js in the Node.js Dev-Tools
+- then I browse to http://localhost:5000 in Chrome browser
 
-Steps 5 and 6:
+- able to check out the src/index.js in the Node.js Dev-Tools
+
+#### Step 5
 
 - Setup Postman
 
   - After installing (Postman)[https://www.getpostman.com/.]
 
-  - import CourseAPI.postman_collection.jso
+#### Step 6:
 
+- import CourseAPI.postman_collection.jso
   - which is the collection of connection request urls
 
 - at the beginning could only test the / *(root)* url req,
-
-  - but it worked... so I was good to go..].
+  - but it worked... so I was good to go.. *=)*.
 
 ## Setting Up Database Connection:
 
-- Modular Mongoose db connection method:
+### Modular Mongoose db connection method:
 
   ./startMongo.js methods, startdb(), onErr(), onceConnected()
 
-- NPM package.json changes:
+### NPM package.json changes:
 
   added prestart, and downMongod script cmds to npm package.json
 
-- so mongod process starts as part of npm start
+### making mongod process start as part of npm start
 
   Added { useNewUrlParser: true } to mongoose.connection
 
@@ -104,7 +117,7 @@ Steps 5 and 6:
 
   To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
 
-- important mongod connection note: dont forget your dbName...
+### important mongod connection note: dont forget your dbName...
 
 ```
 var port = 27017;
@@ -113,17 +126,18 @@ var dbName;
 mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
 // a connection to the localhost will be made
-// but if your trying to connect to a specific db, you wont be
+// should be 'var dbName = yourDBNameHere'
+// otherwise, if will not connect to a your db
 
 ```
 
 ## Setup Schemas and compiled Models:
 
-- Setup schema for Users, Courses and Reviews
+### Setup schema for Users, Courses and Reviews
 
   - Will try to add as much validation to schema layer as possible
 
-- In the Courses model schema ...
+### In the Courses model schema ...
 
   - Populate User.id and Reviews is set when adding data to model
 
@@ -136,348 +150,342 @@ mongoose.connection(`mongodb://localhost:${port}/${dbName}`);
 
   - when? I think, when a req comes in to run query on a course??
 
-## Setup and test routes
+### Setup and test routes
 
 - when a route actually tried to access a mongoose db :
-
   - (node:28756) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
 
-  - to git rid of the warning...
-    at the beginning of each js defining a schema
+- to git rid of the warning at the beginning of each js defining a schema ...
+  - or in the beginning of routes.js accessing the docs generated from that schema
+  - `mongoose.set('useCreateIndex', true)`
 
-  or,
+### DB connection, db access error:
 
-  - in the beginning of routes.js accessing the docs generated from that schema
+#### insertData.js is not working at present, will have to fix later
 
-    mongoose.set('useCreateIndex', true)
+- resigned myself to going back to mongoimport ....
 
-## DB connection, data validation detour:
+- and figuring out why I could not access course-api db
 
-- insertData.js is not working at present, will have to fix later
+#### I took a second look at my mongoClient.js connect method....
 
-  - resigned myself to going back to mongoimport ....
+- it was because I was somehow missing the dbName is my mongoClient.js
 
-  - and figuring out why I could not access course-api db
+- for now am accessing course-api data and moving on...
 
-- I took a second look at my mongoClient.js connect method....
+- mongoClient.js fixed
 
-  - it was because I was somehow missing the dbName is my mongoClient.js
+- insertData.js not fixed yet - but not using it for now
 
-  - for now am accessing course-api data and moving on...
+## Writing code and working through bugs
 
-  - mongoClient.js fixed
-    insertData.js not fixed yet - but not using it for now
+### module exports Schema detour:
 
-## module exports Schema detour:
+#### note on defining schema in a separate js files:
 
-- after a few days dealing with a family emergency....
+- make sure to use the correct syntax for the module.exports and then when importing use the same syntax
 
-  - finally got back to building some more of my course-api…
+- other wise your code may not throw an error but your schema won’t get properly imported
 
-- note to self:
+#### the only indication of a problem was...
 
-  - when defining schema in a separate js files:
-
-  - make sure to use the correct syntax for the module.exports and then import using the same syntax
-
-  - other wise your code may not throw an error but your schema won’t get properly imported
-
-  - the only indication of a problem was when I tried to add a new user or a new course and only the id for the course/user was created and the other fields were ignored ???
-
-  - no errors thrown….no validation errors either ???
-
+-  when I tried to add a new user or a new course,
+  - only the id for the course/user was created and the other fields were ignored ?????
+  - no errors thrown….no validation errors either ????
   - just blank course/user with only an id, v fields ????
 
-  - using Chrome dev-tools, I set up breakpoints where the new user and new course were passed to the callback functions
+#### troubleshooting and fixing the schema issue
 
-  - after testing both...
+- using Chrome dev-tools, I set up breakpoints where the new user and new course were passed to the callback functions
 
+- after testing both...
   - I saw in chrome dev-tools both the new user and new course object, of course were blank other than the id and v fields
+  - but there was an odd property, wait for it...  `schema: undefined` ????
 
-  - but there was an odd property, wait for it...
-
-  - schema: undefined????  
-
-  - I traced back into my code
-
+- I traced back into my code
   - and saw the my module.exports syntax was different from how I was importing into my users routes js file !!!!
 
-  - once fixed, wala!
-
+- once fixed, wala!
   - perfectly formatted new user and new course, complete with all the fields required
-
   - that’s once mistake I won’t make again
 
-## modularize mongoose db document methods:
+### modularize mongoose db document methods:
 
-  - after importing mongoose ...
+#### after importing mongoose ...
+- methods basically does what the the mongoose method does
+- Only wrapped in new Promise
 
-  - methods basically do what the the mongoose method does
+#### takes at least 2 parameters:
+- documentFromModel (document compiled from a model)
+- searchQueryObject, a.k.a ... {propertyName: 'string or value', }
 
-    - Only wrapped in new Promise
+#### then, setting a new promise to be able use Promise#then syntax
 
-    - takes at least 2 parameters:
+- findQuery(documentToDoQuery, searchQueryObject).then().catch()
 
-      - documentFromModel (document compiled from a model)
+- createNew(documentToDoCreate, objectDataValues).then().catch()
 
-      - searchQueryObject, a.k.a ... {propertyName: 'string or value', }
+- updateDoc(documentToDoUpdate, docId, updateDataObject).then().catch()
 
-    - then, setting a new promise to be able use Promise#then syntax
+#### this will simplify the code in users and courses routes  
 
-      - findQuery(documentToDoQuery, searchQueryObject).then().catch()
+- will be creating a separate .js module...in the documentMethods folder
 
-      - createNew(documentToDoCreate, objectDataValues).then().catch()
+- then exporting from documentMethods/index.js
+  - for each mongoose db method needed
 
-      - updateDoc(documentToDoUpdate, docId, updateDataObject).then().catch()
+- then can re-use with no-modifiction on different models
+  - can then add features to fit various queries, model property types, etc...
+  - ... and other scenarios not yet accounted for
 
-  - this will simplify the code in users and courses routes  
+#### documentMethods working with:
 
-    - will be creating a separate .js module...in the documentMethods folder
+- using findQuery, createNew, updateDoc document methods for..
+  - get /api/users and post /api/users documents
+  - even getting a email unique validation error, when using dup email
 
-    - then exporting from documentMethods/index.js
+- get /api/courses, get /api/courses/:id
 
-      - for each mongoose db method needed
+- post /api/courses (creating new) and put /api/courses (updating existing)
 
-      - then can re-use with no-modifiction on different models
+  - post /api/courses/:id/reviews for creating a new course review
 
-        - can then add features to fit various queries, model property types, etc...
+### Data Validation:
 
-          ... and other scenarios not yet accounted for
+- schema validation working !!!
+  - errors sent to global error handler and json formatted error sent to user
 
-## documentMethods working with:
+### Storing encrypted passwords:
 
-  - using findQuery, createNew, updateDoc document methods for..
-
-    - get /api/users and post /api/users documents
-
-      - even getting a email unique validation error, when using dup email
-
-    - get /api/courses, get /api/courses/:id
-
-    - post /api/courses (creating new) and put /api/courses (updating existing)
-
-    - post /api/courses/:id/reviews for creating a new course review
-
-## Validation:
-
-  - schema validation working
-
-    - errors sent to global error handler and json formatted error sent to user
-
-## Store encrypted passwords:
-
-  - added pre-save hook method on user model that hashes user.password
+- added pre-save hook method on user model that hashes user.password
     the calls next() so user.create will store it
 
-    - note: 'this' in the pre-save hook refers to the model, which has the data properties that will be used by user.create to create the new user
+- note: 'this' in the pre-save hook refers to the model, which has the data properties that will be used by user.create to create the new user
 
-    - reference for info in bcyrpt: https://github.com/ncb000gt/node.bcrypt.js/
+- reference for info in bcyrpt: https://github.com/ncb000gt/node.bcrypt.js/
 
-## Static authenticate method and middleware ready:
+### Static authenticate method and middleware:
 
-  - added static authenticate method on the user schema
-  - utils/permsCheck middleware calls user.authenticate
+- added static authenticate method on the user schema
+- utils/permsCheck middleware calls user.authenticate
 
-    - uses user.find then async bcrypt to compare
+- uses user.find then async bcrypt to compare
 
-      - not using my modular document methods here, since this is at the schema level
+- not using my modular document methods here, since this is at the schema level
 
-      - if no email matches or password does not match then returns callback(err)
+- if no email matches or password does not match then returns callback(err)
 
-      - if authenticated, returns callback(null, user)
+- if authenticated, returns callback(null, user)
 
-## Requiring auth on get /api/user and course put and post routes:
+### Requiring auth on get /api/user and course put and post routes:
 
-  - post /api/user
+### post /api/user
 
-    - now able to create a new user
-    - validate name, email and hash password then store in user db
+- now able to create a new user
+- validate name, email and hash password then store in user db
 
-  - get /api/user
+### get /api/user
 
-    - once logged in
-    - able to check creds on http req auth header
-    - then return json of details of auth'ed user
+- once logged in
+- able to check creds on http req auth header
+- then return json of details of auth'ed user
 
-  - post and put /api/courses routes
+### post and put /api/courses routes
 
-    - need modification now that auth is ready and working
+- need modification now that auth is ready and working
 
-      - for new Course, new Review: parse req.body and req.user into 1 object
-      - for update Course : new util to take from req.body only needed data to to update
+- for new Course, new Review: parse req.body and req.user into 1 object
 
-## New pre update prep Util
+- for update Course : new util to take from req.body only needed data to to update
 
-  - this was inspired by course update failing after adding the auth and permsCheck
-  - update was failing since course.id was now present and can not be updated...
+### Update failing, New pre update prep Util
 
-  solution : utils/preUpdatePrep
+- this was inspired by course update failing after adding the auth and permsCheck
+- update was failing since course.id was now present and can not be updated...
 
-   - this is NOT for validation
-      - this is simply to take out of the request body only the info needed
+#### solution : custom utils/preUpdatePrep
 
-   - req.body is parsed by preUpdatePrep,
-      - updateCourseData is passed to updateDoc documentMethod
-      - this uses ...
-        findOneandUpdate({title:updateCourseData.title}, {$set:updateCourseData})
-      - before actual update, validation occurs, if no errors...
-      - course is updated
+- this is NOT for validation
+  - this is simply to take out of the request body only the info needed
 
-   - in current version of course-api,
-      - for updating a document compiled from course or user schema models
-      - reviews dont get updated
+- req.body is parsed by preUpdatePrep,
+  - updateCourseData is passed to updateDoc documentMethod
+  - this uses ...
+    findOneandUpdate({title:updateCourseData.title}, {$set:updateCourseData})
+  - before actual update, validation occurs, if no errors...
+  - course is updated
 
-   - for future version...
-      - parsing for userSchema is ready
-      - user docs may have email address updated and/or password reset
+- in current version of course-api,
+  - for updating a document compiled from course or user schema models
+  - reviews dont get updated
 
-   - may make this a pre-update hook of some-kind
+- for future version...
+  - parsing for userSchema is ready
+  - user docs may have email address updated and/or password reset
 
-## Routes with Auth, Perms and Validation:
+- may make this a pre-update hook of some-kind
 
-  - all routes tested again
+### Routes with Auth, Perms and Validation:
 
-    - everything is working!!
+- all routes tested again
+  - everything is working!!
 
-## documentMethods module detour:
+### documentMethods module bugs:
 
-  - in my documentMethods module...
-    - found that there is some scope issue
-      - property refs to other models don't work, so popluate methods not working
-      - also .select does not works, aka: find({field:value}, selectOption, callback())
-  - when using mongoose directly, not in my promise wrapped documentMethods...
-    - then everything works !!
-  - refactored all Course routes to use mongoose db methods directly
-    - will have to figure out why later..
-    - removed calls to my documentMethods
-    - using only in 1 route and User routes
-        - post new review route uses my documentMethods
-  - retested all routes
-    - auth, permission check, validation...
-    - and actual CRU db ops working
-  - now back to Exceed number 3 and specifying deep pop of specific fields only
+- in my documentMethods module, found that there is some scope issue
+  - property refs to other models don't work, so popluate methods not working
+  - also .select does not works, aka: find({field:value}, selectOption, callback())
 
-## Exceed #1: for Review Model...
+- when using mongoose directly, not in my promise wrapped documentMethods...
+  - then everything works !!
 
-  - additional validation to prevent user who owns course from reviewing that course
+- refactored all Course routes to use mongoose db methods directly
+  - will have to figure out why later..
+  - removed calls to my documentMethods
+  - using only in 1 route and User routes
+  - post new review route uses my documentMethods
 
-    - note : `doc._id.equals(otherDoc._id))` works
-      - the above example using equals to compare both `_id`
-      - need to be sure comparing values, of the same type
-      - however, 2 reasons I found many get inconsistent results
-        - 1: some mistakenly comparing the entire ObjectID
-          - this will always be false,  `Doc.ObjectId.equals(otherInstanceOfsameDoc.ObjectId)`
-        - 2: using == or === compares the instance of the doc not the value
-          - `Doc._id.equals == otherInstanceOfsameDoc._Id` will always be false
-      - can test the property's value type using toString()
-        - `someDoc.ObjectID.toString()`, will stringify an object, not desired in this case
-        - `someDoc._id.toString()`, will stringify into desired formated string.. 's1o3mel0on3g9n8m5b2e7r'
+- retested all routes
+  - auth, permission check, validation...
+  - and actual CRU db ops working
 
-## Exceed #2: for User Routes...
+- now back to route for Courses and specifying deep pop of specific fields only
 
-  - will be writing tests for the following scenarios:
-    - a request to the GET /api/user route with the correct credentials
-      - the corresponding user document is returned
-    - a request to the GET /api/user route with the invalid credentials
-      - a 401 status error is returned
+### Validation for Review Model...
 
-  - tools used:
-    - test framework
-      - Mocha/Chai
-      - supertest
-      - use Postman to generate the auth headers
-    - npm
-      - Setup pretest, test, and posttest in package.json
-      - the npm test cmd will run among others...
-        - tests on User routes as described above
-        ```
-        "scripts": {
-          "pretest": "mongod --config etc/mongod.conf",
-          "test": "node_modules/.bin/mocha --exit --no-warnings",
-          "posttest": "mongo admin --eval 'db.shutdownServer()'",
-                }
-        ```
-    - at the console, when running `npm test` I got the error...
-    ``` > mocha
+- additional validation to prevent user who owns course from reviewing that course
 
-          module.js:545
-          throw err;
-          ^
+- note : `doc._id.equals(otherDoc._id))` works
+  - the above example using equals to compare both `_id`
+  - need to be sure comparing values, of the same type
 
-          Error: Cannot find module './options'
-            at Function.Module._resolveFilename (module.js:543:15)
-            ...
+- however, 2 reasons I found many get inconsistent results
+  - 1: some mistakenly comparing the entire ObjectID
+    - this will always be false,  `Doc.ObjectId.equals(otherInstanceOfsameDoc.ObjectId)`
+  - 2: using == or === compares the instance of the doc not the value
+    - `Doc._id.equals == otherInstanceOfsameDoc._Id` will always be false
+
+- can test the property's value type using toString()
+  - `someDoc.ObjectID.toString()`, will stringify an object, not desired in this case
+  - `someDoc._id.toString()`, will stringify into desired formated string.. 's1o3mel0on3g9n8m5b2e7r'
+
+## Testing User Routes...
+
+### will be writing tests for the following scenarios:
+- a request to the GET /api/user route with the correct credentials
+  - the corresponding user document is returned
+- a request to the GET /api/user route with the invalid credentials
+  - a 401 status error is returned
+
+### test framework
+  - Mocha/Chai
+  - supertest
+  - use Postman to generate the auth headers
+
+### npm package.json modifications
+  - Setup pretest, test, and posttest in package.json
+  - the npm test cmd will run among others...
+    - tests on User routes as described above
     ```
-      - I found... https://github.com/mochajs/mocha/issues/2423
-        - and just did the following...
-          - `rm -rf node_modules` dir and `run npm install`
-          - then `npm test` worked fine
+    "scripts": {
+      "pretest": "mongod --config etc/mongod.conf",
+      "test": "node_modules/.bin/mocha --exit --no-warnings",
+      "posttest": "mongo admin --eval 'db.shutdownServer()'",
+            }
+    ```
+### working through Test errors
 
-  - basic cli functionality:
-    - run cmd, `npm test`
-      - Mocha will run all js files in /test folder
-      - result will be std out'ed to console
+- at the console, when running `npm test` I got the error...
+``` > mocha
 
-  - eventually...
-    - should be able to test all routes and scenarios using this method
+      module.js:545
+      throw err;
+      ^
 
-## Exceed #3: for Course Routes..
+      Error: Cannot find module './options'
+        at Function.Module._resolveFilename (module.js:543:15)
+        ...
+```
 
-  - get /api/course/:id popluate course with reviews
+- I found... https://github.com/mochajs/mocha/issues/2423
+- and just did the following...
+  - `rm -rf node_modules` dir and `run npm install`
+  - then `npm test` worked fine
 
-  - on GET /api/course/:id
-    - populate the course review array of review id's
-      - replacing the id's with...
-        - the rating and review, plus reviewer's, user, fullname
-    - using Mongoose deep population to
-        - return only the fullName of the related user on the course model
-        - and each rating and the review text
-        - all returned with the course model.
-        - by default hides other user’s private details,
-          - like passwords and emails, from other users.
+### basic cli functionality:
+- run cmd, `npm test`
+- Mocha will run all js files in /test folder
+- result will be std out'ed to console
 
-## insertData module and cleanDb modules:
+### eventually...
+- should be able to test all routes and scenarios using this method
 
-  - *inserData:*
-  - uses sample data from original project files
-  - if db course-api courses, users, reviews blank inserts data
-  - fixed bugs
-    - fixed the json syntax
-    - for users, using a create in a forEach loop
-    - passwords now get hashed
-  - new
-    - now checks if NODE_ENV is set,  else assumes 'development' mode
+## Combine Data from separate tables
 
-  - *cleanDb:*
-  - set up as a script in package.json
-  - checks if NODE_ENV is set,  else assumes 'development' mode
-    - deletes all courses, users and reviews
-    - logs "to get fresh data inserted, run npm start, with NODE_ENV set to 'development'"
+- Populate data from Reviews table when getting Course data in the Course Routes..
 
-## User data:
+- get /api/course/:id popluate course with reviews
 
-  - so I changed the users I create in my insertData module
+- on GET /api/course/:id
+  - populate the course review array of review id's
+    - replacing the id's with...
+      - the rating and review, plus reviewer's, user, fullname
+  - using Mongoose deep population to
+      - return only the fullName of the related user on the course model
+      - and each rating and the review text
+      - all returned with the course model.
+      - by default hides other user’s private details,
+        - like passwords and emails, from other users.
 
-    - the \_id's, fullNames, emailAddress ...
-      - are from the original project files sample data  
+## Using sample data in development mode
 
-      - I had to vary the password some,
-        - due to no dups in the user model validation
+- custom insertData module and cleanDb modules:
 
-      - user data found in src/seed-data/more-users.json
-        the first 3 users are inserted by my insertData module
+- *inserData:*
+- uses sample data from original project files
+- if db course-api courses, users, reviews blank inserts data
+- fixed bugs
+  - fixed the json syntax
+  - for users, using a create in a forEach loop
+  - passwords now get hashed
+- new
+  - now checks if NODE_ENV is set,  else assumes 'development' mode
 
-      - other user data samples are included for fun
-        - can add these using the POST /api/users request in POSTMAN..
-          - using the CourseAPI.postman_collection.json requests
+- *cleanDb:*
+- set up as a script in package.json
+- checks if NODE_ENV is set,  else assumes 'development' mode
+  - deletes all courses, users and reviews
+  - logs "to get fresh data inserted, run npm start, with NODE_ENV set to 'development'"
 
-## prep for project submission:
+## Validating User data:
 
-  - DONE: finish exceeds
+- so I changed the users I create in my insertData module
 
-  - DONE: final code walk-through
-    - re-verify meeting project expectations and exceeds
+- the \_id's, fullNames, emailAddress ...
+  - are from the original project files sample data  
+
+- I had to vary the password some,
+  - due to no dups in the user model validation
+
+- user data found in src/seed-data/more-users.json
+  the first 3 users are inserted by my insertData module
+
+- other user data samples are included for fun
+  - can add these using the POST /api/users request in POSTMAN..
+    - using the CourseAPI.postman_collection.json requests
+
+## Initial Project Complete:
+
+  - DONE: All Routes retrieving, validating and delivering correct json data
+
+  - DONE: User Auth, Password Validaton, enable and store Password Randomizaton and Encyrption
+
+  - DONE: Adding Course Reviews
+
+  - DONE: Test routes  
+
+  - DONE: final code walk-through, no more bugs !!
 
   - DONE: compile simple readme.md for reviewer
 
-  - this readme will become 'dev notes'
+  - DONE: Polish off these dev notes

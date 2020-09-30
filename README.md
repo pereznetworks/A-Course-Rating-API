@@ -59,7 +59,9 @@
         - then can you run, npm start again or npm test
 
 ### 2:) use Postman
+
   - import test/CourseAPI.postman_collection.json
+
   - with the course-api rest express server running
     - test responses GET/POST/PUT requests
 

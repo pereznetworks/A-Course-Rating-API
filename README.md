@@ -80,12 +80,15 @@
      - ctrl-c to exit and then npm stop
 
 ### 4:) can use Chrome browser to
-  -  chrome:/inspect
-    - verify Chrome's DevTools for Nodejs has connected
-  - http://localhost:5000
-    - open Developer Tools and open dedicated DevTools for Node.js
+
+-  chrome:/inspect
+  - verify Chrome's DevTools for Nodejs has connected
+
+- http://localhost:5000
+  - open Developer Tools and open dedicated DevTools for Node.js
 
 ### 5:) Reseting after messing up data in the db
+
 - if after messing around with user, review or course data...
   - and for what ever reason.... you need to start over
   - ONLY DO THIS IN DEVELOPMENT WHEN USING SAMPLE DATA

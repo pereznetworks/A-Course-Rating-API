@@ -5,17 +5,15 @@
 - from TeamTreehouse, Tech Degree,
 
 ## Features
-- API Requires user login
-- API Stores and validates encrypted password
-- API USER Route : User Auth
-- API Course Route: Access Courses table
-- API Reviews Route : Access Reivews Table
+- Rest-API
+- Insert Data and Reset Sample DB
 - Document Methods using Promise
-- Deep Pop of Tables data
+- Deep Pop of Table data
 - Data Validation
 - Testing API Routes
 - MongdoDb cli and custom scripting
-...and more
+- Secure Auth
+- ...and more
 
 ## To Build Your Own:
 

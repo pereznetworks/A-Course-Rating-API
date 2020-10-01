@@ -6,7 +6,7 @@
 
 ## Features
 - Rest-API
-- Insert Data and Reset Sample DB
+- Insert Sample Data and Reset Development DB
 - Document Methods using Promise
 - Deep Pop of Table data
 - Data Validation
